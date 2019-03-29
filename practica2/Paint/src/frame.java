@@ -2,6 +2,7 @@
 import java.awt.Color;
 import java.io.File;
 import javax.swing.Icon;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 
 
@@ -26,6 +27,7 @@ public class frame extends javax.swing.JFrame {
     boolean barraestado=true;
     Color color = new Color(0,0,0);
     Formas forma;
+    Color colors[] = { Color.RED, Color.BLUE, Color.BLACK, Color.WHITE };
     public frame() {
         initComponents();
         this.setSize(800, 600);
@@ -61,7 +63,7 @@ public class frame extends javax.swing.JFrame {
         rectangulo = new javax.swing.JToggleButton();
         elipse = new javax.swing.JToggleButton();
         nav3 = new javax.swing.JPanel();
-        colores = new javax.swing.JComboBox<>();
+        colores = new JComboBox(colors);
         nav4 = new javax.swing.JPanel();
         jSpinner1 = new javax.swing.JSpinner();
         jToggleButton1 = new javax.swing.JToggleButton();
@@ -86,11 +88,11 @@ public class frame extends javax.swing.JFrame {
 
         getContentPane().add(pie, java.awt.BorderLayout.PAGE_END);
 
-        head.setLayout(new java.awt.GridLayout());
+        head.setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel8.setLayout(new java.awt.GridLayout(1, 0));
 
-        nav1.setLayout(new java.awt.GridLayout());
+        nav1.setLayout(new java.awt.GridLayout(1, 0));
 
         jButton1.setText("jButton1");
         nav1.add(jButton1);
@@ -103,7 +105,7 @@ public class frame extends javax.swing.JFrame {
 
         jPanel8.add(nav1);
 
-        nav2.setLayout(new java.awt.GridLayout());
+        nav2.setLayout(new java.awt.GridLayout(1, 0));
 
         lapiz.setName("Lapiz");
         menu.add(lapiz);
@@ -147,7 +149,7 @@ public class frame extends javax.swing.JFrame {
 
         jPanel8.add(nav2);
 
-        nav3.setLayout(new java.awt.GridLayout());
+        nav3.setLayout(new java.awt.GridLayout(1, 0));
 
         colores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "negro", "blanco", "amarillo", "verde", "rojo", "azul" }));
         colores.addActionListener(new java.awt.event.ActionListener() {
@@ -159,7 +161,7 @@ public class frame extends javax.swing.JFrame {
 
         jPanel8.add(nav3);
 
-        nav4.setLayout(new java.awt.GridLayout());
+        nav4.setLayout(new java.awt.GridLayout(1, 0));
         nav4.add(jSpinner1);
 
         jToggleButton1.setText("jToggleButton1");
@@ -356,7 +358,7 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JMenuItem FileAbrir;
     private javax.swing.JMenuItem FileGuardar;
     private javax.swing.JMenuItem FileNuevo;
-    private javax.swing.JComboBox<String> colores;
+    private javax.swing.JComboBox<Color> colores;
     private javax.swing.JToggleButton elipse;
     private javax.swing.JLabel estado;
     private javax.swing.JPanel head;
