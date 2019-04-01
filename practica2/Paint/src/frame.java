@@ -62,13 +62,14 @@ public class frame extends javax.swing.JFrame {
         linea = new javax.swing.JToggleButton();
         rectangulo = new javax.swing.JToggleButton();
         elipse = new javax.swing.JToggleButton();
+        Editar = new javax.swing.JToggleButton();
         nav3 = new javax.swing.JPanel();
-        colores = new JComboBox(colors);
+        colores = new javax.swing.JComboBox<>();
         nav4 = new javax.swing.JPanel();
         jSpinner1 = new javax.swing.JSpinner();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
+        relleno = new javax.swing.JToggleButton();
+        transparencia = new javax.swing.JToggleButton();
+        Alisar = new javax.swing.JToggleButton();
         lienzo1 = new Lienzo();
         jMenuBar1 = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
@@ -77,6 +78,10 @@ public class frame extends javax.swing.JFrame {
         FileGuardar = new javax.swing.JMenuItem();
         Edicion = new javax.swing.JMenu();
         EdicionVerbarra = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,13 +99,13 @@ public class frame extends javax.swing.JFrame {
 
         nav1.setLayout(new java.awt.GridLayout(1, 0));
 
-        jButton1.setText("jButton1");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NuevoBoceto.GIF"))); // NOI18N
         nav1.add(jButton1);
 
-        jButton2.setText("jButton2");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abrir.png"))); // NOI18N
         nav1.add(jButton2);
 
-        jButton3.setText("jButton3");
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Guardar.gif"))); // NOI18N
         nav1.add(jButton3);
 
         jPanel8.add(nav1);
@@ -147,16 +152,15 @@ public class frame extends javax.swing.JFrame {
         });
         nav2.add(elipse);
 
+        menu.add(Editar);
+        Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/seleccion.png"))); // NOI18N
+        nav2.add(Editar);
+
         jPanel8.add(nav2);
 
         nav3.setLayout(new java.awt.GridLayout(1, 0));
 
-        colores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "negro", "blanco", "amarillo", "verde", "rojo", "azul" }));
-        colores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                coloresActionPerformed(evt);
-            }
-        });
+        colores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amarillo", "Verde", "Azul", "Negro", "Blanco", "Rojo" }));
         nav3.add(colores);
 
         jPanel8.add(nav3);
@@ -164,14 +168,14 @@ public class frame extends javax.swing.JFrame {
         nav4.setLayout(new java.awt.GridLayout(1, 0));
         nav4.add(jSpinner1);
 
-        jToggleButton1.setText("jToggleButton1");
-        nav4.add(jToggleButton1);
+        relleno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rellenar.png"))); // NOI18N
+        nav4.add(relleno);
 
-        jToggleButton2.setText("jToggleButton2");
-        nav4.add(jToggleButton2);
+        transparencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/transparencia.png"))); // NOI18N
+        nav4.add(transparencia);
 
-        jToggleButton3.setText("jToggleButton3");
-        nav4.add(jToggleButton3);
+        Alisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/alisar.png"))); // NOI18N
+        nav4.add(Alisar);
 
         jPanel8.add(nav4);
 
@@ -202,6 +206,7 @@ public class frame extends javax.swing.JFrame {
         });
         File.add(FileNuevo);
 
+        FileAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abrir.png"))); // NOI18N
         FileAbrir.setText("Abrir");
         FileAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,7 +237,34 @@ public class frame extends javax.swing.JFrame {
         });
         Edicion.add(EdicionVerbarra);
 
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("Ver barra de formas");
+        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem1ActionPerformed(evt);
+            }
+        });
+        Edicion.add(jCheckBoxMenuItem1);
+
+        jCheckBoxMenuItem2.setSelected(true);
+        jCheckBoxMenuItem2.setText("Ver barra de atributos");
+        Edicion.add(jCheckBoxMenuItem2);
+
         jMenuBar1.add(Edicion);
+
+        jMenu1.setText("Imagen");
+
+        jCheckBoxMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
+        jCheckBoxMenuItem3.setSelected(true);
+        jCheckBoxMenuItem3.setText("Tamaño nueva Imagen");
+        jCheckBoxMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jCheckBoxMenuItem3);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -297,7 +329,10 @@ public class frame extends javax.swing.JFrame {
                 }else
                     if(boton.getName() == "Elipse"){
                         forma = Formas.ELIPSE;
-                    }
+                    }else
+                        if(boton.getName() == "Editar"){
+                            forma = Formas.EDITAR;
+                        }
         estado.setText(forma.toString());
         
     }//GEN-LAST:event_herramienta
@@ -307,11 +342,13 @@ public class frame extends javax.swing.JFrame {
        
     }//GEN-LAST:event_FileActionPerformed
 
-    private void coloresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coloresActionPerformed
+    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
         // TODO add your handling code here:
-        actualizarlienzo();
-        
-    }//GEN-LAST:event_coloresActionPerformed
+    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
+
+    private void jCheckBoxMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxMenuItem3ActionPerformed
     public void actualizarlienzo(){
         Color color= (Color.RED);
         
@@ -352,20 +389,26 @@ public class frame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton Alisar;
     private javax.swing.JMenu Edicion;
     private javax.swing.JCheckBoxMenuItem EdicionVerbarra;
+    private javax.swing.JToggleButton Editar;
     private javax.swing.JMenu File;
     private javax.swing.JMenuItem FileAbrir;
     private javax.swing.JMenuItem FileGuardar;
     private javax.swing.JMenuItem FileNuevo;
-    private javax.swing.JComboBox<Color> colores;
+    private javax.swing.JComboBox<String> colores;
     private javax.swing.JToggleButton elipse;
     private javax.swing.JLabel estado;
     private javax.swing.JPanel head;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
     private javax.swing.JDialog jDialog1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -373,9 +416,6 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JToggleButton lapiz;
     private Lienzo lienzo1;
     private javax.swing.JToggleButton linea;
@@ -386,5 +426,7 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JPanel nav4;
     private javax.swing.JPanel pie;
     private javax.swing.JToggleButton rectangulo;
+    private javax.swing.JToggleButton relleno;
+    private javax.swing.JToggleButton transparencia;
     // End of variables declaration//GEN-END:variables
 }
