@@ -38,7 +38,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="FileNuevo">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/NuevoBoceto.GIF"/>
+                  <Image iconType="3" name="/smm/moh/iu/NuevoBoceto.GIF"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nuevo"/>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
@@ -52,7 +52,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="FileAbrir">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/abrir.png"/>
+                  <Image iconType="3" name="/smm/moh/iu/abrir.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Abrir"/>
               </Properties>
@@ -63,7 +63,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="FileGuardar">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Guardar.gif"/>
+                  <Image iconType="3" name="/smm/moh/iu/Guardar.gif"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
@@ -206,21 +206,24 @@
                 <Component class="javax.swing.JButton" name="jButton1">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/NuevoBoceto.GIF"/>
+                      <Image iconType="3" name="/smm/moh/iu/nuevo.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton2">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/abrir.png"/>
+                      <Image iconType="3" name="/smm/moh/iu/abrir.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton3">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/Guardar.gif"/>
+                      <Image iconType="3" name="/smm/moh/iu/Guardar.gif"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -239,7 +242,7 @@
                       <ComponentRef name="menu"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/Lapiz.gif"/>
+                      <Image iconType="3" name="/smm/moh/iu/Lapiz.gif"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -255,7 +258,7 @@
                       <ComponentRef name="menu"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/Linea.gif"/>
+                      <Image iconType="3" name="/smm/moh/iu/Linea.gif"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -271,7 +274,7 @@
                       <ComponentRef name="menu"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/Rectangulo.gif"/>
+                      <Image iconType="3" name="/smm/moh/iu/Rectangulo.gif"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -287,7 +290,7 @@
                       <ComponentRef name="menu"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/Ovalo.gif"/>
+                      <Image iconType="3" name="/smm/moh/iu/Ovalo.gif"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -303,7 +306,7 @@
                       <ComponentRef name="menu"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/seleccion.png"/>
+                      <Image iconType="3" name="/smm/moh/iu/seleccion.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -347,21 +350,21 @@
                 <Component class="javax.swing.JToggleButton" name="relleno">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/rellenar.png"/>
+                      <Image iconType="3" name="/smm/moh/iu/rellenar.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JToggleButton" name="transparencia">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/transparencia.png"/>
+                      <Image iconType="3" name="/smm/moh/iu/transparencia.png"/>
                     </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JToggleButton" name="Alisar">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/alisar.png"/>
+                      <Image iconType="3" name="/smm/moh/iu/alisar.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -370,15 +373,6 @@
           </SubComponents>
         </Container>
       </SubComponents>
-    </Container>
-    <Container class="Lienzo" name="lienzo1">
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-          <BorderConstraints direction="Center"/>
-        </Constraint>
-      </Constraints>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
     </Container>
   </SubComponents>
 </Form>

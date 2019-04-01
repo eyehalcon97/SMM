@@ -1,3 +1,8 @@
+package smm.moh.iu;
+
+
+
+
 
 import java.awt.Color;
 import java.io.File;
@@ -70,7 +75,6 @@ public class frame extends javax.swing.JFrame {
         relleno = new javax.swing.JToggleButton();
         transparencia = new javax.swing.JToggleButton();
         Alisar = new javax.swing.JToggleButton();
-        lienzo1 = new Lienzo();
         jMenuBar1 = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
         FileNuevo = new javax.swing.JMenuItem();
@@ -99,13 +103,18 @@ public class frame extends javax.swing.JFrame {
 
         nav1.setLayout(new java.awt.GridLayout(1, 0));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NuevoBoceto.GIF"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/nuevo.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         nav1.add(jButton1);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abrir.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/abrir.png"))); // NOI18N
         nav1.add(jButton2);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Guardar.gif"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/Guardar.gif"))); // NOI18N
         nav1.add(jButton3);
 
         jPanel8.add(nav1);
@@ -114,7 +123,7 @@ public class frame extends javax.swing.JFrame {
 
         lapiz.setName("Lapiz");
         menu.add(lapiz);
-        lapiz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Lapiz.gif"))); // NOI18N
+        lapiz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/Lapiz.gif"))); // NOI18N
         lapiz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 herramienta(evt);
@@ -124,7 +133,7 @@ public class frame extends javax.swing.JFrame {
 
         linea.setName("Linea");
         menu.add(linea);
-        linea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Linea.gif"))); // NOI18N
+        linea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/Linea.gif"))); // NOI18N
         linea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 herramienta(evt);
@@ -134,7 +143,7 @@ public class frame extends javax.swing.JFrame {
 
         rectangulo.setName("Rectangulo");
         menu.add(rectangulo);
-        rectangulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Rectangulo.gif"))); // NOI18N
+        rectangulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/Rectangulo.gif"))); // NOI18N
         rectangulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 herramienta(evt);
@@ -144,7 +153,7 @@ public class frame extends javax.swing.JFrame {
 
         elipse.setName("Elipse");
         menu.add(elipse);
-        elipse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ovalo.gif"))); // NOI18N
+        elipse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/Ovalo.gif"))); // NOI18N
         elipse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 herramienta(evt);
@@ -153,7 +162,7 @@ public class frame extends javax.swing.JFrame {
         nav2.add(elipse);
 
         menu.add(Editar);
-        Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/seleccion.png"))); // NOI18N
+        Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/seleccion.png"))); // NOI18N
         nav2.add(Editar);
 
         jPanel8.add(nav2);
@@ -168,13 +177,13 @@ public class frame extends javax.swing.JFrame {
         nav4.setLayout(new java.awt.GridLayout(1, 0));
         nav4.add(jSpinner1);
 
-        relleno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rellenar.png"))); // NOI18N
+        relleno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/rellenar.png"))); // NOI18N
         nav4.add(relleno);
 
-        transparencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/transparencia.png"))); // NOI18N
+        transparencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/transparencia.png"))); // NOI18N
         nav4.add(transparencia);
 
-        Alisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/alisar.png"))); // NOI18N
+        Alisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/alisar.png"))); // NOI18N
         nav4.add(Alisar);
 
         jPanel8.add(nav4);
@@ -182,7 +191,6 @@ public class frame extends javax.swing.JFrame {
         head.add(jPanel8);
 
         getContentPane().add(head, java.awt.BorderLayout.PAGE_START);
-        getContentPane().add(lienzo1, java.awt.BorderLayout.CENTER);
 
         File.setText("Archivo");
         File.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -196,7 +204,7 @@ public class frame extends javax.swing.JFrame {
             }
         });
 
-        FileNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NuevoBoceto.GIF"))); // NOI18N
+        FileNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/NuevoBoceto.GIF"))); // NOI18N
         FileNuevo.setText("Nuevo");
         menu.add(FileNuevo);
         FileNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -206,7 +214,7 @@ public class frame extends javax.swing.JFrame {
         });
         File.add(FileNuevo);
 
-        FileAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abrir.png"))); // NOI18N
+        FileAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/abrir.png"))); // NOI18N
         FileAbrir.setText("Abrir");
         FileAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,7 +223,7 @@ public class frame extends javax.swing.JFrame {
         });
         File.add(FileAbrir);
 
-        FileGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Guardar.gif"))); // NOI18N
+        FileGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/Guardar.gif"))); // NOI18N
         FileGuardar.setText("Guardar");
         FileGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -349,6 +357,10 @@ public class frame extends javax.swing.JFrame {
     private void jCheckBoxMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxMenuItem3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
     public void actualizarlienzo(){
         Color color= (Color.RED);
         
@@ -417,7 +429,6 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JToggleButton lapiz;
-    private Lienzo lienzo1;
     private javax.swing.JToggleButton linea;
     private javax.swing.ButtonGroup menu;
     private javax.swing.JPanel nav1;
