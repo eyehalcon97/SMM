@@ -1,3 +1,5 @@
+package smm.moh.graficos;
+
 
 import smm.moh.iu.Formas;
 import java.awt.Graphics;

@@ -75,6 +75,7 @@ public class frame extends javax.swing.JFrame {
         relleno = new javax.swing.JToggleButton();
         transparencia = new javax.swing.JToggleButton();
         Alisar = new javax.swing.JToggleButton();
+        lienzo1 = new smm.moh.graficos.Lienzo();
         jMenuBar1 = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
         FileNuevo = new javax.swing.JMenuItem();
@@ -191,6 +192,7 @@ public class frame extends javax.swing.JFrame {
         head.add(jPanel8);
 
         getContentPane().add(head, java.awt.BorderLayout.PAGE_START);
+        getContentPane().add(lienzo1, java.awt.BorderLayout.CENTER);
 
         File.setText("Archivo");
         File.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -429,6 +431,7 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JToggleButton lapiz;
+    private smm.moh.graficos.Lienzo lienzo1;
     private javax.swing.JToggleButton linea;
     private javax.swing.ButtonGroup menu;
     private javax.swing.JPanel nav1;
