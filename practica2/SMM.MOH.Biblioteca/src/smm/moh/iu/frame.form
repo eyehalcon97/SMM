@@ -309,6 +309,9 @@
                       <Image iconType="3" name="/smm/moh/iu/seleccion.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="herramienta"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -374,7 +377,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="smm.moh.graficos.Lienzo" name="lienzo1">
+    <Container class="smm.moh.graficos.Lienzo2D" name="lienzo2D">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
           <BorderConstraints direction="Center"/>

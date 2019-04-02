@@ -75,7 +75,7 @@ public class frame extends javax.swing.JFrame {
         relleno = new javax.swing.JToggleButton();
         transparencia = new javax.swing.JToggleButton();
         Alisar = new javax.swing.JToggleButton();
-        lienzo1 = new smm.moh.graficos.Lienzo();
+        lienzo2D = new smm.moh.graficos.Lienzo2D();
         jMenuBar1 = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
         FileNuevo = new javax.swing.JMenuItem();
@@ -164,6 +164,11 @@ public class frame extends javax.swing.JFrame {
 
         menu.add(Editar);
         Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/seleccion.png"))); // NOI18N
+        Editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                herramienta(evt);
+            }
+        });
         nav2.add(Editar);
 
         jPanel8.add(nav2);
@@ -192,7 +197,7 @@ public class frame extends javax.swing.JFrame {
         head.add(jPanel8);
 
         getContentPane().add(head, java.awt.BorderLayout.PAGE_START);
-        getContentPane().add(lienzo1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(lienzo2D, java.awt.BorderLayout.CENTER);
 
         File.setText("Archivo");
         File.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -344,6 +349,7 @@ public class frame extends javax.swing.JFrame {
                             forma = Formas.EDITAR;
                         }
         estado.setText(forma.toString());
+        lienzo2D.setFormas(forma);
         
     }//GEN-LAST:event_herramienta
 
@@ -431,7 +437,7 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JToggleButton lapiz;
-    private smm.moh.graficos.Lienzo lienzo1;
+    private smm.moh.graficos.Lienzo2D lienzo2D;
     private javax.swing.JToggleButton linea;
     private javax.swing.ButtonGroup menu;
     private javax.swing.JPanel nav1;
