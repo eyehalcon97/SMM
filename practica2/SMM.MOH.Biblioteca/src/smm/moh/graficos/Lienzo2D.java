@@ -5,11 +5,14 @@
  */
 package smm.moh.graficos;
 
+import java.awt.BasicStroke;
 import smm.moh.iu.Formas;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -34,6 +37,9 @@ public class Lienzo2D extends javax.swing.JPanel {
     private Color color = new Color(0,0,0);
     private Formas forma;
     private boolean relleno = false;
+    private boolean alisar = false;
+    private boolean transparencia = false;
+    private int numrelleno = 1;
     List<Shape> vShape = new ArrayList();
     
     public Lienzo2D() {
@@ -43,7 +49,15 @@ public class Lienzo2D extends javax.swing.JPanel {
     public void paint(Graphics g){
         super.paint(g);
     Graphics2D g2d=(Graphics2D)g;
-    g2d.setColor(color);
+    if(transparencia){
+            
+            color = new Color(color.getRed(),color.getGreen(),color.getBlue(),80);
+            
+        }else{
+            color = new Color(color.getRed(),color.getGreen(),color.getBlue());
+        }
+        g2d.setColor(color);
+    
     double x, y;
         double w, h;
     if(null != forma)switch (forma) {
@@ -98,35 +112,72 @@ public class Lienzo2D extends javax.swing.JPanel {
                 
                 
                 break;
+            case EDITAR:
+                int num=0;
+                for(Shape s:vShape){
+                    if(s.contains(pin)){
+                        num = vShape.indexOf(s);
+                    }
+                }
+                Shape aux = vShape.get(num);
+                if(aux.getClass().getName() == Line2D.class.getName()){
+                    System.out.println("hola");
+                }
+                break;
             default:
                 break;
                 
         }
         if(relleno){
             g2d.fill(figura);
+            
         }else{
             g2d.draw(figura);
         }
+        if(alisar){
+             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+             g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        }
+            
+        g2d.setStroke(new BasicStroke(numrelleno));
+           
         
         
-    System.out.print(vShape.toString());
+    
         for(Shape s:vShape){
             if(relleno){
             g2d.fill(s);
+            g2d.draw(s);
         }else{
             g2d.draw(s);
         }
         }
         
+        
     }
     public void setColor(Color color){
         this.color = color;
+        repaint();
+        
     }
     public void setFormas(Formas forma){
         this.forma=forma;
     }
     public void setRelleno(){
         relleno = !relleno;
+        repaint();
+    }
+    public void setAlisar(){
+       alisar = !alisar;
+       repaint();
+    }
+    
+    public void setNumrelleno(int num){
+        numrelleno = num;
+        repaint();
+    }
+    public void setTransparencia(){
+        transparencia = !transparencia;
         repaint();
     }
                           
@@ -182,22 +233,22 @@ public class Lienzo2D extends javax.swing.JPanel {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:ç
-        pin=new Point2D.Float(evt.getX(),evt.getY());
+        //pin=new Point2D.Float(evt.getX(),evt.getY());
             
-            repaint();
+          //  repaint();
             
     }//GEN-LAST:event_formMouseClicked
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         // TODO add your handling code here:
-                pin=new Point2D.Float(evt.getX(),evt.getY());
+               pin=new Point2D.Float(evt.getX(),evt.getY());
        repaint();
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         // TODO add your handling code here:
-        pout=new Point2D.Float(evt.getX(),evt.getY());
-            
+       // pout=new Point2D.Float(evt.getX(),evt.getY());
+            //vShape.add(figura);
             
             
     }//GEN-LAST:event_formMouseMoved
@@ -208,6 +259,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         
         repaint();
         vShape.add(figura);
+        
     }//GEN-LAST:event_formMouseReleased
 
 

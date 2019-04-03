@@ -29,7 +29,9 @@ public class frame extends javax.swing.JFrame {
     /**
      * Creates new form frame
      */
-    boolean barraestado=true;
+    private boolean barraestado=true;
+    private boolean barraformas=true;
+    private boolean barraatributos=true;
     Color color = new Color(0,0,0);
     Formas forma;
     Color colors[] = { Color.RED, Color.BLUE, Color.BLACK, Color.WHITE };
@@ -67,11 +69,11 @@ public class frame extends javax.swing.JFrame {
         linea = new javax.swing.JToggleButton();
         rectangulo = new javax.swing.JToggleButton();
         elipse = new javax.swing.JToggleButton();
-        Editar = new javax.swing.JToggleButton();
+        editar = new javax.swing.JToggleButton();
         nav3 = new javax.swing.JPanel();
         colores = new javax.swing.JComboBox<>();
         nav4 = new javax.swing.JPanel();
-        jSpinner1 = new javax.swing.JSpinner();
+        numeroalisar = new javax.swing.JSpinner();
         relleno = new javax.swing.JToggleButton();
         transparencia = new javax.swing.JToggleButton();
         Alisar = new javax.swing.JToggleButton();
@@ -113,9 +115,19 @@ public class frame extends javax.swing.JFrame {
         nav1.add(jButton1);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/abrir.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FileAbrirActionPerformed(evt);
+            }
+        });
         nav1.add(jButton2);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/Guardar.gif"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FileGuardarActionPerformed(evt);
+            }
+        });
         nav1.add(jButton3);
 
         jPanel8.add(nav1);
@@ -162,20 +174,21 @@ public class frame extends javax.swing.JFrame {
         });
         nav2.add(elipse);
 
-        menu.add(Editar);
-        Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/seleccion.png"))); // NOI18N
-        Editar.addActionListener(new java.awt.event.ActionListener() {
+        editar.setName("Editar");
+        menu.add(editar);
+        editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/seleccion.png"))); // NOI18N
+        editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 herramienta(evt);
             }
         });
-        nav2.add(Editar);
+        nav2.add(editar);
 
         jPanel8.add(nav2);
 
         nav3.setLayout(new java.awt.GridLayout(1, 0));
 
-        colores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Verde", "Amarillo", "Rojo", "Azul", "Negro", "Blanco" }));
+        colores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Negro", "Verde", "Amarillo", "Rojo", "Azul", "Blanco" }));
         colores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 coloresActionPerformed(evt);
@@ -186,7 +199,14 @@ public class frame extends javax.swing.JFrame {
         jPanel8.add(nav3);
 
         nav4.setLayout(new java.awt.GridLayout(1, 0));
-        nav4.add(jSpinner1);
+
+        numeroalisar.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        numeroalisar.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                numeroalisarStateChanged(evt);
+            }
+        });
+        nav4.add(numeroalisar);
 
         relleno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/rellenar.png"))); // NOI18N
         relleno.addActionListener(new java.awt.event.ActionListener() {
@@ -197,9 +217,19 @@ public class frame extends javax.swing.JFrame {
         nav4.add(relleno);
 
         transparencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/transparencia.png"))); // NOI18N
+        transparencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transparenciaActionPerformed(evt);
+            }
+        });
         nav4.add(transparencia);
 
         Alisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/alisar.png"))); // NOI18N
+        Alisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AlisarActionPerformed(evt);
+            }
+        });
         nav4.add(Alisar);
 
         jPanel8.add(nav4);
@@ -212,7 +242,7 @@ public class frame extends javax.swing.JFrame {
         lienzo2D.setLayout(lienzo2DLayout);
         lienzo2DLayout.setHorizontalGroup(
             lienzo2DLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 589, Short.MAX_VALUE)
+            .addGap(0, 1160, Short.MAX_VALUE)
         );
         lienzo2DLayout.setVerticalGroup(
             lienzo2DLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,6 +315,11 @@ public class frame extends javax.swing.JFrame {
 
         jCheckBoxMenuItem2.setSelected(true);
         jCheckBoxMenuItem2.setText("Ver barra de atributos");
+        jCheckBoxMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem2ActionPerformed(evt);
+            }
+        });
         Edicion.add(jCheckBoxMenuItem2);
 
         jMenuBar1.add(Edicion);
@@ -337,42 +372,43 @@ public class frame extends javax.swing.JFrame {
         color = new Color(0,0,0);
 
         menu.clearSelection();
-        System.out.print("");
+        
     }//GEN-LAST:event_FileNuevoActionPerformed
 
     private void EdicionVerbarraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdicionVerbarraActionPerformed
         // TODO add your handling code here:
         barraestado = !barraestado;
-        if(barraestado == false){
-            estado.setText("");
-        }else{
-        estado.setText("Paint");
-        }
+        estado.setVisible(barraestado);
+        
     }//GEN-LAST:event_EdicionVerbarraActionPerformed
 
     private void herramienta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_herramienta
         // TODO add your handling code here:
         javax.swing.JToggleButton boton;
         boton = (javax.swing.JToggleButton) evt.getSource();
+        
         if(boton.getName() == "Lapiz"){
             forma=Formas.PUNTO;
-            
-        }else
+        }else{
             if(boton.getName() == "Linea"){
                 forma = Formas.LINEA;
-            }else
+            }else{
                 if(boton.getName() == "Rectangulo"){
                     forma = Formas.RECTANGULO;
-                }else
+                }else{
                     if(boton.getName() == "Elipse"){
                         forma = Formas.ELIPSE;
-                    }else
+                    }else{
                         if(boton.getName() == "Editar"){
                             forma = Formas.EDITAR;
                         }
+                    }
+                }
+            }
+        }
         estado.setText(forma.toString());
         lienzo2D.setFormas(forma);
-        
+    
     }//GEN-LAST:event_herramienta
 
     private void FileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FileActionPerformed
@@ -382,6 +418,9 @@ public class frame extends javax.swing.JFrame {
 
     private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
         // TODO add your handling code here:
+        barraformas = !barraformas;
+        nav2.setVisible(barraformas);
+        
     }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
     private void jCheckBoxMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem3ActionPerformed
@@ -395,6 +434,9 @@ public class frame extends javax.swing.JFrame {
     private void rellenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rellenoActionPerformed
         // TODO add your handling code here:
         lienzo2D.setRelleno();
+        
+        
+        
     }//GEN-LAST:event_rellenoActionPerformed
 
     private void coloresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coloresActionPerformed
@@ -405,7 +447,31 @@ public class frame extends javax.swing.JFrame {
         lienzo2D.setColor(color);
         
         
+        
     }//GEN-LAST:event_coloresActionPerformed
+
+    private void AlisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlisarActionPerformed
+        // TODO add your handling code here:
+        lienzo2D.setAlisar();
+        
+    }//GEN-LAST:event_AlisarActionPerformed
+
+    private void numeroalisarStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_numeroalisarStateChanged
+        // TODO add your handling code here:
+        lienzo2D.setNumrelleno(Integer.parseInt(numeroalisar.getValue().toString()));
+    }//GEN-LAST:event_numeroalisarStateChanged
+
+    private void transparenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transparenciaActionPerformed
+        // TODO add your handling code here:
+        lienzo2D.setTransparencia();
+    }//GEN-LAST:event_transparenciaActionPerformed
+
+    private void jCheckBoxMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        barraatributos = !barraatributos;
+        nav3.setVisible(barraatributos);
+        nav4.setVisible(barraatributos);
+    }//GEN-LAST:event_jCheckBoxMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -442,12 +508,12 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JToggleButton Alisar;
     private javax.swing.JMenu Edicion;
     private javax.swing.JCheckBoxMenuItem EdicionVerbarra;
-    private javax.swing.JToggleButton Editar;
     private javax.swing.JMenu File;
     private javax.swing.JMenuItem FileAbrir;
     private javax.swing.JMenuItem FileGuardar;
     private javax.swing.JMenuItem FileNuevo;
     private javax.swing.JComboBox<String> colores;
+    private javax.swing.JToggleButton editar;
     private javax.swing.JToggleButton elipse;
     private javax.swing.JLabel estado;
     private javax.swing.JPanel head;
@@ -465,7 +531,6 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JToggleButton lapiz;
     private smm.moh.graficos.Lienzo2D lienzo2D;
     private javax.swing.JToggleButton linea;
@@ -474,6 +539,7 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JPanel nav2;
     private javax.swing.JPanel nav3;
     private javax.swing.JPanel nav4;
+    private javax.swing.JSpinner numeroalisar;
     private javax.swing.JPanel pie;
     private javax.swing.JToggleButton rectangulo;
     private javax.swing.JToggleButton relleno;

@@ -19,5 +19,5 @@ public enum Formas {
     LINEA,
     RECTANGULO,
     ELIPSE,
-    EDITAR
+    EDITAR;
 }
