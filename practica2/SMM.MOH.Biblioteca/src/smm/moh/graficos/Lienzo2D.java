@@ -13,6 +13,7 @@ import java.awt.Shape;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.geom.Ellipse2D;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,8 @@ public class Lienzo2D extends javax.swing.JPanel {
     
     private Point2D pin = new Point2D.Double(-10, -10);
     private Point2D pout = new Point2D.Double(-10, -10);
-    private Color color;
+    private Shape figura = new Line2D.Double(pin, pout);
+    private Color color = new Color(0,0,0);
     private Formas forma;
     private boolean relleno = false;
     List<Shape> vShape = new ArrayList();
@@ -41,16 +43,17 @@ public class Lienzo2D extends javax.swing.JPanel {
     public void paint(Graphics g){
         super.paint(g);
     Graphics2D g2d=(Graphics2D)g;
+    g2d.setColor(color);
     double x, y;
         double w, h;
     if(null != forma)switch (forma) {
             case PUNTO:
-                Line2D punto = new Line2D.Double(pin, pin);
-                vShape.add(punto);
+                figura = new Line2D.Double(pin, pin);
+                
                 break;
             case LINEA:
-                Line2D linea = new Line2D.Double(pin, pout);
-                vShape.add(linea);
+                figura = new Line2D.Double(pin, pout);
+                
                 break;
             case RECTANGULO:
                 if(pin.getX() > pout.getX()){
@@ -68,84 +71,65 @@ public class Lienzo2D extends javax.swing.JPanel {
                         y = pin.getY();
                     h = pout.getY() - pin.getY();
                 }
-                if(relleno == false){
-                    Rectangle2D rectangulo = new Rectangle2D.Double(x, y, w, h);
-                    vShape.add(rectangulo);
-                }
+                
+                    figura = new Rectangle2D.Double(x, y, w, h);
+                    
+               
                 
                 break;
-                /*
+                
             case ELIPSE:
-                if(pin.x > pout.x){
-                x = pout.x;
-                w = pin.x - pout.x;
+                if(pin.getX() > pout.getX()){
+                x = pout.getX();
+                w = pin.getX() - pout.getX();
                 }else{
-                    x = pin.x;
-                    w = pout.x - pin.x;
+                    x = pin.getX();
+                    w = pout.getX() - pin.getX();
                 }
              
-                if(pin.y > pout.y){
-                    y = pout.y;
-                    h = pin.y - pout.y;
+                if(pin.getY() > pout.getY()){
+                    y = pout.getY();
+                    h = pin.getY() - pout.getY();
                     }else{
-                        y = pin.y;
-                    h = pout.y - pin.y;
+                        y = pin.getY();
+                    h = pout.getY() - pin.getY();
                 }
-                if(relleno == false){
-                    g.drawOval(x, y, w, h);
-                }else{
-                    g.fillOval(x, y, w, h);
-                }
+                figura = new Ellipse2D.Double(x, y, w, h);
                 
                 
                 break;
             default:
                 break;
-                */
+                
         }
-    
-    
+        if(relleno){
+            g2d.fill(figura);
+        }else{
+            g2d.draw(figura);
+        }
+        
+        
     System.out.print(vShape.toString());
         for(Shape s:vShape){
+            if(relleno){
+            g2d.fill(s);
+        }else{
             g2d.draw(s);
+        }
         }
         
     }
     public void setColor(Color color){
-        this.color = new Color(color.getRGB());
+        this.color = color;
     }
     public void setFormas(Formas forma){
         this.forma=forma;
     }
     public void setRelleno(){
         relleno = !relleno;
-    }
-    
-    private void formMouseClicked(java.awt.event.MouseEvent evt) {
-         pin=new Point2D.Float(evt.getX(),evt.getY());
-            
-            repaint();
-        // TODO add your handling code here:
-    }                                 
-
-    private void formMouseDragged(java.awt.event.MouseEvent evt) {                                  
-        // TODO add your handling code here:
-            
-             //pout=new Point2D.Float(evt.getX(),evt.getY());
-            
-            //repaint();
-        
-       
-       
-               
-        
-    }                                 
-
-    private void formMousePressed(java.awt.event.MouseEvent evt) {                                  
-        // TODO add your handling code here:
-         pin=new Point2D.Float(evt.getX(),evt.getY());
         repaint();
-    }      
+    }
+                          
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -155,6 +139,26 @@ public class Lienzo2D extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                formMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -167,6 +171,44 @@ public class Lienzo2D extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        // TODO add your handling code here:
+          pout=new Point2D.Float(evt.getX(),evt.getY());
+            
+            repaint();
+        
+    }//GEN-LAST:event_formMouseDragged
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:ç
+        pin=new Point2D.Float(evt.getX(),evt.getY());
+            
+            repaint();
+            
+    }//GEN-LAST:event_formMouseClicked
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        // TODO add your handling code here:
+                pin=new Point2D.Float(evt.getX(),evt.getY());
+       repaint();
+    }//GEN-LAST:event_formMousePressed
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+        // TODO add your handling code here:
+        pout=new Point2D.Float(evt.getX(),evt.getY());
+            
+            
+            
+    }//GEN-LAST:event_formMouseMoved
+
+    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
+        // TODO add your handling code here:
+        pout=new Point2D.Float(evt.getX(),evt.getY());
+        
+        repaint();
+        vShape.add(figura);
+    }//GEN-LAST:event_formMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

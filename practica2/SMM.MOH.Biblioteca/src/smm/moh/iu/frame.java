@@ -175,7 +175,12 @@ public class frame extends javax.swing.JFrame {
 
         nav3.setLayout(new java.awt.GridLayout(1, 0));
 
-        colores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amarillo", "Verde", "Azul", "Negro", "Blanco", "Rojo" }));
+        colores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Verde", "Amarillo", "Rojo", "Azul", "Negro", "Blanco" }));
+        colores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                coloresActionPerformed(evt);
+            }
+        });
         nav3.add(colores);
 
         jPanel8.add(nav3);
@@ -184,6 +189,11 @@ public class frame extends javax.swing.JFrame {
         nav4.add(jSpinner1);
 
         relleno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/rellenar.png"))); // NOI18N
+        relleno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rellenoActionPerformed(evt);
+            }
+        });
         nav4.add(relleno);
 
         transparencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/transparencia.png"))); // NOI18N
@@ -197,6 +207,18 @@ public class frame extends javax.swing.JFrame {
         head.add(jPanel8);
 
         getContentPane().add(head, java.awt.BorderLayout.PAGE_START);
+
+        javax.swing.GroupLayout lienzo2DLayout = new javax.swing.GroupLayout(lienzo2D);
+        lienzo2D.setLayout(lienzo2DLayout);
+        lienzo2DLayout.setHorizontalGroup(
+            lienzo2DLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 589, Short.MAX_VALUE)
+        );
+        lienzo2DLayout.setVerticalGroup(
+            lienzo2DLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 440, Short.MAX_VALUE)
+        );
+
         getContentPane().add(lienzo2D, java.awt.BorderLayout.CENTER);
 
         File.setText("Archivo");
@@ -369,13 +391,21 @@ public class frame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-    public void actualizarlienzo(){
-        Color color= (Color.RED);
+
+    private void rellenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rellenoActionPerformed
+        // TODO add your handling code here:
+        lienzo2D.setRelleno();
+    }//GEN-LAST:event_rellenoActionPerformed
+
+    private void coloresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coloresActionPerformed
+        // TODO add your handling code here:
+        
+        String seleccionado = colores.getSelectedItem().toString();
+        Color color = Colores.valueOf(seleccionado).getColor();
+        lienzo2D.setColor(color);
         
         
-        
-        
-    }
+    }//GEN-LAST:event_coloresActionPerformed
 
     /**
      * @param args the command line arguments
