@@ -10,6 +10,7 @@ import smm.moh.iu.Formas;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.Stroke;
@@ -17,9 +18,9 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Ellipse2D;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.shape.Ellipse;
 /**
 /**
  *
@@ -36,11 +37,16 @@ public class Lienzo2D extends javax.swing.JPanel {
     private Shape figura = new Line2D.Double(pin, pout);
     private Color color = new Color(0,0,0);
     private Formas forma;
+    private Shape figmod = null;
+    //private int numfigura =0;
     private boolean relleno = false;
     private boolean alisar = false;
     private boolean transparencia = false;
+    //private boolean editar = false;
     private int numrelleno = 1;
     List<Shape> vShape = new ArrayList();
+    private RenderingHints render;
+    private Stroke atributos;
     
     public Lienzo2D() {
         initComponents();
@@ -49,18 +55,72 @@ public class Lienzo2D extends javax.swing.JPanel {
     public void paint(Graphics g){
         super.paint(g);
     Graphics2D g2d=(Graphics2D)g;
+    g2d.setColor(color);
+    if(alisar){
+        g2d.setRenderingHints(render);
+    }
     if(transparencia){
+        g2d.setStroke(atributos);
+    }
+    
+    if(relleno){
+            g2d.fill(figura);
+            g2d.draw(figura);
+        }else{
+            g2d.draw(figura);
+        }
+    
+        for(Shape s:vShape){
+            if(relleno){
+            g2d.fill(s);
+            g2d.draw(s);
+            }else{
+                g2d.draw(s);
+            }
+        }
+        
+        
+    }
+    public void setColor(Color color){
+        this.color = color;
+        repaint();
+        
+    }
+    public void setFormas(Formas forma){
+        this.forma=forma;
+    }
+    public void setRelleno(){
+        relleno = !relleno;
+        pintar();
+    }
+    public void setAlisar(){
+       alisar = !alisar;
+       pintar();
+    }
+    
+    public void setNumrelleno(int num){
+        numrelleno = num;
+        pintar();
+    }
+    public void setTransparencia(){
+        transparencia = !transparencia;
+        pintar();
+    }
+    
+    public void pintar(){
+        
+        if(transparencia){
             
             color = new Color(color.getRed(),color.getGreen(),color.getBlue(),80);
             
         }else{
             color = new Color(color.getRed(),color.getGreen(),color.getBlue());
         }
-        g2d.setColor(color);
-    
-    double x, y;
+        
+        
+        double x, y;
         double w, h;
-    if(null != forma)switch (forma) {
+        if(null != forma)switch (forma) {
             case PUNTO:
                 figura = new Line2D.Double(pin, pin);
                 
@@ -86,7 +146,7 @@ public class Lienzo2D extends javax.swing.JPanel {
                     h = pout.getY() - pin.getY();
                 }
                 
-                    figura = new Rectangle2D.Double(x, y, w, h);
+                    figura = new Rectangle((int)x,(int) y,(int) w,(int) h);
                     
                
                 
@@ -108,78 +168,103 @@ public class Lienzo2D extends javax.swing.JPanel {
                         y = pin.getY();
                     h = pout.getY() - pin.getY();
                 }
-                figura = new Ellipse2D.Double(x, y, w, h);
+                figura = (Shape) new Ellipse((int)x,(int) y,(int) w,(int) h);
                 
                 
                 break;
-            case EDITAR:
-                int num=0;
-                for(Shape s:vShape){
-                    if(s.contains(pin)){
-                        num = vShape.indexOf(s);
-                    }
-                }
-                Shape aux = vShape.get(num);
-                if(aux.getClass().getName() == Line2D.class.getName()){
-                    System.out.println("hola");
-                }
-                break;
+            
+                
+            
             default:
                 break;
                 
         }
-        if(relleno){
-            g2d.fill(figura);
-            
-        }else{
-            g2d.draw(figura);
-        }
+        
         if(alisar){
-             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-             g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        }
             
-        g2d.setStroke(new BasicStroke(numrelleno));
-           
+            render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+            render.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        }
         
+            atributos = new BasicStroke(numrelleno);
         
+           repaint();
+    }
     
+    /*public void editar(){
+        
+        if(vShape.size() >0){
         for(Shape s:vShape){
-            if(relleno){
-            g2d.fill(s);
-            g2d.draw(s);
-        }else{
-            g2d.draw(s);
+            if(s.contains(pin)){
+                //numfigura = vShape.indexOf(s);
+                //editar = true;
+                //updatefigura(numfigura);
+            }
         }
         }
+    //      public boolean isNear(Point2D p){
+    //return this.ptLineDist(p)<=2.0;
+    //}
+    }*/
+    /*public void updatefigura(int num){
         
+        Shape modificada= vShape.get(num);
+        if(modificada.getClass().getName() == Rectangle2D.Double.class.getName()){
+            double w, h;
+            Rectangle2D rectangulo = (java.awt.geom.Rectangle2D)modificada;
+           w = rectangulo.getWidth();
+           h = rectangulo.getHeight();
+           figura = new Rectangle2D.Double(pout.getX(),pout.getY(), w, h);
+           vShape.set(num, figura);
+                   }
+        else{
+            if(modificada.getClass().getName() == Ellipse2D.Double.class.getName()){
+                double w, h;
+                Ellipse2D elipse = (java.awt.geom.Ellipse2D)modificada;
+                w = elipse.getWidth();
+                h = elipse.getHeight();
+                figura = new Ellipse2D.Double(pout.getX(),pout.getY(), w, h);
+                vShape.set(num, figura);
+            }
+            else{
+                if(modificada.getClass().getName() == Line2D.Double.class.getName()){
+                    Line2D linea = (java.awt.geom.Line2D)modificada;
+                    if(linea.getP1() == linea.getP2()){
+                        figura = new Line2D.Double(pout, pout);
+                    }else{
+                        double difx=0,dify=0;
+                        difx = linea.getP1().getX() - linea.getP2().getX();
+                        dify = linea.getP1().getY() - linea.getP2().getY();
+                        Point2D second= new Point2D.Double(pin.getX()+difx,pin.getY()+ dify);
+                        figura = new Line2D.Double(pin, second);
+                    }
+                    
+                    
+                    vShape.set(num, figura);
+                }
+            }
+        }
         
+    }*/
+    private Shape getSelectedShape(Point2D p){
+    for(Shape s:vShape)
+    if(s.contains(p)) return s;
+    return null;
     }
-    public void setColor(Color color){
-        this.color = color;
-        repaint();
-        
-    }
-    public void setFormas(Formas forma){
-        this.forma=forma;
-    }
-    public void setRelleno(){
-        relleno = !relleno;
-        repaint();
-    }
-    public void setAlisar(){
-       alisar = !alisar;
-       repaint();
+    private void actualizar(Shape forma,java.awt.event.MouseEvent evt){
+        if(forma != null){
+            if(forma.getClass().getName() == Rectangle.class.getName()){
+                Rectangle rectangulo = (java.awt.Rectangle)forma;
+                rectangulo.setLocation(evt.getPoint());
+            }
+            if(forma.getClass().getName() == Ellipse.class.getName()){
+                Ellipse elipse = (javafx.scene.shape.Ellipse)forma;
+                
+            }
+            
+        }
     }
     
-    public void setNumrelleno(int num){
-        numrelleno = num;
-        repaint();
-    }
-    public void setTransparencia(){
-        transparencia = !transparencia;
-        repaint();
-    }
                           
 
     /**
@@ -226,8 +311,20 @@ public class Lienzo2D extends javax.swing.JPanel {
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         // TODO add your handling code here:
           pout=new Point2D.Float(evt.getX(),evt.getY());
+          /*if(editar){
+                updatefigura(numfigura);
+            }*/
+            if(forma == Formas.EDITAR){
+                
+                
+                actualizar(figmod,evt);
+               
+            //editar();
             
-            repaint();
+            }
+            
+            pintar();
+            
         
     }//GEN-LAST:event_formMouseDragged
 
@@ -242,12 +339,22 @@ public class Lienzo2D extends javax.swing.JPanel {
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         // TODO add your handling code here:
                pin=new Point2D.Float(evt.getX(),evt.getY());
-       repaint();
+               if(forma == Formas.EDITAR){
+                   
+            //editar();
+            actualizar(figmod,evt);
+            
+            
+            
+                }
+       pintar();
+       
+       
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         // TODO add your handling code here:
-       // pout=new Point2D.Float(evt.getX(),evt.getY());
+        
             //vShape.add(figura);
             
             
@@ -255,11 +362,20 @@ public class Lienzo2D extends javax.swing.JPanel {
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         // TODO add your handling code here:
-        pout=new Point2D.Float(evt.getX(),evt.getY());
-        
-        repaint();
+        /*if(editar){
+            editar = false;
+        }*/
+        if(forma == Formas.EDITAR){
+            if(figmod == null){
+                    figmod = getSelectedShape(pout);
+                }
+           // editar();
+            
+        }else{
+            pout=new Point2D.Float(evt.getX(),evt.getY());
+        pintar();
         vShape.add(figura);
-        
+        }
     }//GEN-LAST:event_formMouseReleased
 
 
