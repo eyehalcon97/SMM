@@ -46,7 +46,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     private int numrelleno = 1;
     List<Shape> vShape = new ArrayList();
     private RenderingHints render;
-    private Stroke atributos;
+    private Stroke atributos = new BasicStroke(numrelleno);
     
     public Lienzo2D() {
         initComponents();
@@ -56,12 +56,13 @@ public class Lienzo2D extends javax.swing.JPanel {
         super.paint(g);
     Graphics2D g2d=(Graphics2D)g;
     g2d.setColor(color);
+    
     if(alisar){
         g2d.setRenderingHints(render);
     }
-    if(transparencia){
+    
         g2d.setStroke(atributos);
-    }
+    
     
     if(relleno){
             g2d.fill(figura);
@@ -83,7 +84,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     }
     public void setColor(Color color){
         this.color = color;
-        repaint();
+        pintar();
         
     }
     public void setFormas(Formas forma){
@@ -260,6 +261,10 @@ public class Lienzo2D extends javax.swing.JPanel {
             if(forma.getClass().getName() == Ellipse.class.getName()){
                 Ellipse elipse = (javafx.scene.shape.Ellipse)forma;
                 
+            }
+            if(forma.getClass().getName() == Line2D.Double.class.getName()){
+                Line2D linea = (java.awt.geom.Line2D)forma;
+                ((MiLinea)linea).setLocation(evt.getPoint());
             }
             
         }
