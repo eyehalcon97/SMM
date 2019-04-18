@@ -249,26 +249,36 @@ public class Lienzo2D extends javax.swing.JPanel {
     }*/
     private Shape getSelectedShape(Point2D p){
     for(Shape s:vShape){
-    if(s.contains(p)) 
-         return s;
+        System.out.println(s.getClass().getName());
+       // System.out.println("");    
+    if(s.contains(p)){
+        
+        return s;
+    }
+    //MiLinea line= MiLineas; 
+    //((MiLinea) s).contains(p);
+         
     }
     
     return null;
     }
     private void actualizar(Shape forma,java.awt.event.MouseEvent evt){
         if(forma != null){
+            System.out.println(forma.getClass().getName());
+            System.out.println(MiLinea.Double.class.getName());
             if(forma.getClass().getName() == Rectangle.class.getName()){
-                Rectangle rectangulo = (java.awt.Rectangle)forma;
-                rectangulo.setLocation(evt.getPoint());
+                //Rectangle rectangulo = (java.awt.Rectangle)forma;
+                ((Rectangle) forma).setLocation(evt.getPoint());
+                //rectangulo.setLocation(evt.getPoint());
             }
             if(forma.getClass().getName() == Ellipse2D.class.getName()){
-                Ellipse2D elipse = (java.awt.geom.Ellipse2D)forma;
+                ((Rectangle) forma).setLocation(evt.getPoint());
                 
             }
+            
             if(forma.getClass().getName() == MiLinea.Double.class.getName()){
-                MiLinea linea = (MiLinea)forma;
-                System.out.println("hola");
-                (linea).setLocation(evt.getPoint());
+                ((MiLinea) forma).setLocation(evt.getPoint());
+                
             }
             
         }
@@ -348,9 +358,12 @@ public class Lienzo2D extends javax.swing.JPanel {
                pin=new Point2D.Float(evt.getX(),evt.getY());
                if(forma == Formas.EDITAR){
                    figmod = getSelectedShape(pin);
+                   
             //editar();
             actualizar(figmod,evt);
-            
+            pin = new Point2D.Double(-10, -10);
+                    pout = new Point2D.Double(-10, -10);
+                    figura = new Line2D.Double(pin, pout);
             
             
                 }else{
@@ -375,18 +388,21 @@ public class Lienzo2D extends javax.swing.JPanel {
             editar = false;
         }*/
         pout=new Point2D.Float(evt.getX(),evt.getY());
-        if(forma == Formas.EDITAR){
+        if(forma == Formas.EDITAR ){
             if(figmod != null){
                     actualizar(figmod,evt);
                     figmod=null;
+                    
                 }
            // editar();
            
             
-        }
+        }else{
         vShape.add(figura);
         
+        }
         pintar();
+       
     }//GEN-LAST:event_formMouseReleased
 
 

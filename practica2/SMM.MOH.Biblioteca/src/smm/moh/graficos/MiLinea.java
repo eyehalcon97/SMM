@@ -22,7 +22,9 @@ public class MiLinea extends Line2D.Double{
     }
     
     @Override
-    public boolean contains(Point2D p) {
+    public boolean contains(Point2D p) {        
+                    System.out.println("gjgjgjgjgj");
+        
         return isNear(p);
     }
 
