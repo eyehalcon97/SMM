@@ -14,8 +14,9 @@ import java.awt.geom.Point2D;
  */
 public class MiLinea extends Line2D.Double{
 
-    
-    
+    public MiLinea(Point2D pd, Point2D pd1){
+        super(pd,pd1);
+    }
     
     public boolean isNear(Point2D p){
         return this.ptLineDist(p)<=2.0;
@@ -23,8 +24,6 @@ public class MiLinea extends Line2D.Double{
     
     @Override
     public boolean contains(Point2D p) {        
-                    System.out.println("gjgjgjgjgj");
-        
         return isNear(p);
     }
 

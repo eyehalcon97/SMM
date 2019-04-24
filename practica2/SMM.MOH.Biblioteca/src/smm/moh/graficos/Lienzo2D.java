@@ -37,11 +37,9 @@ public class Lienzo2D extends javax.swing.JPanel {
     private Color color = new Color(0,0,0);
     private Formas forma;
     private Shape figmod = null;
-    //private int numfigura =0;
     private boolean relleno = false;
     private boolean alisar = false;
     private boolean transparencia = false;
-    //private boolean editar = false;
     private int numrelleno = 1;
     List<Shape> vShape = new ArrayList();
     private RenderingHints render;
@@ -116,18 +114,15 @@ public class Lienzo2D extends javax.swing.JPanel {
         }else{
             color = new Color(color.getRed(),color.getGreen(),color.getBlue());
         }
-        
-        
+
         double x, y;
         double w, h;
         if(null != forma)switch (forma) {
             case PUNTO:
-                figura = new MiLinea.Double(pin, pin);
-                
+                figura = new MiLinea(pin,pin);
                 break;
             case LINEA:
-                figura = new MiLinea.Double(pin, pout);
-                
+                figura = new MiLinea(pin,pout);
                 break;
             case RECTANGULO:
                 if(pin.getX() > pout.getX()){
@@ -168,14 +163,8 @@ public class Lienzo2D extends javax.swing.JPanel {
                         y = pin.getY();
                     h = pout.getY() - pin.getY();
                 }
-                figura = (Shape)new Ellipse2D.Double(x,y, w, h);
-                
-                
-                
+                figura = new MiElipse(x,y, w, h);
                 break;
-            
-                
-            
             default:
                 break;
                 
@@ -192,64 +181,10 @@ public class Lienzo2D extends javax.swing.JPanel {
            repaint();
     }
     
-    /*public void editar(){
-        
-        if(vShape.size() >0){
-        for(Shape s:vShape){
-            if(s.contains(pin)){
-                //numfigura = vShape.indexOf(s);
-                //editar = true;
-                //updatefigura(numfigura);
-            }
-        }
-        }
-    //      public boolean isNear(Point2D p){
-    //return this.ptLineDist(p)<=2.0;
-    //}
-    }*/
-    /*public void updatefigura(int num){
-        
-        Shape modificada= vShape.get(num);
-        if(modificada.getClass().getName() == Rectangle2D.Double.class.getName()){
-            double w, h;
-            Rectangle2D rectangulo = (java.awt.geom.Rectangle2D)modificada;
-           w = rectangulo.getWidth();
-           h = rectangulo.getHeight();
-           figura = new Rectangle2D.Double(pout.getX(),pout.getY(), w, h);
-           vShape.set(num, figura);
-                   }
-        else{
-            if(modificada.getClass().getName() == Ellipse2D.Double.class.getName()){
-                double w, h;
-                Ellipse2D elipse = (java.awt.geom.Ellipse2D)modificada;
-                w = elipse.getWidth();
-                h = elipse.getHeight();
-                figura = new Ellipse2D.Double(pout.getX(),pout.getY(), w, h);
-                vShape.set(num, figura);
-            }
-            else{
-                if(modificada.getClass().getName() == Line2D.Double.class.getName()){
-                    Line2D linea = (java.awt.geom.Line2D)modificada;
-                    if(linea.getP1() == linea.getP2()){
-                        figura = new Line2D.Double(pout, pout);
-                    }else{
-                        double difx=0,dify=0;
-                        difx = linea.getP1().getX() - linea.getP2().getX();
-                        dify = linea.getP1().getY() - linea.getP2().getY();
-                        Point2D second= new Point2D.Double(pin.getX()+difx,pin.getY()+ dify);
-                        figura = new Line2D.Double(pin, second);
-                    }
-                    
-                    
-                    vShape.set(num, figura);
-                }
-            }
-        }
-        
-    }*/
+    
     private Shape getSelectedShape(Point2D p){
     for(Shape s:vShape){
-        System.out.println(s.getClass().getName());
+
        // System.out.println("");    
     if(s.contains(p)){
         
@@ -264,23 +199,15 @@ public class Lienzo2D extends javax.swing.JPanel {
     }
     private void actualizar(Shape forma,java.awt.event.MouseEvent evt){
         if(forma != null){
-            System.out.println(forma.getClass().getName());
-            System.out.println(MiLinea.Double.class.getName());
             if(forma.getClass().getName() == Rectangle.class.getName()){
-                //Rectangle rectangulo = (java.awt.Rectangle)forma;
                 ((Rectangle) forma).setLocation(evt.getPoint());
-                //rectangulo.setLocation(evt.getPoint());
             }
-            if(forma.getClass().getName() == Ellipse2D.class.getName()){
-                ((Rectangle) forma).setLocation(evt.getPoint());
-                
+            if(forma.getClass().getName() == MiElipse.class.getName()){
+                ((MiElipse) forma).setLocation(evt.getPoint());
             }
-            
-            if(forma.getClass().getName() == MiLinea.Double.class.getName()){
-                ((MiLinea) forma).setLocation(evt.getPoint());
-                
+            if(forma.getClass().getName() == MiLinea.class.getName()){
+                ((MiLinea) forma).setLocation(evt.getPoint());   
             }
-            
         }
     }
     
@@ -336,8 +263,7 @@ public class Lienzo2D extends javax.swing.JPanel {
                 
                 actualizar(figmod,evt);
                
-            //editar();
-            
+
             }
             
             pintar();
@@ -346,10 +272,6 @@ public class Lienzo2D extends javax.swing.JPanel {
     }//GEN-LAST:event_formMouseDragged
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        // TODO add your handling code here:ç
-        //pin=new Point2D.Float(evt.getX(),evt.getY());
-            
-          //  repaint();
             
     }//GEN-LAST:event_formMouseClicked
 
@@ -375,18 +297,11 @@ public class Lienzo2D extends javax.swing.JPanel {
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
-        // TODO add your handling code here:
-        
-            //vShape.add(figura);
-            
-            
+
     }//GEN-LAST:event_formMouseMoved
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         // TODO add your handling code here:
-        /*if(editar){
-            editar = false;
-        }*/
         pout=new Point2D.Float(evt.getX(),evt.getY());
         if(forma == Formas.EDITAR ){
             if(figmod != null){
