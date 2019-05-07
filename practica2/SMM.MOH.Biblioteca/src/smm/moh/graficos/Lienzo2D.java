@@ -34,13 +34,14 @@ public class Lienzo2D extends javax.swing.JPanel {
     private Point2D pin = new Point2D.Double(-10, -10);
     private Point2D pout = new Point2D.Double(-10, -10);
     private Shape figura = new Line2D.Double(pin, pout);
-    private Color color = new Color(0,0,0);
+    private Color color = new Color(0,0,0,0);
     private Formas forma;
     private Shape figmod = null;
     private boolean relleno = false;
     private boolean alisar = false;
     private boolean transparencia = false;
     private int numrelleno = 1;
+   
     List<Shape> vShape = new ArrayList();
     private RenderingHints render;
     private Stroke atributos = new BasicStroke(numrelleno);
@@ -52,7 +53,12 @@ public class Lienzo2D extends javax.swing.JPanel {
     public void paint(Graphics g){
         super.paint(g);
     Graphics2D g2d=(Graphics2D)g;
-    g2d.setColor(color);
+    pintar(g2d);
+        
+    }
+    
+    public void pintar(Graphics2D g2d){
+        g2d.setColor(color);
     
     if(alisar){
         g2d.setRenderingHints(render);
@@ -76,8 +82,10 @@ public class Lienzo2D extends javax.swing.JPanel {
                 g2d.draw(s);
             }
         }
-        
-        
+    }
+    public void paintfiguras(Graphics g){
+        Graphics2D g2d=(Graphics2D)g;
+        pintar(g2d);
     }
     public void setColor(Color color){
         this.color = color;

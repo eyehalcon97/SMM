@@ -5,7 +5,9 @@ package smm.moh.iu;
 
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -349,10 +351,23 @@ public class frame extends javax.swing.JFrame {
 
     private void FileGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FileGuardarActionPerformed
         // TODO add your handling code here:
-        JFileChooser dlg = new JFileChooser();
-        int resp = dlg.showSaveDialog(this);
-        if( resp == JFileChooser.APPROVE_OPTION) {
-        File f = dlg.getSelectedFile();
+        VentanaInterna vi=(VentanaInterna)Escritorio.getSelectedFrame();   
+        if (vi != null) {     
+            JFileChooser dlg = new JFileChooser();
+            
+        int resp = dlg.showSaveDialog(this);     
+        if (resp == JFileChooser.APPROVE_OPTION) {     
+            try {       
+                BufferedImage img = vi.getLienzoImagen().getImagen();      
+                if (img != null) {        
+                    File f = dlg.getSelectedFile();       
+                    ImageIO.write(img, "jpg", f);         
+                    vi.setTitle(f.getName());       
+                    }    
+                }catch (Exception ex) {       
+                    System.err.println("Error al guardar la imagen");     
+                }
+        }
         }
     }//GEN-LAST:event_FileGuardarActionPerformed
 
@@ -360,9 +375,17 @@ public class frame extends javax.swing.JFrame {
         // TODO add your handling code here:
         JFileChooser dlg = new JFileChooser();
         int resp = dlg.showOpenDialog(this);
-        if( resp == JFileChooser.APPROVE_OPTION) {
-        File f = dlg.getSelectedFile();
-        }
+        if( resp == JFileChooser.APPROVE_OPTION) {     
+            try{       
+                File f = dlg.getSelectedFile();         
+                BufferedImage img = ImageIO.read(f);       
+                VentanaInterna vi = new VentanaInterna();        
+                vi.getLienzoImagen().setImage(img);        
+                this.Escritorio.add(vi);        
+                vi.setTitle(f.getName());        
+                vi.setVisible(true);     
+            }catch(Exception ex){       
+                System.err.println("Error al leer la imagen");     }   }
     }//GEN-LAST:event_FileAbrirActionPerformed
 
     private void FileNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FileNuevoActionPerformed
@@ -410,7 +433,7 @@ public class frame extends javax.swing.JFrame {
         VentanaInterna vi;  
         vi = (VentanaInterna)Escritorio.getSelectedFrame();
         if(vi != null){
-            vi.getLienzo().setFormas(forma);
+            vi.getLienzoImagen().setFormas(forma);
         }
     
     }//GEN-LAST:event_herramienta
@@ -435,13 +458,19 @@ public class frame extends javax.swing.JFrame {
         // TODO add your handling code here:
          VentanaInterna vi = new VentanaInterna();
          Escritorio.add(vi);
-         vi.setVisible(true); 
+         vi.setVisible(true);
+         BufferedImage img;
+         img = new BufferedImage(300,300,BufferedImage.TYPE_INT_RGB);
+         vi.getLienzoImagen().setImage(img);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void rellenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rellenoActionPerformed
         // TODO add your handling code here:
-        //lienzo2D.setRelleno();
-        
+        VentanaInterna vi;  
+        vi = (VentanaInterna)Escritorio.getSelectedFrame();
+        if(vi != null){
+        vi.getLienzoImagen().setRelleno();
+        }
         
         
     }//GEN-LAST:event_rellenoActionPerformed
@@ -451,26 +480,40 @@ public class frame extends javax.swing.JFrame {
         
         String seleccionado = colores.getSelectedItem().toString();
         Color color = Colores.valueOf(seleccionado).getColor();
-        //lienzo2D.setColor(color);
-        
+        VentanaInterna vi;  
+        vi = (VentanaInterna)Escritorio.getSelectedFrame();
+        if(vi != null){
+        vi.getLienzoImagen().setColor(color);
+        }
         
         
     }//GEN-LAST:event_coloresActionPerformed
 
     private void AlisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlisarActionPerformed
         // TODO add your handling code here:
-       // lienzo2D.setAlisar();
-        
+        VentanaInterna vi;  
+        vi = (VentanaInterna)Escritorio.getSelectedFrame();
+        if(vi != null){
+        vi.getLienzoImagen().setAlisar();
+        }
     }//GEN-LAST:event_AlisarActionPerformed
 
     private void numeroalisarStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_numeroalisarStateChanged
         // TODO add your handling code here:
-       // lienzo2D.setNumrelleno(Integer.parseInt(numeroalisar.getValue().toString()));
+       VentanaInterna vi;  
+        vi = (VentanaInterna)Escritorio.getSelectedFrame();
+        if(vi != null){
+        vi.getLienzoImagen().setNumrelleno(Integer.parseInt(numeroalisar.getValue().toString()));
+        }
     }//GEN-LAST:event_numeroalisarStateChanged
 
     private void transparenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transparenciaActionPerformed
         // TODO add your handling code here:
-       // lienzo2D.setTransparencia();
+        VentanaInterna vi;  
+        vi = (VentanaInterna)Escritorio.getSelectedFrame();
+        if(vi != null){
+       vi.getLienzoImagen().setTransparencia();
+        }
     }//GEN-LAST:event_transparenciaActionPerformed
 
     private void jCheckBoxMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem2ActionPerformed

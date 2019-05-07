@@ -18,8 +18,8 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
         initComponents();
     }
     
-    public smm.moh.graficos.Lienzo2D getLienzo(){
-        return lienzo2D1;
+    public smm.moh.graficos.LienzoImagen2D getLienzoImagen(){
+        return lienzoImagen2D1;
     }
 
     /**
@@ -31,33 +31,35 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lienzo2D1 = new smm.moh.graficos.Lienzo2D();
+        lienzoImagen2D1 = new smm.moh.graficos.LienzoImagen2D();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
 
-        javax.swing.GroupLayout lienzo2D1Layout = new javax.swing.GroupLayout(lienzo2D1);
-        lienzo2D1.setLayout(lienzo2D1Layout);
-        lienzo2D1Layout.setHorizontalGroup(
-            lienzo2D1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+        javax.swing.GroupLayout lienzoImagen2D1Layout = new javax.swing.GroupLayout(lienzoImagen2D1);
+        lienzoImagen2D1.setLayout(lienzoImagen2D1Layout);
+        lienzoImagen2D1Layout.setHorizontalGroup(
+            lienzoImagen2D1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 386, Short.MAX_VALUE)
         );
-        lienzo2D1Layout.setVerticalGroup(
-            lienzo2D1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+        lienzoImagen2D1Layout.setVerticalGroup(
+            lienzoImagen2D1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 280, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lienzo2D1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(lienzoImagen2D1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lienzo2D1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lienzoImagen2D1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -65,6 +67,6 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private smm.moh.graficos.Lienzo2D lienzo2D1;
+    private smm.moh.graficos.LienzoImagen2D lienzoImagen2D1;
     // End of variables declaration//GEN-END:variables
 }
