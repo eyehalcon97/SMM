@@ -77,7 +77,7 @@ public class frame extends javax.swing.JFrame {
         relleno = new javax.swing.JToggleButton();
         transparencia = new javax.swing.JToggleButton();
         Alisar = new javax.swing.JToggleButton();
-        lienzo2D = new smm.moh.graficos.Lienzo2D();
+        Escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
         FileNuevo = new javax.swing.JMenuItem();
@@ -238,18 +238,18 @@ public class frame extends javax.swing.JFrame {
 
         getContentPane().add(head, java.awt.BorderLayout.PAGE_START);
 
-        javax.swing.GroupLayout lienzo2DLayout = new javax.swing.GroupLayout(lienzo2D);
-        lienzo2D.setLayout(lienzo2DLayout);
-        lienzo2DLayout.setHorizontalGroup(
-            lienzo2DLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
+        Escritorio.setLayout(EscritorioLayout);
+        EscritorioLayout.setHorizontalGroup(
+            EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1160, Short.MAX_VALUE)
         );
-        lienzo2DLayout.setVerticalGroup(
-            lienzo2DLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        EscritorioLayout.setVerticalGroup(
+            EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 440, Short.MAX_VALUE)
         );
 
-        getContentPane().add(lienzo2D, java.awt.BorderLayout.CENTER);
+        getContentPane().add(Escritorio, java.awt.BorderLayout.CENTER);
 
         File.setText("Archivo");
         File.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -407,7 +407,11 @@ public class frame extends javax.swing.JFrame {
             }
         }
         estado.setText(forma.toString());
-        lienzo2D.setFormas(forma);
+        VentanaInterna vi;  
+        vi = (VentanaInterna)Escritorio.getSelectedFrame();
+        if(vi != null){
+            vi.getLienzo().setFormas(forma);
+        }
     
     }//GEN-LAST:event_herramienta
 
@@ -429,11 +433,14 @@ public class frame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+         VentanaInterna vi = new VentanaInterna();
+         Escritorio.add(vi);
+         vi.setVisible(true); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void rellenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rellenoActionPerformed
         // TODO add your handling code here:
-        lienzo2D.setRelleno();
+        //lienzo2D.setRelleno();
         
         
         
@@ -444,7 +451,7 @@ public class frame extends javax.swing.JFrame {
         
         String seleccionado = colores.getSelectedItem().toString();
         Color color = Colores.valueOf(seleccionado).getColor();
-        lienzo2D.setColor(color);
+        //lienzo2D.setColor(color);
         
         
         
@@ -452,18 +459,18 @@ public class frame extends javax.swing.JFrame {
 
     private void AlisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlisarActionPerformed
         // TODO add your handling code here:
-        lienzo2D.setAlisar();
+       // lienzo2D.setAlisar();
         
     }//GEN-LAST:event_AlisarActionPerformed
 
     private void numeroalisarStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_numeroalisarStateChanged
         // TODO add your handling code here:
-        lienzo2D.setNumrelleno(Integer.parseInt(numeroalisar.getValue().toString()));
+       // lienzo2D.setNumrelleno(Integer.parseInt(numeroalisar.getValue().toString()));
     }//GEN-LAST:event_numeroalisarStateChanged
 
     private void transparenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transparenciaActionPerformed
         // TODO add your handling code here:
-        lienzo2D.setTransparencia();
+       // lienzo2D.setTransparencia();
     }//GEN-LAST:event_transparenciaActionPerformed
 
     private void jCheckBoxMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem2ActionPerformed
@@ -508,6 +515,7 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JToggleButton Alisar;
     private javax.swing.JMenu Edicion;
     private javax.swing.JCheckBoxMenuItem EdicionVerbarra;
+    private javax.swing.JDesktopPane Escritorio;
     private javax.swing.JMenu File;
     private javax.swing.JMenuItem FileAbrir;
     private javax.swing.JMenuItem FileGuardar;
@@ -532,7 +540,6 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToggleButton lapiz;
-    private smm.moh.graficos.Lienzo2D lienzo2D;
     private javax.swing.JToggleButton linea;
     private javax.swing.ButtonGroup menu;
     private javax.swing.JPanel nav1;
