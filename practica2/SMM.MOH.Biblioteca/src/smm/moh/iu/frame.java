@@ -361,7 +361,7 @@ public class frame extends javax.swing.JFrame {
                 BufferedImage img = vi.getLienzoImagen().getImagen();      
                 if (img != null) {        
                     File f = dlg.getSelectedFile();       
-                    ImageIO.write(img, "jpg", f);         
+                    ImageIO.write(img, "png", f);         
                     vi.setTitle(f.getName());       
                     }    
                 }catch (Exception ex) {       
