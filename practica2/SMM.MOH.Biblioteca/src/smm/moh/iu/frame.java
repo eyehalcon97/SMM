@@ -7,6 +7,7 @@ package smm.moh.iu;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
+import java.awt.image.Kernel;
 import java.awt.image.RescaleOp;
 import java.awt.image.WritableRaster;
 import java.io.File;
@@ -705,6 +706,8 @@ public class frame extends javax.swing.JFrame {
 
     private void FiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FiltroActionPerformed
         // TODO add your handling code here:
+       
+        
     }//GEN-LAST:event_FiltroActionPerformed
 
     private void jSlider1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jSlider1FocusGained
