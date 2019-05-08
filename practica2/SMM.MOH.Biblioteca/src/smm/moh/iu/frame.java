@@ -6,6 +6,9 @@ package smm.moh.iu;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.RescaleOp;
+import java.awt.image.WritableRaster;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
@@ -36,6 +39,7 @@ public class frame extends javax.swing.JFrame {
     private boolean barraatributos=true;
     Color color = new Color(0,0,0);
     Formas forma;
+    BufferedImage imgSource;
     Color colors[] = { Color.RED, Color.BLUE, Color.BLACK, Color.WHITE };
     public frame() {
         initComponents();
@@ -57,9 +61,40 @@ public class frame extends javax.swing.JFrame {
         jDialog1 = new javax.swing.JDialog();
         menu = new javax.swing.ButtonGroup();
         jPanel7 = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
         pie = new javax.swing.JPanel();
         estado = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jSlider1 = new javax.swing.JSlider();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        Filtro = new javax.swing.JComboBox<>();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jToggleButton2 = new javax.swing.JToggleButton();
+        jToggleButton3 = new javax.swing.JToggleButton();
+        jPanel10 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jToggleButton4 = new javax.swing.JToggleButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        jSlider2 = new javax.swing.JSlider();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
         head = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         nav1 = new javax.swing.JPanel();
@@ -92,13 +127,158 @@ public class frame extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
 
+        jButton4.setText("jButton4");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pie.setLayout(new java.awt.BorderLayout());
 
         estado.setText("Paint");
         pie.add(estado, java.awt.BorderLayout.PAGE_END);
-        pie.add(jSeparator1, java.awt.BorderLayout.CENTER);
+
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+
+        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jSeparator3.setMaximumSize(new java.awt.Dimension(10, 10));
+        jSeparator3.setPreferredSize(new java.awt.Dimension(10, 10));
+        jSeparator3.setRequestFocusEnabled(false);
+        jPanel1.add(jSeparator3);
+
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+
+        jPanel4.setLayout(new java.awt.GridLayout(0, 1));
+
+        jLabel1.setText("Brillo");
+        jPanel4.add(jLabel1);
+
+        jSlider1.setMinimum(-100);
+        jSlider1.setValue(0);
+        jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSlider1StateChanged(evt);
+            }
+        });
+        jSlider1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jSlider1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jSlider1FocusLost(evt);
+            }
+        });
+        jPanel4.add(jSlider1);
+
+        jPanel2.add(jPanel4);
+
+        jPanel5.setLayout(new java.awt.GridLayout(0, 1));
+
+        jLabel2.setText("Filtro");
+        jPanel5.add(jLabel2);
+
+        Filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "media" }));
+        Filtro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FiltroActionPerformed(evt);
+            }
+        });
+        jPanel5.add(Filtro);
+
+        jPanel2.add(jPanel5);
+
+        jPanel6.setLayout(new java.awt.GridLayout(0, 1));
+
+        jLabel3.setText("Contraste");
+        jPanel6.add(jLabel3);
+
+        jPanel9.setLayout(new java.awt.GridLayout(0, 3));
+
+        jToggleButton1.setText("jToggleButton1");
+        jToggleButton1.setMaximumSize(new java.awt.Dimension(73, 23));
+        jToggleButton1.setMinimumSize(new java.awt.Dimension(73, 23));
+        jToggleButton1.setPreferredSize(new java.awt.Dimension(73, 23));
+        jPanel9.add(jToggleButton1);
+
+        jToggleButton2.setText("jToggleButton2");
+        jToggleButton2.setMaximumSize(new java.awt.Dimension(73, 23));
+        jToggleButton2.setMinimumSize(new java.awt.Dimension(73, 23));
+        jToggleButton2.setPreferredSize(new java.awt.Dimension(73, 23));
+        jPanel9.add(jToggleButton2);
+
+        jToggleButton3.setText("jToggleButton3");
+        jToggleButton3.setMaximumSize(new java.awt.Dimension(73, 23));
+        jToggleButton3.setMinimumSize(new java.awt.Dimension(73, 23));
+        jToggleButton3.setPreferredSize(new java.awt.Dimension(73, 23));
+        jPanel9.add(jToggleButton3);
+
+        jPanel6.add(jPanel9);
+
+        jPanel2.add(jPanel6);
+
+        jPanel10.setLayout(new java.awt.GridLayout(0, 1));
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 73, Short.MAX_VALUE)
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        jPanel10.add(jPanel11);
+
+        jToggleButton4.setText("jToggleButton4");
+        jToggleButton4.setMaximumSize(new java.awt.Dimension(73, 23));
+        jToggleButton4.setMinimumSize(new java.awt.Dimension(73, 23));
+        jToggleButton4.setPreferredSize(new java.awt.Dimension(73, 23));
+        jPanel10.add(jToggleButton4);
+
+        jPanel2.add(jPanel10);
+
+        jPanel3.setLayout(new java.awt.GridLayout(0, 1));
+
+        jLabel4.setText("Rotacion");
+        jPanel3.add(jLabel4);
+
+        jPanel12.setLayout(new java.awt.GridLayout());
+        jPanel12.add(jSlider2);
+
+        jButton5.setText("jButton5");
+        jPanel12.add(jButton5);
+
+        jButton6.setText("jButton6");
+        jPanel12.add(jButton6);
+
+        jButton7.setText("jButton7");
+        jPanel12.add(jButton7);
+
+        jPanel3.add(jPanel12);
+
+        jPanel2.add(jPanel3);
+
+        jPanel13.setLayout(new java.awt.GridLayout(0, 1));
+
+        jLabel5.setText("Escala");
+        jPanel13.add(jLabel5);
+
+        jPanel14.setLayout(new java.awt.GridLayout());
+
+        jButton8.setText("jButton8");
+        jPanel14.add(jButton8);
+
+        jButton9.setText("jButton9");
+        jPanel14.add(jButton9);
+
+        jPanel13.add(jPanel14);
+
+        jPanel2.add(jPanel13);
+
+        jPanel1.add(jPanel2);
+
+        pie.add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        pie.add(jSeparator2, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(pie, java.awt.BorderLayout.PAGE_END);
 
@@ -248,7 +428,7 @@ public class frame extends javax.swing.JFrame {
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
+            .addGap(0, 343, Short.MAX_VALUE)
         );
 
         getContentPane().add(Escritorio, java.awt.BorderLayout.CENTER);
@@ -523,6 +703,38 @@ public class frame extends javax.swing.JFrame {
         nav4.setVisible(barraatributos);
     }//GEN-LAST:event_jCheckBoxMenuItem2ActionPerformed
 
+    private void FiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FiltroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FiltroActionPerformed
+
+    private void jSlider1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jSlider1FocusGained
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jSlider1FocusGained
+
+    private void jSlider1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jSlider1FocusLost
+        // TODO add your handling code here:
+        imgSource =null;
+        
+    }//GEN-LAST:event_jSlider1FocusLost
+
+    private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
+        // TODO add your handling code here:
+        VentanaInterna vi = (VentanaInterna)(Escritorio.getSelectedFrame());
+        if(vi!=null){     
+            ColorModel cm = vi.getLienzoImagen().getImagen().getColorModel();     
+            WritableRaster raster = vi.getLienzoImagen().getImagen().copyData(null);    
+            boolean alfaPre = vi.getLienzoImagen().getImagen().isAlphaPremultiplied();   
+            imgSource = new BufferedImage(cm,raster,alfaPre,null);
+            imgSource =vi.getLienzoImagen().getImagen();
+           RescaleOp rop = new RescaleOp(jSlider1.getValue()*1.0F,jSlider1.getValue()*100.0F,null);
+           rop.filter(imgSource, imgSource);
+           vi.getLienzoImagen().setImage(imgSource);
+           vi.getLienzoImagen().repaint();
+           
+        }
+    }//GEN-LAST:event_jSlider1StateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -563,6 +775,7 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JMenuItem FileAbrir;
     private javax.swing.JMenuItem FileGuardar;
     private javax.swing.JMenuItem FileNuevo;
+    private javax.swing.JComboBox<String> Filtro;
     private javax.swing.JComboBox<String> colores;
     private javax.swing.JToggleButton editar;
     private javax.swing.JToggleButton elipse;
@@ -571,17 +784,47 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
     private javax.swing.JDialog jDialog1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSlider jSlider1;
+    private javax.swing.JSlider jSlider2;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JToggleButton jToggleButton4;
     private javax.swing.JToggleButton lapiz;
     private javax.swing.JToggleButton linea;
     private javax.swing.ButtonGroup menu;
