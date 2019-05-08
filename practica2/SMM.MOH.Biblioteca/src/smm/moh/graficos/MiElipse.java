@@ -13,7 +13,7 @@ import java.awt.geom.Point2D;
  */
 public class MiElipse extends Ellipse2D.Double{
     
-    MiElipse(double x,double y,double h,double w){
+    public MiElipse(double x,double y,double h,double w){
         super(x,y,h,w);
     }
     public void setLocation(Point2D pos){

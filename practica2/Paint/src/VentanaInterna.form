@@ -38,7 +38,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="smm.moh.graficos.LienzoImagen2D" name="lienzoImagen2D1">
+    <Container class="smm.moh.iu.LienzoImagen2D" name="lienzoImagen2D1">
 
       <Layout>
         <DimensionLayout dim="0">

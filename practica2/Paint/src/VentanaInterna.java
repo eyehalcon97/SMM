@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package smm.moh.iu;
+
 
 /**
  *
@@ -18,7 +18,7 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
         initComponents();
     }
     
-    public smm.moh.graficos.LienzoImagen2D getLienzoImagen(){
+    public smm.moh.iu.LienzoImagen2D getLienzoImagen(){
         return lienzoImagen2D1;
     }
 
@@ -31,7 +31,7 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lienzoImagen2D1 = new smm.moh.graficos.LienzoImagen2D();
+        lienzoImagen2D1 = new smm.moh.iu.LienzoImagen2D();
 
         setClosable(true);
         setIconifiable(true);
@@ -67,6 +67,6 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private smm.moh.graficos.LienzoImagen2D lienzoImagen2D1;
+    private smm.moh.iu.LienzoImagen2D lienzoImagen2D1;
     // End of variables declaration//GEN-END:variables
 }

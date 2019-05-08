@@ -1,9 +1,10 @@
-package smm.moh.iu;
 
 
 
 
 
+
+import smm.moh.iu.Formas;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
@@ -243,7 +244,7 @@ public class frame extends javax.swing.JFrame {
         jLabel4.setText("Rotacion");
         jPanel3.add(jLabel4);
 
-        jPanel12.setLayout(new java.awt.GridLayout());
+        jPanel12.setLayout(new java.awt.GridLayout(1, 0));
         jPanel12.add(jSlider2);
 
         jButton5.setText("jButton5");
@@ -264,7 +265,7 @@ public class frame extends javax.swing.JFrame {
         jLabel5.setText("Escala");
         jPanel13.add(jLabel5);
 
-        jPanel14.setLayout(new java.awt.GridLayout());
+        jPanel14.setLayout(new java.awt.GridLayout(1, 0));
 
         jButton8.setText("jButton8");
         jPanel14.add(jButton8);
@@ -289,7 +290,7 @@ public class frame extends javax.swing.JFrame {
 
         nav1.setLayout(new java.awt.GridLayout(1, 0));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/nuevo.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/NuevoBoceto.GIF"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -297,7 +298,7 @@ public class frame extends javax.swing.JFrame {
         });
         nav1.add(jButton1);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/abrir.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/abrir.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FileAbrirActionPerformed(evt);
@@ -305,7 +306,7 @@ public class frame extends javax.swing.JFrame {
         });
         nav1.add(jButton2);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/Guardar.gif"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Guardar.gif"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FileGuardarActionPerformed(evt);
@@ -319,7 +320,7 @@ public class frame extends javax.swing.JFrame {
 
         lapiz.setName("Lapiz");
         menu.add(lapiz);
-        lapiz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/Lapiz.gif"))); // NOI18N
+        lapiz.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Lapiz.gif"))); // NOI18N
         lapiz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 herramienta(evt);
@@ -329,7 +330,7 @@ public class frame extends javax.swing.JFrame {
 
         linea.setName("Linea");
         menu.add(linea);
-        linea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/Linea.gif"))); // NOI18N
+        linea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Linea.gif"))); // NOI18N
         linea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 herramienta(evt);
@@ -339,7 +340,7 @@ public class frame extends javax.swing.JFrame {
 
         rectangulo.setName("Rectangulo");
         menu.add(rectangulo);
-        rectangulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/Rectangulo.gif"))); // NOI18N
+        rectangulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Rectangulo.gif"))); // NOI18N
         rectangulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 herramienta(evt);
@@ -349,7 +350,7 @@ public class frame extends javax.swing.JFrame {
 
         elipse.setName("Elipse");
         menu.add(elipse);
-        elipse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/Ovalo.gif"))); // NOI18N
+        elipse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Ovalo.gif"))); // NOI18N
         elipse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 herramienta(evt);
@@ -359,7 +360,7 @@ public class frame extends javax.swing.JFrame {
 
         editar.setName("Editar");
         menu.add(editar);
-        editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/seleccion.png"))); // NOI18N
+        editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/seleccion.png"))); // NOI18N
         editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 herramienta(evt);
@@ -391,7 +392,7 @@ public class frame extends javax.swing.JFrame {
         });
         nav4.add(numeroalisar);
 
-        relleno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/rellenar.png"))); // NOI18N
+        relleno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/rellenar.png"))); // NOI18N
         relleno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rellenoActionPerformed(evt);
@@ -399,7 +400,7 @@ public class frame extends javax.swing.JFrame {
         });
         nav4.add(relleno);
 
-        transparencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/transparencia.png"))); // NOI18N
+        transparencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/transparencia.png"))); // NOI18N
         transparencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 transparenciaActionPerformed(evt);
@@ -407,7 +408,7 @@ public class frame extends javax.swing.JFrame {
         });
         nav4.add(transparencia);
 
-        Alisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/alisar.png"))); // NOI18N
+        Alisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alisar.png"))); // NOI18N
         Alisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AlisarActionPerformed(evt);
@@ -425,11 +426,11 @@ public class frame extends javax.swing.JFrame {
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1160, Short.MAX_VALUE)
+            .addGap(0, 1227, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 343, Short.MAX_VALUE)
+            .addGap(0, 538, Short.MAX_VALUE)
         );
 
         getContentPane().add(Escritorio, java.awt.BorderLayout.CENTER);
@@ -446,7 +447,7 @@ public class frame extends javax.swing.JFrame {
             }
         });
 
-        FileNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/NuevoBoceto.GIF"))); // NOI18N
+        FileNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/NuevoBoceto.GIF"))); // NOI18N
         FileNuevo.setText("Nuevo");
         menu.add(FileNuevo);
         FileNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -456,7 +457,7 @@ public class frame extends javax.swing.JFrame {
         });
         File.add(FileNuevo);
 
-        FileAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/abrir.png"))); // NOI18N
+        FileAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/abrir.png"))); // NOI18N
         FileAbrir.setText("Abrir");
         FileAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -465,7 +466,7 @@ public class frame extends javax.swing.JFrame {
         });
         File.add(FileAbrir);
 
-        FileGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/smm/moh/iu/Guardar.gif"))); // NOI18N
+        FileGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Guardar.gif"))); // NOI18N
         FileGuardar.setText("Guardar");
         FileGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

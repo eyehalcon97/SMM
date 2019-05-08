@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package smm.moh.graficos;
+package smm.moh.iu;
 
 import java.awt.BasicStroke;
-import smm.moh.iu.Formas;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -19,6 +18,8 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 import java.util.List;
+import smm.moh.graficos.MiElipse;
+import smm.moh.graficos.MiLinea;
 
 /**
 /**

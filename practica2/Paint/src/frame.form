@@ -43,7 +43,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="FileNuevo">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/smm/moh/iu/NuevoBoceto.GIF"/>
+                  <Image iconType="3" name="/images/NuevoBoceto.GIF"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nuevo"/>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
@@ -57,7 +57,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="FileAbrir">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/smm/moh/iu/abrir.png"/>
+                  <Image iconType="3" name="/images/abrir.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Abrir"/>
               </Properties>
@@ -68,7 +68,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="FileGuardar">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/smm/moh/iu/Guardar.gif"/>
+                  <Image iconType="3" name="/images/Guardar.gif"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
@@ -152,7 +152,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,3,0,0,4,-120"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-58,0,0,4,-53"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -473,7 +473,7 @@
                 <Component class="javax.swing.JButton" name="jButton1">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smm/moh/iu/nuevo.png"/>
+                      <Image iconType="3" name="/images/NuevoBoceto.GIF"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -483,7 +483,7 @@
                 <Component class="javax.swing.JButton" name="jButton2">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smm/moh/iu/abrir.png"/>
+                      <Image iconType="3" name="/images/abrir.png"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -493,7 +493,7 @@
                 <Component class="javax.swing.JButton" name="jButton3">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smm/moh/iu/Guardar.gif"/>
+                      <Image iconType="3" name="/images/Guardar.gif"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -515,7 +515,7 @@
                       <ComponentRef name="menu"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smm/moh/iu/Lapiz.gif"/>
+                      <Image iconType="3" name="/images/Lapiz.gif"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -531,7 +531,7 @@
                       <ComponentRef name="menu"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smm/moh/iu/Linea.gif"/>
+                      <Image iconType="3" name="/images/Linea.gif"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -547,7 +547,7 @@
                       <ComponentRef name="menu"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smm/moh/iu/Rectangulo.gif"/>
+                      <Image iconType="3" name="/images/Rectangulo.gif"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -563,7 +563,7 @@
                       <ComponentRef name="menu"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smm/moh/iu/Ovalo.gif"/>
+                      <Image iconType="3" name="/images/Ovalo.gif"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -579,7 +579,7 @@
                       <ComponentRef name="menu"/>
                     </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smm/moh/iu/seleccion.png"/>
+                      <Image iconType="3" name="/images/seleccion.png"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -640,7 +640,7 @@
                 <Component class="javax.swing.JToggleButton" name="relleno">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smm/moh/iu/rellenar.png"/>
+                      <Image iconType="3" name="/images/rellenar.png"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -650,7 +650,7 @@
                 <Component class="javax.swing.JToggleButton" name="transparencia">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smm/moh/iu/transparencia.png"/>
+                      <Image iconType="3" name="/images/transparencia.png"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -660,7 +660,7 @@
                 <Component class="javax.swing.JToggleButton" name="Alisar">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/smm/moh/iu/alisar.png"/>
+                      <Image iconType="3" name="/images/alisar.png"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -683,12 +683,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="1160" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="1227" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="343" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="538" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
