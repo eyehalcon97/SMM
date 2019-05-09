@@ -14,7 +14,7 @@ import java.awt.Color;
  * @author eyehalcon97
  */
 public enum Colores {
-    Azul("Azul", Color.BLUE),
+    Azul("Azul", new Color(0,0,255,0 )),
     Amarillo("Amarillo", Color.YELLOW),
     Blanco("Blanco", Color.WHITE),
     Negro("Negro", Color.BLACK),

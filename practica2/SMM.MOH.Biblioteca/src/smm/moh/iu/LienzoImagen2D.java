@@ -5,9 +5,11 @@
  */
 package smm.moh.iu;
 
+import java.awt.Color;
 import smm.moh.iu.Lienzo2D;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 /**
@@ -27,9 +29,13 @@ public class LienzoImagen2D extends Lienzo2D{
             BufferedImage img2;
             img2 = img;
             Graphics g = img2.getGraphics();
-            super.paintfiguras(g);        
+            super.paintfiguras(g);
             return img2;
+            
         
+    }
+    public void setImagen(BufferedImage img){
+        this.img =img;
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);

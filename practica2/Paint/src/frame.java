@@ -6,9 +6,15 @@
 
 import smm.moh.iu.Formas;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.ByteLookupTable;
 import java.awt.image.ColorModel;
+import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
+import java.awt.image.LookupOp;
+import java.awt.image.LookupTable;
 import java.awt.image.RescaleOp;
 import java.awt.image.WritableRaster;
 import java.io.File;
@@ -16,7 +22,9 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-
+import sm.image.KernelProducer;
+import sm.image.LookupTableProducer;
+import java.awt.image.LookupTable;
 
 
 
@@ -36,6 +44,7 @@ public class frame extends javax.swing.JFrame {
     /**
      * Creates new form frame
      */
+    
     private boolean barraestado=true;
     private boolean barraformas=true;
     private boolean barraatributos=true;
@@ -78,12 +87,12 @@ public class frame extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
+        contrasteoscuro = new javax.swing.JButton();
+        contrastenormal = new javax.swing.JButton();
+        aclarar = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
-        jToggleButton4 = new javax.swing.JToggleButton();
+        jButton10 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
@@ -177,7 +186,8 @@ public class frame extends javax.swing.JFrame {
         jLabel2.setText("Filtro");
         jPanel5.add(jLabel2);
 
-        Filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "media" }));
+        Filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "media", "binomial", "enfoque", "relieve", "laplaciano" }));
+        Filtro.setSelectedItem("Seleccione");
         Filtro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FiltroActionPerformed(evt);
@@ -194,23 +204,29 @@ public class frame extends javax.swing.JFrame {
 
         jPanel9.setLayout(new java.awt.GridLayout(0, 3));
 
-        jToggleButton1.setText("jToggleButton1");
-        jToggleButton1.setMaximumSize(new java.awt.Dimension(73, 23));
-        jToggleButton1.setMinimumSize(new java.awt.Dimension(73, 23));
-        jToggleButton1.setPreferredSize(new java.awt.Dimension(73, 23));
-        jPanel9.add(jToggleButton1);
+        contrasteoscuro.setText("normal");
+        contrasteoscuro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contrasteoscuroActionPerformed(evt);
+            }
+        });
+        jPanel9.add(contrasteoscuro);
 
-        jToggleButton2.setText("jToggleButton2");
-        jToggleButton2.setMaximumSize(new java.awt.Dimension(73, 23));
-        jToggleButton2.setMinimumSize(new java.awt.Dimension(73, 23));
-        jToggleButton2.setPreferredSize(new java.awt.Dimension(73, 23));
-        jPanel9.add(jToggleButton2);
+        contrastenormal.setText("contrastelog");
+        contrastenormal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contrastenormalActionPerformed(evt);
+            }
+        });
+        jPanel9.add(contrastenormal);
 
-        jToggleButton3.setText("jToggleButton3");
-        jToggleButton3.setMaximumSize(new java.awt.Dimension(73, 23));
-        jToggleButton3.setMinimumSize(new java.awt.Dimension(73, 23));
-        jToggleButton3.setPreferredSize(new java.awt.Dimension(73, 23));
-        jPanel9.add(jToggleButton3);
+        aclarar.setText("aclarar");
+        aclarar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aclararActionPerformed(evt);
+            }
+        });
+        jPanel9.add(aclarar);
 
         jPanel6.add(jPanel9);
 
@@ -222,7 +238,7 @@ public class frame extends javax.swing.JFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 73, Short.MAX_VALUE)
+            .addGap(0, 97, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,11 +247,13 @@ public class frame extends javax.swing.JFrame {
 
         jPanel10.add(jPanel11);
 
-        jToggleButton4.setText("jToggleButton4");
-        jToggleButton4.setMaximumSize(new java.awt.Dimension(73, 23));
-        jToggleButton4.setMinimumSize(new java.awt.Dimension(73, 23));
-        jToggleButton4.setPreferredSize(new java.awt.Dimension(73, 23));
-        jPanel10.add(jToggleButton4);
+        jButton10.setText("Funcion Seno");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+        jPanel10.add(jButton10);
 
         jPanel2.add(jPanel10);
 
@@ -643,6 +661,8 @@ public class frame extends javax.swing.JFrame {
          vi.setVisible(true);
          BufferedImage img;
          img = new BufferedImage(300,300,BufferedImage.TYPE_INT_RGB);
+         img.createGraphics().setPaint(Color.white);
+         img.createGraphics().fill(new Rectangle2D.Float(0.0f, 0.0f, img.getWidth(), img.getHeight()));
          vi.getLienzoImagen().setImage(img);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -707,13 +727,61 @@ public class frame extends javax.swing.JFrame {
 
     private void FiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FiltroActionPerformed
         // TODO add your handling code here:
+        
+        VentanaInterna vi = (VentanaInterna) this.Escritorio.getSelectedFrame();
+        if (vi != null)
+        {
+            imgSource = vi.getLienzoImagen().getImagen();
+            if (this.imgSource != null)
+                try
+                {
+                    Kernel k = null; // por inicializarlo con algo
+                    System.out.println(Filtro.getSelectedItem().toString());
+                    switch (Filtro.getSelectedItem().toString())
+                    {
+                        case "Seleccione": // --seleccione--
+                            break;
+                        case "media": // Emborronamiento media
+                            k = KernelProducer.createKernel(KernelProducer.TYPE_MEDIA_3x3);
+                            break;
+                        case "binomial": // Emborronamiento binomial
+                            k = KernelProducer.createKernel(KernelProducer.TYPE_BINOMIAL_3x3);
+                            break;
+                        case "enfoque": // Emborronamiento Enfoque
+                            k = KernelProducer.createKernel(KernelProducer.TYPE_ENFOQUE_3x3);
+                            break;
+                        case "relieve": // Relieve
+                            k = KernelProducer.createKernel(KernelProducer.TYPE_RELIEVE_3x3);
+                            break;
+                        case "laplaciano": // Detector de fronteras laplaciano
+                            k = KernelProducer.createKernel(KernelProducer.TYPE_LAPLACIANA_3x3);
+                            break;
+                    }
+                    if (k != null)
+                    {
+                        ConvolveOp cop = new ConvolveOp(k,ConvolveOp.EDGE_NO_OP, null);
+                        BufferedImage imgSource = cop.filter(this.imgSource, null);
+                        vi.getLienzoImagen().setImagen(imgSource);
+                        vi.getLienzoImagen().repaint();
+                    }
+
+                } catch (Exception e)
+                {
+                    System.err.println("Error");
+                }
+        }
+
+
        
         
     }//GEN-LAST:event_FiltroActionPerformed
 
     private void jSlider1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jSlider1FocusGained
         // TODO add your handling code here:
-        
+          VentanaInterna vi =(VentanaInterna)(Escritorio.getSelectedFrame());
+          if(vi != null){
+              imgSource = vi.getLienzoImagen().getImagen();
+          }
     }//GEN-LAST:event_jSlider1FocusGained
 
     private void jSlider1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jSlider1FocusLost
@@ -725,20 +793,122 @@ public class frame extends javax.swing.JFrame {
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
         // TODO add your handling code here:
         VentanaInterna vi = (VentanaInterna)(Escritorio.getSelectedFrame());
-        if(vi!=null){     
-            ColorModel cm = vi.getLienzoImagen().getImagen().getColorModel();     
-            WritableRaster raster = vi.getLienzoImagen().getImagen().copyData(null);    
-            boolean alfaPre = vi.getLienzoImagen().getImagen().isAlphaPremultiplied();   
-            imgSource = new BufferedImage(cm,raster,alfaPre,null);
-            imgSource =vi.getLienzoImagen().getImagen();
-           RescaleOp rop = new RescaleOp(jSlider1.getValue()*1.0F,jSlider1.getValue()*100.0F,null);
-           rop.filter(imgSource, imgSource);
-           vi.getLienzoImagen().setImage(imgSource);
-           vi.getLienzoImagen().repaint();
-           
-        }
+        float value = this.jSlider1.getValue();
+        if (vi != null && imgSource != null)
+            try
+            {
+                RescaleOp rop;
+                if (this.imgSource.getColorModel().hasAlpha())
+                {
+                    float[] scales = new float[]{1.0f, 1.0f, 1.0f, 1.0f};
+                    float[] offsets = new float[]{value, value, value, 0.0f};
+                    rop = new RescaleOp(scales, offsets, null);
+                } else{
+                    rop = new RescaleOp(1.0f, value, null);
+                }
+                BufferedImage imgdest = rop.filter(this.imgSource, null);
+                vi.getLienzoImagen().setImage(imgdest);
+                vi.getLienzoImagen().repaint();
+                
+            } catch (Exception e)
+            {
+                System.err.println("Error");
+            }
     }//GEN-LAST:event_jSlider1StateChanged
 
+    private void contrasteoscuroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contrasteoscuroActionPerformed
+        // TODO add your handling code here:
+        VentanaInterna vi = (VentanaInterna) (Escritorio.getSelectedFrame());   
+        if (vi != null) {     
+            BufferedImage imgSource = vi.getLienzoImagen().getImagen();
+             if(imgSource!=null){             
+            try{              
+                int type = LookupTableProducer.TYPE_GAMMA_CORRECTION;
+            
+                 LookupTable lt = LookupTableProducer.createLookupTable(type);    
+                 lt = LookupTableProducer.gammaCorrection(LookupTableProducer.DEFAULT_A_GAMMA, LookupTableProducer.TYPE_GAMMA_CORRECTION);
+        LookupOp lop = new LookupOp(lt, null);                 
+        lop.filter( imgSource , imgSource);         
+        vi.repaint();       
+        } catch(Exception e){           
+        System.err.println(e.getLocalizedMessage());       
+        }           
+        }   
+        }
+    }//GEN-LAST:event_contrasteoscuroActionPerformed
+
+    private void contrastenormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contrastenormalActionPerformed
+        // TODO add your handling code here:
+        VentanaInterna vi = (VentanaInterna) (Escritorio.getSelectedFrame());   
+        if (vi != null) {     
+            BufferedImage imgSource = vi.getLienzoImagen().getImagen();
+             if(imgSource!=null){             
+            try{              
+                int type = LookupTableProducer.TYPE_SFUNCION;
+            
+                 LookupTable lt = LookupTableProducer.createLookupTable(type);
+                 lt = LookupTableProducer.gammaCorrection(LookupTableProducer.TYPE_GAMMA_CORRECTION, LookupTableProducer.DEFAULT_GAMMA);
+        LookupOp lop = new LookupOp(lt, null);                 
+        lop.filter( imgSource , imgSource);         
+        vi.repaint();       
+        } catch(Exception e){           
+        System.err.println(e.getLocalizedMessage());       
+        }           
+        }   
+        }
+    }//GEN-LAST:event_contrastenormalActionPerformed
+
+    private void aclararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aclararActionPerformed
+        // TODO add your handling code here:
+        VentanaInterna vi = (VentanaInterna) (Escritorio.getSelectedFrame());   
+        if (vi != null) {     
+            BufferedImage imgSource = vi.getLienzoImagen().getImagen();
+             if(imgSource!=null){             
+            try{              
+                int type = LookupTableProducer.TYPE_LOGARITHM;
+            
+                 LookupTable lt = LookupTableProducer.logarithmFuction();
+                 //lt = LookupTableProducer.gammaCorrection(LookupTableProducer.DEFAULT_GAMMA, LookupTableProducer.);
+        LookupOp lop = new LookupOp(lt, null);                 
+        lop.filter( imgSource , imgSource);         
+        vi.repaint();       
+        } catch(Exception e){           
+        System.err.println(e.getLocalizedMessage());       
+        }           
+        }   
+        }
+    }//GEN-LAST:event_aclararActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
+        imgSource = vi.getLienzoImagen().getImagen();
+        
+        if (vi != null){
+            try
+            {
+                LookupTable lt = seno(180);
+                LookupOp lop = new LookupOp(lt, null);
+                lop.filter(imgSource, imgSource);
+                vi.repaint();
+            } catch (Exception e)
+            {
+                System.err.println("Error");
+            }
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private LookupTable seno(double w){
+        double K = 255.0; // Cte de normalización
+        // Código implementado f(x)=|sin(wx)|
+
+        byte[] lt = new byte[256];
+        for (int i = 0; i < 256; ++i)
+            lt[i] = (byte)Math.abs(K * Math.sin( w * i ));
+        
+        ByteLookupTable slt = new ByteLookupTable(0, lt);
+        return slt;
+    }
     /**
      * @param args the command line arguments
      */
@@ -780,12 +950,16 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JMenuItem FileGuardar;
     private javax.swing.JMenuItem FileNuevo;
     private javax.swing.JComboBox<String> Filtro;
+    private javax.swing.JButton aclarar;
     private javax.swing.JComboBox<String> colores;
+    private javax.swing.JButton contrastenormal;
+    private javax.swing.JButton contrasteoscuro;
     private javax.swing.JToggleButton editar;
     private javax.swing.JToggleButton elipse;
     private javax.swing.JLabel estado;
     private javax.swing.JPanel head;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -825,10 +999,6 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JSlider jSlider2;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JToggleButton jToggleButton4;
     private javax.swing.JToggleButton lapiz;
     private javax.swing.JToggleButton linea;
     private javax.swing.ButtonGroup menu;

@@ -1,3 +1,6 @@
+
+import smm.moh.iu.LienzoImagen2D;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -14,6 +17,7 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
     /**
      * Creates new form VentanaInterna
      */
+
     public VentanaInterna() {
         initComponents();
     }
@@ -21,6 +25,8 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
     public smm.moh.iu.LienzoImagen2D getLienzoImagen(){
         return lienzoImagen2D1;
     }
+    
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
