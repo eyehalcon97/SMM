@@ -7,7 +7,10 @@
 import smm.moh.iu.Formas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.awt.image.ByteLookupTable;
 import java.awt.image.ColorModel;
@@ -263,15 +266,48 @@ public class frame extends javax.swing.JFrame {
         jPanel3.add(jLabel4);
 
         jPanel12.setLayout(new java.awt.GridLayout(1, 0));
+
+        jSlider2.setMaximum(360);
+        jSlider2.setMinorTickSpacing(90);
+        jSlider2.setPaintTicks(true);
+        jSlider2.setSnapToTicks(true);
+        jSlider2.setToolTipText("");
+        jSlider2.setValue(0);
+        jSlider2.setAutoscrolls(true);
+        jSlider2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSlider2StateChanged(evt);
+            }
+        });
+        jSlider2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jSlider2PropertyChange(evt);
+            }
+        });
         jPanel12.add(jSlider2);
 
-        jButton5.setText("jButton5");
+        jButton5.setText("90");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         jPanel12.add(jButton5);
 
-        jButton6.setText("jButton6");
+        jButton6.setText("180");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         jPanel12.add(jButton6);
 
-        jButton7.setText("jButton7");
+        jButton7.setText("270");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
         jPanel12.add(jButton7);
 
         jPanel3.add(jPanel12);
@@ -898,6 +934,54 @@ public class frame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
+        if(vi != null){
+        rotar(90);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
+        if(vi != null){
+        rotar(180);
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
+        if(vi != null){
+        rotar(270);
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jSlider2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jSlider2PropertyChange
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jSlider2PropertyChange
+
+    private void jSlider2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider2StateChanged
+        // TODO add your handling code here:
+        VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
+        if(vi != null){
+        rotar(jSlider2.getValue());
+        }
+    }//GEN-LAST:event_jSlider2StateChanged
+
+    
+    private void rotar(int angulo){
+        VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
+        imgSource = vi.getLienzoImagen().getImagen();
+        double r = Math.toRadians(angulo); 
+        Point c = new Point(imgSource.getWidth()/2, imgSource.getHeight()/2); 
+        AffineTransform at = AffineTransform.getRotateInstance(r,c.x,c.y); 
+        AffineTransformOp atop; atop = new AffineTransformOp(at,AffineTransformOp.TYPE_BILINEAR); 
+        BufferedImage imgdest = atop.filter(imgSource, null);
+        vi.getLienzoImagen().setImagen(imgdest);
+    }
     private LookupTable seno(double w){
         double K = 255.0; // Cte de normalización
         // Código implementado f(x)=|sin(wx)|
