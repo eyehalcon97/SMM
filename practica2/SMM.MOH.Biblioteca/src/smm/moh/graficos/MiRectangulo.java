@@ -5,23 +5,24 @@
  */
 package smm.moh.graficos;
 
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
+
 import java.awt.geom.Point2D;
-/*
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
+
+/**
+ *
  * @author eyehalcon97
  */
-public class MiElipse extends Ellipse2D.Double{
+public class MiRectangulo extends Rectangle2D.Double{
     private Propiedades propiedad;
-    public MiElipse(double x,double y,double h,double w){
+    public MiRectangulo(double x,double y,double h,double w){
         super(x,y,h,w);
         propiedad = new Propiedades();
-        
     }
-    public MiElipse(double x,double y,double h,double w,Propiedades propiedad){
+    public MiRectangulo(double x,double y,double h,double w,Propiedades propiedad){
         super(x,y,h,w);
-        this.propiedad =propiedad;
-        
+        propiedad = this.propiedad;
     }
     public void setLocation(Point2D pos){
         double dx=pos.getX()-(this.width/2);
@@ -35,5 +36,5 @@ public class MiElipse extends Ellipse2D.Double{
     public Propiedades getPropiedad(){
         return propiedad;
     }
-    
+        
 }

@@ -13,9 +13,14 @@ import java.awt.geom.Point2D;
  * @author eyehalcon97
  */
 public class MiLinea extends Line2D.Double{
-
+    private Propiedades propiedad;
     public MiLinea(Point2D pd, Point2D pd1){
         super(pd,pd1);
+        propiedad = new Propiedades();
+    }
+    public MiLinea(Point2D pd, Point2D pd1,Propiedades propiedad){
+        super(pd,pd1);
+        this.propiedad = propiedad;
     }
     
     public boolean isNear(Point2D p){
@@ -33,5 +38,10 @@ public class MiLinea extends Line2D.Double{
         Point2D newp2 = new Point2D.Double(this.getX2()+dx,this.getY2()+dy);
         this.setLine(pos,newp2);
     }
-
+    public void setPropiedad(Propiedades propiedad){
+        this.propiedad=propiedad;
+    }
+    public Propiedades getPropiedad(){
+        return propiedad;
+    }
 }

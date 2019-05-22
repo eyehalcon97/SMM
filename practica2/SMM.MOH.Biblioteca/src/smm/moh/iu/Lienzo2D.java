@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import smm.moh.graficos.MiElipse;
 import smm.moh.graficos.MiLinea;
+import smm.moh.graficos.MiRectangulo;
 
 /**
 /**
@@ -150,7 +151,7 @@ public class Lienzo2D extends javax.swing.JPanel {
                     h = pout.getY() - pin.getY();
                 }
                 
-                    figura = new Rectangle((int)x,(int) y,(int) w,(int) h);
+                    figura = new MiRectangulo(x,y, w, h);
                     
                
                 
@@ -179,13 +180,6 @@ public class Lienzo2D extends javax.swing.JPanel {
                 
         }
         
-        if(alisar){
-            
-            render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-            render.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        }
-        
-            atributos = new BasicStroke(numrelleno);
         
            repaint();
     }
@@ -208,7 +202,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     }
     private void actualizar(Shape forma,java.awt.event.MouseEvent evt){
         if(forma != null){
-            if(forma.getClass().getName() == Rectangle.class.getName()){
+            if(forma.getClass().getName() == MiRectangulo.class.getName()){
                 ((Rectangle) forma).setLocation(evt.getPoint());
             }
             if(forma.getClass().getName() == MiElipse.class.getName()){
