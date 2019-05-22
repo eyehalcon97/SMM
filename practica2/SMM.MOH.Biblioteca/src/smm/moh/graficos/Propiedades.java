@@ -103,7 +103,7 @@ public class Propiedades {
    public Graphics2D Graphics(Graphics2D g2d){
        
         g2d.setColor(color);
-       System.out.println(color.toString());
+       
     if(alisar){
         g2d.setRenderingHints(render);
     }

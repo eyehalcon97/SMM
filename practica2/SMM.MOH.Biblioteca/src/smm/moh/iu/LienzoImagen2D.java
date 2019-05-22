@@ -17,12 +17,40 @@ import java.awt.image.BufferedImage;
  * @author eyehalcon97
  */
 public class LienzoImagen2D extends Lienzo2D{
-    private BufferedImage img;
+    private BufferedImage img=null;
+    private float brillo=0;
+    private int rotacion=0;
+    private String filtro="Seleccione";
+    private String espectro="Seleccione";
     public void setImage(BufferedImage img){
         this.img = img;
         if(img != null){
             setPreferredSize(new Dimension(img.getWidth(),img.getHeight()));
         }
+    }
+    public void setBrillo(float brillo){
+        this.brillo =  brillo;
+    }
+    public void setRotacion(int rotacion){
+        this.rotacion=rotacion;
+    }
+    public void setFiltro(String filtro){
+        this.filtro = filtro;
+    }
+    public void setEspectro(String espectro){
+        this.espectro =espectro;
+    }
+    public float getBrillo(){
+        return brillo;
+    }
+    public int getRotacion(){
+        return rotacion;
+    }
+    public String getFiltro(){
+        return filtro;
+    }
+    public String getEspectro(){
+        return espectro;
     }
     public BufferedImage getImagen(){
         

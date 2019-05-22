@@ -1,9 +1,6 @@
 
 
 
-
-
-
 import smm.moh.iu.Formas;
 import java.awt.Color;
 import java.awt.Point;
@@ -32,6 +29,9 @@ import java.awt.image.LookupTable;
 
 
 
+
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -51,15 +51,16 @@ public class frame extends javax.swing.JFrame {
     private boolean barraestado=true;
     private boolean barraformas=true;
     private boolean barraatributos=true;
+    Formas form = null;
     Color color = new Color(0,0,0);
-    Formas forma;
+    Formas forma=null;
     BufferedImage imgSource;
     Color colors[] = { Color.RED, Color.BLUE, Color.BLACK, Color.WHITE };
     public frame() {
         initComponents();
         this.setSize(800, 600);
     }
-
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -127,7 +128,7 @@ public class frame extends javax.swing.JFrame {
         elipse = new javax.swing.JToggleButton();
         editar = new javax.swing.JToggleButton();
         nav3 = new javax.swing.JPanel();
-        colores = new javax.swing.JComboBox<>();
+        Colores = new javax.swing.JButton();
         nav4 = new javax.swing.JPanel();
         numeroalisar = new javax.swing.JSpinner();
         relleno = new javax.swing.JToggleButton();
@@ -248,7 +249,7 @@ public class frame extends javax.swing.JFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 66, Short.MAX_VALUE)
+            .addGap(0, 165, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,7 +283,7 @@ public class frame extends javax.swing.JFrame {
         });
         jPanel16.add(jButton8);
 
-        espectro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "RGB", "YCC", "GREY" }));
+        espectro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "RGB", "YCC", "GREY" }));
         espectro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 espectroActionPerformed(evt);
@@ -471,13 +472,12 @@ public class frame extends javax.swing.JFrame {
 
         nav3.setLayout(new java.awt.GridLayout(1, 0));
 
-        colores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Negro", "Verde", "Amarillo", "Rojo", "Azul", "Blanco" }));
-        colores.addActionListener(new java.awt.event.ActionListener() {
+        Colores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                coloresActionPerformed(evt);
+                ColoresActionPerformed(evt);
             }
         });
-        nav3.add(colores);
+        nav3.add(Colores);
 
         jPanel8.add(nav3);
 
@@ -534,11 +534,11 @@ public class frame extends javax.swing.JFrame {
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1223, Short.MAX_VALUE)
+            .addGap(0, 1221, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
+            .addGap(0, 538, Short.MAX_VALUE)
         );
 
         getContentPane().add(Escritorio, java.awt.BorderLayout.CENTER);
@@ -657,7 +657,7 @@ public class frame extends javax.swing.JFrame {
                 }catch (Exception ex) {       
                     System.err.println("Error al guardar la imagen");     
                 }
-        }
+            }
         }
     }//GEN-LAST:event_FileGuardarActionPerformed
 
@@ -669,7 +669,7 @@ public class frame extends javax.swing.JFrame {
             try{       
                 File f = dlg.getSelectedFile();         
                 BufferedImage img = ImageIO.read(f);       
-                VentanaInterna vi = new VentanaInterna();        
+                VentanaInterna vi = new VentanaInterna(this);        
                 vi.getLienzoImagen().setImage(img);        
                 this.Escritorio.add(vi);        
                 vi.setTitle(f.getName());        
@@ -683,9 +683,7 @@ public class frame extends javax.swing.JFrame {
          estado.setText("Paint");
         forma = null;
         color = new Color(0,0,0);
-
         menu.clearSelection();
-        
     }//GEN-LAST:event_FileNuevoActionPerformed
 
     private void EdicionVerbarraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdicionVerbarraActionPerformed
@@ -695,37 +693,88 @@ public class frame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_EdicionVerbarraActionPerformed
 
+    public void seleccionarcolor(Color color){
+        this.color =color;
+        VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
+        if(vi !=null){
+            vi.getLienzoImagen().setColor(color);
+            Colores.setBackground(color);
+        }
+    }
+    
+    public void actualizarframe(){
+        VentanaInterna vi=(VentanaInterna)Escritorio.getSelectedFrame();   
+        if (vi != null) {
+            form = vi.getLienzoImagen().getForma();
+            if(form == Formas.PUNTO){
+            lapiz.setSelected(true);
+             }
+            if(form == Formas.LINEA){
+            linea.setSelected(true);
+             }
+            if(form == Formas.RECTANGULO){
+            rectangulo.setSelected(true);
+             }
+            if(form == Formas.ELIPSE){
+            elipse.setSelected(true);
+             }
+            if(form == null){
+                vi.getLienzoImagen().setFormas(forma);
+            }
+            Color col = vi.getLienzoImagen().getPropiedad().getColor();
+            Colores.setBackground(col);
+            if(vi.getLienzoImagen().getPropiedad().getRelleno()){
+                relleno.setSelected(true);
+            }else{
+                relleno.setSelected(false);
+            }
+            if(vi.getLienzoImagen().getPropiedad().getTransparencia()){
+                transparencia.setSelected(true);
+            }else{
+                transparencia.setSelected(false);
+            }
+            if(vi.getLienzoImagen().getPropiedad().getAlisar()){
+                Alisar.setSelected(true);
+            }else{
+                Alisar.setSelected(false);
+            }
+            numeroalisar.setValue(vi.getLienzoImagen().getPropiedad().getNumRelleno());
+            jSlider1.setValue((int)(vi.getLienzoImagen().getBrillo()));
+            jSlider2.setValue(vi.getLienzoImagen().getRotacion());
+            Filtro.setSelectedItem(vi.getLienzoImagen().getFiltro());
+            espectro.setSelectedItem(vi.getLienzoImagen().getEspectro());
+            
+        }
+
+        
+    }
     private void herramienta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_herramienta
         // TODO add your handling code here:
         javax.swing.JToggleButton boton;
         boton = (javax.swing.JToggleButton) evt.getSource();
-        
-        if(boton.getName() == "Lapiz"){
-            forma=Formas.PUNTO;
-        }else{
-            if(boton.getName() == "Linea"){
+        switch (boton.getName()){
+            case "Lapiz":
+                forma=Formas.PUNTO;
+                break;
+            case "Linea":
                 forma = Formas.LINEA;
-            }else{
-                if(boton.getName() == "Rectangulo"){
-                    forma = Formas.RECTANGULO;
-                }else{
-                    if(boton.getName() == "Elipse"){
-                        forma = Formas.ELIPSE;
-                    }else{
-                        if(boton.getName() == "Editar"){
-                            forma = Formas.EDITAR;
-                        }
-                    }
-                }
-            }
-        }
+                break;
+            case "Rectangulo":
+                forma = Formas.RECTANGULO;
+                break;
+            case "Elipse":
+                forma = Formas.ELIPSE;
+                break;
+            case "Editar":
+                forma = Formas.EDITAR;
+                break;
+        }      
         estado.setText(forma.toString());
         VentanaInterna vi;  
         vi = (VentanaInterna)Escritorio.getSelectedFrame();
         if(vi != null){
             vi.getLienzoImagen().setFormas(forma);
         }
-    
     }//GEN-LAST:event_herramienta
 
     private void FileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FileActionPerformed
@@ -746,7 +795,8 @@ public class frame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         VentanaInterna vi = new VentanaInterna();
+         VentanaInterna vi = new VentanaInterna(this);
+         
          Escritorio.add(vi);
          vi.setVisible(true);
          BufferedImage img;
@@ -754,6 +804,7 @@ public class frame extends javax.swing.JFrame {
          img.createGraphics().setPaint(Color.white);
          img.createGraphics().fill(new Rectangle2D.Float(0.0f, 0.0f, img.getWidth(), img.getHeight()));
          vi.getLienzoImagen().setImage(img);
+         actualizarframe();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void rellenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rellenoActionPerformed
@@ -766,20 +817,6 @@ public class frame extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_rellenoActionPerformed
-
-    private void coloresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coloresActionPerformed
-        // TODO add your handling code here:
-        
-        String seleccionado = colores.getSelectedItem().toString();
-        Color color = Colores.valueOf(seleccionado).getColor();
-        VentanaInterna vi;  
-        vi = (VentanaInterna)Escritorio.getSelectedFrame();
-        if(vi != null){
-        vi.getLienzoImagen().setColor(color);
-        }
-        
-        
-    }//GEN-LAST:event_coloresActionPerformed
 
     private void AlisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlisarActionPerformed
         // TODO add your handling code here:
@@ -820,17 +857,16 @@ public class frame extends javax.swing.JFrame {
         
         VentanaInterna vi = (VentanaInterna) this.Escritorio.getSelectedFrame();
         if (vi != null)
-        {
+        {   if(Filtro.getSelectedItem().toString() != "Seleccione"){
             imgSource = vi.getLienzoImagen().getImagen();
             if (this.imgSource != null)
                 try
                 {
                     Kernel k = null;
-                    System.out.println(Filtro.getSelectedItem().toString());
+                    vi.getLienzoImagen().setFiltro(Filtro.getSelectedItem().toString());
+                    
                     switch (Filtro.getSelectedItem().toString())
                     {
-                        case "Seleccione": 
-                            break;
                         case "media": 
                             k = KernelProducer.createKernel(KernelProducer.TYPE_MEDIA_3x3);
                             break;
@@ -846,6 +882,7 @@ public class frame extends javax.swing.JFrame {
                         case "laplaciano":
                             k = KernelProducer.createKernel(KernelProducer.TYPE_LAPLACIANA_3x3);
                             break;
+                        
                     }
                     if (k != null)
                     {
@@ -859,6 +896,7 @@ public class frame extends javax.swing.JFrame {
                 {
                     System.err.println("Error");
                 }
+            }
         }
 
 
@@ -884,6 +922,7 @@ public class frame extends javax.swing.JFrame {
         // TODO add your handling code here:
         VentanaInterna vi = (VentanaInterna)(Escritorio.getSelectedFrame());
         float value = this.jSlider1.getValue();
+        vi.getLienzoImagen().setBrillo(value);
         if (vi != null && imgSource != null)
             try
             {
@@ -1035,6 +1074,7 @@ public class frame extends javax.swing.JFrame {
         VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
         if(vi != null){
             int valor = jSlider2.getValue();
+            vi.getLienzoImagen().setRotacion(valor);
             int rota = 0;
             switch (valor)
                     {
@@ -1124,7 +1164,7 @@ public class frame extends javax.swing.JFrame {
             int bandList[] = {i};
             WritableRaster bandRaster = (WritableRaster)imgSource.getRaster().createWritableChild(0,0,imgSource.getWidth(), imgSource.getHeight(), 0, 0, bandList);
             BufferedImage imgBanda = new BufferedImage(cm, bandRaster, false, null);
-            VentanaInterna vi2=new VentanaInterna();
+            VentanaInterna vi2=new VentanaInterna(this);
             vi2.getLienzoImagen().setImagen(imgBanda);
             Escritorio.add(vi2);
             vi2.setTitle(vi2.getTitle()+ i);
@@ -1138,7 +1178,9 @@ public class frame extends javax.swing.JFrame {
         // TODO add your handling code here:
         VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
         if (vi != null)
+            
         {
+            if(espectro.getSelectedItem().toString()!="Seleccione"){
             imgSource = vi.getLienzoImagen().getImagen();
             
             if (this.imgSource != null)
@@ -1147,6 +1189,7 @@ public class frame extends javax.swing.JFrame {
                     BufferedImage imgOut =null;
                     ColorSpace cs=null;
                     ColorConvertOp cop=null;
+                    vi.getLienzoImagen().setEspectro(espectro.getSelectedItem().toString());
                     switch (espectro.getSelectedItem().toString())
                     {
                         case "RGB":
@@ -1183,20 +1226,24 @@ public class frame extends javax.swing.JFrame {
                 {
                     System.err.println("Error");
                 }
+            }
         }
     }//GEN-LAST:event_espectroActionPerformed
 
+    private void ColoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColoresActionPerformed
+        // TODO add your handling code here:
+        new SelCol(this).setVisible(true);
+    }//GEN-LAST:event_ColoresActionPerformed
+    
     private void escalar(double indice){
         VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
         imgSource = vi.getLienzoImagen().getImagen();
-        
         AffineTransform at = AffineTransform.getScaleInstance(indice, indice);
         AffineTransformOp atop;
         atop = new AffineTransformOp(at,AffineTransformOp.TYPE_BILINEAR); 
         BufferedImage imgdest = atop.filter(imgSource, null);
         vi.getLienzoImagen().setImagen(imgdest);
         vi.repaint();
-        
     }
     private void rotar(int angulo){
         VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
@@ -1213,11 +1260,9 @@ public class frame extends javax.swing.JFrame {
     private LookupTable seno(double w){
         double K = 255.0; // Cte de normalización
         // Código implementado f(x)=|sin(wx)|
-
         byte[] lt = new byte[256];
         for (int i = 0; i < 256; ++i)
             lt[i] = (byte)Math.abs(K * Math.sin( w * i ));
-        
         ByteLookupTable slt = new ByteLookupTable(0, lt);
         return slt;
     }
@@ -1254,6 +1299,7 @@ public class frame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Alisar;
+    private javax.swing.JButton Colores;
     private javax.swing.JMenu Edicion;
     private javax.swing.JCheckBoxMenuItem EdicionVerbarra;
     private javax.swing.JDesktopPane Escritorio;
@@ -1264,7 +1310,6 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> Filtro;
     private javax.swing.JButton aclarar;
     private javax.swing.JButton aumentar;
-    private javax.swing.JComboBox<String> colores;
     private javax.swing.JButton contrastenormal;
     private javax.swing.JButton contrasteoscuro;
     private javax.swing.JToggleButton editar;

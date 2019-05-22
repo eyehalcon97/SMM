@@ -33,7 +33,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     private Point2D pin = new Point2D.Double(-10, -10);
     private Point2D pout = new Point2D.Double(-10, -10);
     private Figura figura = new MiLinea(pin, pout);
-    private Formas forma;
+    private Formas forma =null;
     private Figura figmod = null;
     private Propiedades propiedad = new Propiedades();
    
@@ -99,6 +99,9 @@ public class Lienzo2D extends javax.swing.JPanel {
     }
     public void setFormas(Formas forma){
         this.forma=forma;
+    }
+    public Formas getForma(){
+        return forma;
     }
     public void setRelleno(){
         propiedad.setRelleno(!this.propiedad.getRelleno());
