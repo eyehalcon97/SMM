@@ -12,7 +12,7 @@ import java.awt.geom.Point2D;
  *
  * @author eyehalcon97
  */
-public class MiLinea extends Line2D.Double{
+public class MiLinea extends Line2D.Double implements Figura{
     private Propiedades propiedad;
     public MiLinea(Point2D pd, Point2D pd1){
         super(pd,pd1);
@@ -31,16 +31,18 @@ public class MiLinea extends Line2D.Double{
     public boolean contains(Point2D p) {        
         return isNear(p);
     }
-
+    @Override
     public void setLocation(Point2D pos){
         double dx=pos.getX()-this.getX1();
         double dy=pos.getY()-this.getY1();
         Point2D newp2 = new Point2D.Double(this.getX2()+dx,this.getY2()+dy);
         this.setLine(pos,newp2);
     }
+    @Override
     public void setPropiedad(Propiedades propiedad){
         this.propiedad=propiedad;
     }
+    @Override
     public Propiedades getPropiedad(){
         return propiedad;
     }

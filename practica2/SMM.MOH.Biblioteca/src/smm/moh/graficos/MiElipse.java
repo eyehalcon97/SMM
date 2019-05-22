@@ -11,7 +11,7 @@ import java.awt.geom.Point2D;
 /*
  * @author eyehalcon97
  */
-public class MiElipse extends Ellipse2D.Double{
+public class MiElipse extends Ellipse2D.Double implements Figura{
     private Propiedades propiedad;
     public MiElipse(double x,double y,double h,double w){
         super(x,y,h,w);
@@ -23,15 +23,18 @@ public class MiElipse extends Ellipse2D.Double{
         this.propiedad =propiedad;
         
     }
+    @Override
     public void setLocation(Point2D pos){
         double dx=pos.getX()-(this.width/2);
         double dy=pos.getY()-(this.height/2);
         this.x = dx;
         this.y = dy;       
     }
+    @Override
     public void setPropiedad(Propiedades propiedad){
         this.propiedad=propiedad;
     }
+    @Override
     public Propiedades getPropiedad(){
         return propiedad;
     }

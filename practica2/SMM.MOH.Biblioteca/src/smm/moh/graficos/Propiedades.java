@@ -8,6 +8,7 @@ package smm.moh.graficos;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Stroke;
 
@@ -27,12 +28,13 @@ public class Propiedades {
     public Propiedades(){
        render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
        render.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-       this.color=Color.BLACK;
+       this.color=new Color(0,0,0,0);
         this.relleno=false;
         this.alisar=false;
         this.transparencia=false;
         this.numrelleno=1;
         this.atributos = new BasicStroke(numrelleno);
+        actualizartransparencia();
     }
     public Propiedades(Color color,boolean relleno,boolean alisar,boolean transparencia,int numrelleno){
         render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
@@ -43,6 +45,7 @@ public class Propiedades {
         this.transparencia=transparencia;
         this.numrelleno=numrelleno;
         this.atributos = new BasicStroke(numrelleno);
+        actualizartransparencia();
     }
     public Propiedades(Propiedades propiedad){
         render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
@@ -53,6 +56,7 @@ public class Propiedades {
         this.transparencia=propiedad.getTransparencia();
         this.numrelleno=propiedad.getNumRelleno();
         this.atributos = new BasicStroke(numrelleno);
+        actualizartransparencia();
     }
    public void setColor(Color color){
        this.color = color;
@@ -65,6 +69,10 @@ public class Propiedades {
    }
    public void setTransparencia(boolean bool){
       transparencia = bool;
+      actualizartransparencia();
+       
+   }
+   private void actualizartransparencia(){
        if(transparencia){
             color = new Color(color.getRed(),color.getGreen(),color.getBlue(),80);
         }else{
@@ -91,5 +99,16 @@ public class Propiedades {
    public int getNumRelleno(){
        return numrelleno;
    }
-   
+       
+   public Graphics2D Graphics(Graphics2D g2d){
+       
+        g2d.setColor(color);
+       System.out.println(color.toString());
+    if(alisar){
+        g2d.setRenderingHints(render);
+    }
+    
+        g2d.setStroke(atributos);
+    return g2d;
+   }
 }

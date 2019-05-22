@@ -6,8 +6,6 @@
 
 import smm.moh.iu.Formas;
 import java.awt.Color;
-import static java.awt.Color.GRAY;
-import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Transparency;
 import java.awt.color.ColorSpace;
@@ -17,19 +15,15 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.awt.image.ByteLookupTable;
 import java.awt.image.ColorConvertOp;
-import java.awt.image.ColorModel;
 import java.awt.image.ComponentColorModel;
 import java.awt.image.ConvolveOp;
 import java.awt.image.DataBuffer;
 import java.awt.image.Kernel;
 import java.awt.image.LookupOp;
-import java.awt.image.LookupTable;
 import java.awt.image.RescaleOp;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import sm.image.KernelProducer;
 import sm.image.LookupTableProducer;
@@ -139,6 +133,8 @@ public class frame extends javax.swing.JFrame {
         relleno = new javax.swing.JToggleButton();
         transparencia = new javax.swing.JToggleButton();
         Alisar = new javax.swing.JToggleButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
         Escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
@@ -252,7 +248,7 @@ public class frame extends javax.swing.JFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 65, Short.MAX_VALUE)
+            .addGap(0, 66, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,7 +272,7 @@ public class frame extends javax.swing.JFrame {
         jLabel6.setText("Color");
         jPanel15.add(jLabel6);
 
-        jPanel16.setLayout(new java.awt.GridLayout());
+        jPanel16.setLayout(new java.awt.GridLayout(1, 0));
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bandas.png"))); // NOI18N
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -525,15 +521,24 @@ public class frame extends javax.swing.JFrame {
 
         getContentPane().add(head, java.awt.BorderLayout.PAGE_START);
 
+        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jList2);
+
+        getContentPane().add(jScrollPane2, java.awt.BorderLayout.LINE_END);
+
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1268, Short.MAX_VALUE)
+            .addGap(0, 1223, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 538, Short.MAX_VALUE)
+            .addGap(0, 535, Short.MAX_VALUE)
         );
 
         getContentPane().add(Escritorio, java.awt.BorderLayout.CENTER);
@@ -1286,6 +1291,7 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
@@ -1306,6 +1312,7 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSlider jSlider1;
