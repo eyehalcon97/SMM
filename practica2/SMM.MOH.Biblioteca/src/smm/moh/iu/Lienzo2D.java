@@ -36,7 +36,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     private Formas forma =null;
     private Figura figmod = null;
     private Propiedades propiedad = new Propiedades();
-   
+    private boolean EDITAR=false;
     List<Figura> Lista = new ArrayList();
     
     public Lienzo2D() {
@@ -97,6 +97,9 @@ public class Lienzo2D extends javax.swing.JPanel {
         
         
     }
+    public List<Figura> GetLista(){
+        return Lista;
+    }
     public void setFormas(Formas forma){
         this.forma=forma;
     }
@@ -119,6 +122,11 @@ public class Lienzo2D extends javax.swing.JPanel {
     public void setTransparencia(){
         propiedad.setTransparencia(!this.propiedad.getTransparencia());
         
+    }
+    
+    public void setEditar(String seleccionada){
+        EDITAR=true;
+        figmod = getSelectedShape(seleccionada);
     }
     
     public void pintar(){
@@ -185,12 +193,14 @@ public class Lienzo2D extends javax.swing.JPanel {
     }
     
     
-    private Figura getSelectedShape(Point2D p){
+    private Figura getSelectedShape(String Seleccionada){
     for(Figura s:Lista){
-
+        System.out.println(Seleccionada);
+        System.out.println("uno");
+        System.out.println(((Figura)s).toString());
        // System.out.println("");    
-    if(((Shape)s).contains(p)){
-        
+    if((((Figura)s).toString()).equals(Seleccionada)){
+        System.out.println("entro");
         return s;
     }
     //MiLinea line= MiLineas; 
@@ -253,7 +263,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         // TODO add your handling code here:
           pout=new Point2D.Float(evt.getX(),evt.getY());
           
-            if(forma == Formas.EDITAR){
+            if(EDITAR){
                 
                 
                 actualizar(figmod,evt);
@@ -273,8 +283,8 @@ public class Lienzo2D extends javax.swing.JPanel {
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         // TODO add your handling code here:
                pin=new Point2D.Float(evt.getX(),evt.getY());
-               if(forma == Formas.EDITAR){
-                   figmod = getSelectedShape(pin);
+               if(EDITAR){
+                   
                    
             //editar();
             actualizar(figmod,evt);
@@ -298,7 +308,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         // TODO add your handling code here:
         pout=new Point2D.Float(evt.getX(),evt.getY());
-        if(forma == Formas.EDITAR ){
+        if(EDITAR ){
             if(figmod != null){
                     actualizar(figmod,evt);
                     figmod=null;

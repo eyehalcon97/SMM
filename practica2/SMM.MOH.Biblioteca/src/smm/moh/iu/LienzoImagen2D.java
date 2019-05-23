@@ -54,16 +54,16 @@ public class LienzoImagen2D extends Lienzo2D{
     }
     public BufferedImage getImagen(){
         
-            BufferedImage img2;
-            img2 = img;
-            Graphics g = img2.getGraphics();
+            
+            Graphics g = img.getGraphics();
             super.paintfiguras(g);
-            return img2;
+            return img;
             
         
     }
     public void setImagen(BufferedImage img){
         this.img =img;
+        
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);

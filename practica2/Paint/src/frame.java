@@ -25,6 +25,10 @@ import javax.swing.JFileChooser;
 import sm.image.KernelProducer;
 import sm.image.LookupTableProducer;
 import java.awt.image.LookupTable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JButton;
+import smm.moh.graficos.Figura;
 
 
 
@@ -56,6 +60,9 @@ public class frame extends javax.swing.JFrame {
     Formas forma=null;
     BufferedImage imgSource;
     Color colors[] = { Color.RED, Color.BLUE, Color.BLACK, Color.WHITE };
+    List<JButton> jMenu2 = new ArrayList();
+  
+    
     public frame() {
         initComponents();
         this.setSize(800, 600);
@@ -77,6 +84,7 @@ public class frame extends javax.swing.JFrame {
         menu = new javax.swing.ButtonGroup();
         jPanel7 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
+        list = new javax.swing.JMenu();
         pie = new javax.swing.JPanel();
         estado = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -134,8 +142,7 @@ public class frame extends javax.swing.JFrame {
         relleno = new javax.swing.JToggleButton();
         transparencia = new javax.swing.JToggleButton();
         Alisar = new javax.swing.JToggleButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        jPanel17 = new javax.swing.JPanel();
         Escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
@@ -150,6 +157,8 @@ public class frame extends javax.swing.JFrame {
         jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
 
         jButton4.setText("jButton4");
+
+        list.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -521,20 +530,14 @@ public class frame extends javax.swing.JFrame {
 
         getContentPane().add(head, java.awt.BorderLayout.PAGE_START);
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList2);
-
-        getContentPane().add(jScrollPane2, java.awt.BorderLayout.LINE_END);
+        jPanel17.setLayout(new java.awt.GridLayout(0, 1));
+        getContentPane().add(jPanel17, java.awt.BorderLayout.LINE_END);
 
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1221, Short.MAX_VALUE)
+            .addGap(0, 1256, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -703,8 +706,11 @@ public class frame extends javax.swing.JFrame {
     }
     
     public void actualizarframe(){
+        
         VentanaInterna vi=(VentanaInterna)Escritorio.getSelectedFrame();   
         if (vi != null) {
+            jPanel17.removeAll();
+        
             form = vi.getLienzoImagen().getForma();
             if(form == Formas.PUNTO){
             lapiz.setSelected(true);
@@ -744,10 +750,42 @@ public class frame extends javax.swing.JFrame {
             Filtro.setSelectedItem(vi.getLienzoImagen().getFiltro());
             espectro.setSelectedItem(vi.getLienzoImagen().getEspectro());
             
+            
+
+            
+            List<Figura> Lista = vi.getLienzoImagen().GetLista();
+            for (Figura s:Lista){
+                
+            JButton boton = new javax.swing.JButton();
+
+            boton.setText(((Figura)s).toString());
+            boton.setName(((Figura)s).toString());
+            boton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            botonActionPerformed(evt);
+            }
+            });
+
+            jPanel17.add(boton);
+                
+               
+                
+            }
+            
         }
 
         
     }
+    private void botonActionPerformed(java.awt.event.ActionEvent evt) {
+        javax.swing.JButton boton;
+        boton = (javax.swing.JButton) evt.getSource();
+        VentanaInterna vi;
+        vi = (VentanaInterna)Escritorio.getSelectedFrame();
+        if(vi != null){
+            vi.getLienzoImagen().setEditar(boton.getName());
+        }
+    }  
+   
     private void herramienta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_herramienta
         // TODO add your handling code here:
         javax.swing.JToggleButton boton;
@@ -1336,7 +1374,6 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
@@ -1347,6 +1384,7 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1357,13 +1395,13 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JSlider jSlider2;
     private javax.swing.JToggleButton lapiz;
     private javax.swing.JToggleButton linea;
+    private javax.swing.JMenu list;
     private javax.swing.ButtonGroup menu;
     private javax.swing.JPanel nav1;
     private javax.swing.JPanel nav2;
