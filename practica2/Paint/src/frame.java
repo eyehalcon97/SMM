@@ -27,7 +27,10 @@ import sm.image.LookupTableProducer;
 import java.awt.image.LookupTable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import smm.moh.graficos.Figura;
 
 
@@ -61,7 +64,7 @@ public class frame extends javax.swing.JFrame {
     BufferedImage imgSource;
     Color colors[] = { Color.RED, Color.BLUE, Color.BLACK, Color.WHITE };
     List<JButton> jMenu2 = new ArrayList();
-  
+    JComboBox List;
     
     public frame() {
         initComponents();
@@ -143,6 +146,8 @@ public class frame extends javax.swing.JFrame {
         transparencia = new javax.swing.JToggleButton();
         Alisar = new javax.swing.JToggleButton();
         jPanel17 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         Escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
@@ -258,7 +263,7 @@ public class frame extends javax.swing.JFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 165, Short.MAX_VALUE)
+            .addGap(0, 66, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -530,18 +535,41 @@ public class frame extends javax.swing.JFrame {
 
         getContentPane().add(head, java.awt.BorderLayout.PAGE_START);
 
-        jPanel17.setLayout(new java.awt.GridLayout(0, 1));
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGap(158, 158, 158)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(238, Short.MAX_VALUE))
+        );
+
         getContentPane().add(jPanel17, java.awt.BorderLayout.LINE_END);
 
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1256, Short.MAX_VALUE)
+            .addGap(0, 1156, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 538, Short.MAX_VALUE)
+            .addGap(0, 535, Short.MAX_VALUE)
         );
 
         getContentPane().add(Escritorio, java.awt.BorderLayout.CENTER);
@@ -709,7 +737,7 @@ public class frame extends javax.swing.JFrame {
         
         VentanaInterna vi=(VentanaInterna)Escritorio.getSelectedFrame();   
         if (vi != null) {
-            jPanel17.removeAll();
+            //jPanel17.removeAll();
         
             form = vi.getLienzoImagen().getForma();
             if(form == Formas.PUNTO){
@@ -752,25 +780,50 @@ public class frame extends javax.swing.JFrame {
             
             
 
-            
+           
             List<Figura> Lista = vi.getLienzoImagen().GetLista();
-            for (Figura s:Lista){
-                
-            JButton boton = new javax.swing.JButton();
+            if(!Lista.isEmpty()){
+                List = new JComboBox((ComboBoxModel) Lista);
+            jPanel17.add(List);
+            
+            javax.swing.Jlist<> jListFiguras = new javax.swing.JList<>;//Creamos el objeto que nos visualizará las personas
+            DefaultListModel modelo = new DefaultListModel();//creamos la lista modelo
+            jListFiguras.setModel(modelo);//Asociamos la lista modelo a el objeto que nos visualizará las personas
+            
+            Persona persona = new Persona();//creamos el objeto persona
 
-            boton.setText(((Figura)s).toString());
-            boton.setName(((Figura)s).toString());
-            boton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            botonActionPerformed(evt);
+        
+            modelo.addElement(persona);//Agregamos la persona a la lista
+
+
             }
-            });
+            Figura[] figuras = new Array();
+            Figura hola=null;
+            figuras[1]=hola;
+                    /*new Figura[]{
+            new Persona(10, "Albert", 20),
+            new Persona(15, "Bernard", 21),
+            new Persona(20, "Carl", 22),
+            }*/
+            //for (Figura s:Lista){
+                
+            //JButton boton = new javax.swing.JButton();
 
-            jPanel17.add(boton);
+            //boton.setText(((Figura)s).toString());
+            //boton.setName(((Figura)s).toString());
+            //boton.addActionListener(new java.awt.event.ActionListener() {
+            //public void actionPerformed(java.awt.event.ActionEvent evt) {
+            //botonActionPerformed(evt);
+            //}
+            //});
+            
+            
+
+            //jPanel17.add(boton);
                 
                
                 
-            }
+            //}
             
         }
 
@@ -1374,6 +1427,7 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
@@ -1395,6 +1449,7 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSlider jSlider1;

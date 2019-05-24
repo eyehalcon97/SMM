@@ -27,6 +27,7 @@ public class LienzoImagen2D extends Lienzo2D{
         if(img != null){
             setPreferredSize(new Dimension(img.getWidth(),img.getHeight()));
         }
+        Lista.clear();
     }
     public void setBrillo(float brillo){
         this.brillo =  brillo;
@@ -56,7 +57,9 @@ public class LienzoImagen2D extends Lienzo2D{
         
             
             Graphics g = img.getGraphics();
+            
             super.paintfiguras(g);
+            
             return img;
             
         
