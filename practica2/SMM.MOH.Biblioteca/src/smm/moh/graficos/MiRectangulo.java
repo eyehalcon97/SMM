@@ -41,6 +41,10 @@ public class MiRectangulo extends Rectangle2D.Double implements Figura{
     public Propiedades getPropiedad(){
         return propiedad;
     }
+    @Override
+    public String toString(){
+        return "Rectangulo";
+    }
     
     
         

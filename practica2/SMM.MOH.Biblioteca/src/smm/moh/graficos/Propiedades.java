@@ -17,7 +17,8 @@ import java.awt.Stroke;
  * @author eyehalcon97
  */
 public class Propiedades {
-    private Color color;
+    private Color Borde;
+    private Color Relleno;
     private boolean relleno;
     private boolean alisar;
     private boolean transparencia;
@@ -28,7 +29,8 @@ public class Propiedades {
     public Propiedades(){
        render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
        render.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-       this.color=new Color(0,0,0,0);
+       this.Borde=new Color(0,0,0,0);
+       this.Relleno=new Color(0,0,0,0);
         this.relleno=false;
         this.alisar=false;
         this.transparencia=false;
@@ -36,10 +38,11 @@ public class Propiedades {
         this.atributos = new BasicStroke(numrelleno);
         actualizartransparencia();
     }
-    public Propiedades(Color color,boolean relleno,boolean alisar,boolean transparencia,int numrelleno){
+    public Propiedades(Color Borde,Color Relleno,boolean relleno,boolean alisar,boolean transparencia,int numrelleno){
         render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         render.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        this.color=color;
+        this.Borde=Borde;
+        this.Relleno=Relleno;
         this.relleno=relleno;
         this.alisar=alisar;
         this.transparencia=transparencia;
@@ -50,16 +53,20 @@ public class Propiedades {
     public Propiedades(Propiedades propiedad){
         render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         render.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        this.color=propiedad.getColor();
-        this.relleno=propiedad.getRelleno();
+        this.Borde=propiedad.getBorde();
+        this.Relleno=propiedad.getRelleno();
+        this.relleno=propiedad.getRellenado();
         this.alisar=propiedad.getAlisar();
         this.transparencia=propiedad.getTransparencia();
         this.numrelleno=propiedad.getNumRelleno();
         this.atributos = new BasicStroke(numrelleno);
         actualizartransparencia();
     }
-   public void setColor(Color color){
-       this.color = color;
+   public void setBorde(Color color){
+       this.Borde = color;
+   }
+   public void setRelleno(Color color){
+       this.Relleno = color;
    }
    public void setRelleno(boolean bool){
        this.relleno = bool;
@@ -74,9 +81,11 @@ public class Propiedades {
    }
    private void actualizartransparencia(){
        if(transparencia){
-            color = new Color(color.getRed(),color.getGreen(),color.getBlue(),80);
+            Borde = new Color(Borde.getRed(),Borde.getGreen(),Borde.getBlue(),80);
+            Relleno = new Color(Relleno.getRed(),Relleno.getGreen(),Relleno.getBlue(),80);
         }else{
-            color = new Color(color.getRed(),color.getGreen(),color.getBlue());
+            Borde = new Color(Borde.getRed(),Borde.getGreen(),Borde.getBlue());
+            Relleno = new Color(Relleno.getRed(),Relleno.getGreen(),Relleno.getBlue());
         }
    }
    public void setNumrelleno(int num){
@@ -84,10 +93,13 @@ public class Propiedades {
        atributos = new BasicStroke(numrelleno);
    }
    
-   public Color getColor(){
-       return color;
+   public Color getBorde(){
+       return Borde;
    }
-   public boolean getRelleno(){
+   public Color getRelleno(){
+       return Relleno;
+   }
+   public boolean getRellenado(){
        return relleno;
    }
    public boolean getAlisar(){
@@ -102,7 +114,7 @@ public class Propiedades {
        
    public Graphics2D Graphics(Graphics2D g2d){
        
-        g2d.setColor(color);
+        g2d.setColor(Borde);
        
     if(alisar){
         g2d.setRenderingHints(render);

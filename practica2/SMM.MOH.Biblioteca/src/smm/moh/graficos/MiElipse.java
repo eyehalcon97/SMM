@@ -38,5 +38,9 @@ public class MiElipse extends Ellipse2D.Double implements Figura{
     public Propiedades getPropiedad(){
         return propiedad;
     }
+    @Override
+    public String toString(){
+        return "Elipse";
+    }
     
 }

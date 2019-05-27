@@ -21,13 +21,16 @@ public class SelCol extends javax.swing.JFrame {
      * Creates new form SelCol
      */
     frame cuadro = null;
-    public SelCol(frame frame) {
+    String tipo = null;
+    public SelCol(frame frame,String tipo) {
         initComponents();
         cuadro=frame;
+        this.tipo = tipo;
     }
     public SelCol() {
         initComponents();
         cuadro = null;
+        tipo=null;
     }
 
     /**
@@ -40,89 +43,13 @@ public class SelCol extends javax.swing.JFrame {
     private void initComponents() {
 
         jSeparator2 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        selectedcolor = new javax.swing.JPanel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
-        jSeparator4 = new javax.swing.JSeparator();
+        jPanel2 = new javax.swing.JPanel();
         Aceptar = new javax.swing.JButton();
+        Cancelar = new javax.swing.JButton();
+        Pred = new javax.swing.JButton();
+        Colores = new javax.swing.JColorChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridLayout(0, 2));
-
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Seleccion(evt);
-            }
-        });
-        getContentPane().add(jButton1);
-
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Seleccion(evt);
-            }
-        });
-        getContentPane().add(jButton3);
-
-        jButton4.setBackground(new java.awt.Color(0, 51, 255));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Seleccion(evt);
-            }
-        });
-        getContentPane().add(jButton4);
-
-        jButton2.setBackground(new java.awt.Color(51, 255, 0));
-        jButton2.setForeground(new java.awt.Color(102, 255, 102));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Seleccion(evt);
-            }
-        });
-        getContentPane().add(jButton2);
-
-        jButton6.setBackground(new java.awt.Color(255, 255, 0));
-        jButton6.setForeground(new java.awt.Color(255, 255, 51));
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Seleccion(evt);
-            }
-        });
-        getContentPane().add(jButton6);
-
-        jButton5.setBackground(new java.awt.Color(204, 0, 0));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Seleccion(evt);
-            }
-        });
-        getContentPane().add(jButton5);
-
-        jPanel1.setLayout(new java.awt.GridLayout(0, 1));
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Color Seleccionado");
-        jLabel1.setToolTipText("");
-        jPanel1.add(jLabel1);
-
-        selectedcolor.setLayout(new java.awt.BorderLayout());
-        selectedcolor.add(jSeparator1, java.awt.BorderLayout.PAGE_START);
-        selectedcolor.add(jSeparator3, java.awt.BorderLayout.LINE_END);
-        selectedcolor.add(jSeparator4, java.awt.BorderLayout.PAGE_END);
-
-        jPanel1.add(selectedcolor);
-
-        getContentPane().add(jPanel1);
 
         Aceptar.setText("Aceptar");
         Aceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -130,25 +57,50 @@ public class SelCol extends javax.swing.JFrame {
                 AceptarActionPerformed(evt);
             }
         });
-        getContentPane().add(Aceptar);
+        jPanel2.add(Aceptar);
+
+        Cancelar.setText("Cancelar");
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Cancelar);
+
+        Pred.setText("Predeterminado");
+        Pred.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PredActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Pred);
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_END);
+
+        Colores.setBackground(new java.awt.Color(0, 153, 153));
+        getContentPane().add(Colores, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
         // TODO add your handling code here:
-        Color color = selectedcolor.getBackground();
-        cuadro.seleccionarcolor(color);
+        Color Seleccionado = Colores.getColor();
+        cuadro.selcolor(tipo, Seleccionado);
         this.setVisible(false);
     }//GEN-LAST:event_AceptarActionPerformed
 
-    private void Seleccion(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Seleccion
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_CancelarActionPerformed
 
-        Color color = ((javax.swing.JButton) evt.getSource()).getBackground();
-        selectedcolor.setBackground(color);
-        
-    }//GEN-LAST:event_Seleccion
+    private void PredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PredActionPerformed
+        // TODO add your handling code here:
+        Color Seleccionado = Color.BLACK;
+        cuadro.selcolor(tipo, Seleccionado);
+        this.setVisible(false);
+    }//GEN-LAST:event_PredActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,18 +139,10 @@ public class SelCol extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Aceptar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton Cancelar;
+    private javax.swing.JColorChooser Colores;
+    private javax.swing.JButton Pred;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JPanel selectedcolor;
     // End of variables declaration//GEN-END:variables
 }

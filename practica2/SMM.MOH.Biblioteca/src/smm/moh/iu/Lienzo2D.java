@@ -68,7 +68,7 @@ public class Lienzo2D extends javax.swing.JPanel {
             
                 
             
-            if(s.getPropiedad().getRelleno()){
+            if(s.getPropiedad().getRellenado()){
                
             g2d.fill((Shape) s);
             g2d.draw((Shape) s);
@@ -80,7 +80,7 @@ public class Lienzo2D extends javax.swing.JPanel {
             
                 
             
-            if(propiedad.getRelleno()){
+            if(propiedad.getRellenado()){
                
             g2d.fill((Shape) figura);
             g2d.draw((Shape) figura);
@@ -93,7 +93,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         pintar(g2d);
     }
     public void setColor(Color color){
-        this.propiedad.setColor(color);
+        this.propiedad.setBorde(color);
         
         
     }
@@ -107,7 +107,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         return forma;
     }
     public void setRelleno(){
-        propiedad.setRelleno(!this.propiedad.getRelleno());
+        propiedad.setRelleno(!this.propiedad.getRellenado());
         
     }
     public void setAlisar(){

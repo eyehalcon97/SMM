@@ -46,4 +46,8 @@ public class MiLinea extends Line2D.Double implements Figura{
     public Propiedades getPropiedad(){
         return propiedad;
     }
+    @Override
+    public String toString(){
+        return "Linea";
+    }
 }

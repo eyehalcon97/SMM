@@ -31,6 +31,7 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import smm.moh.graficos.Figura;
 
 
@@ -63,12 +64,11 @@ public class frame extends javax.swing.JFrame {
     Formas forma=null;
     BufferedImage imgSource;
     Color colors[] = { Color.RED, Color.BLUE, Color.BLACK, Color.WHITE };
-    List<JButton> jMenu2 = new ArrayList();
-    JComboBox List;
-    
+      
     public frame() {
         initComponents();
         this.setSize(800, 600);
+        jPanel17.setVisible(false);
     }
     
 
@@ -139,7 +139,10 @@ public class frame extends javax.swing.JFrame {
         elipse = new javax.swing.JToggleButton();
         editar = new javax.swing.JToggleButton();
         nav3 = new javax.swing.JPanel();
-        Colores = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        Relleno = new javax.swing.JButton();
+        Borde = new javax.swing.JButton();
         nav4 = new javax.swing.JPanel();
         numeroalisar = new javax.swing.JSpinner();
         relleno = new javax.swing.JToggleButton();
@@ -484,14 +487,29 @@ public class frame extends javax.swing.JFrame {
 
         jPanel8.add(nav2);
 
-        nav3.setLayout(new java.awt.GridLayout(1, 0));
+        nav3.setLayout(new java.awt.GridLayout(0, 2));
 
-        Colores.addActionListener(new java.awt.event.ActionListener() {
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Relleno");
+        nav3.add(jLabel7);
+
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Borde");
+        nav3.add(jLabel8);
+
+        Relleno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ColoresActionPerformed(evt);
+                RellenoActionPerformed(evt);
             }
         });
-        nav3.add(Colores);
+        nav3.add(Relleno);
+
+        Borde.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BordeActionPerformed(evt);
+            }
+        });
+        nav3.add(Borde);
 
         jPanel8.add(nav3);
 
@@ -535,29 +553,11 @@ public class frame extends javax.swing.JFrame {
 
         getContentPane().add(head, java.awt.BorderLayout.PAGE_START);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        jPanel17.setLayout(new java.awt.GridLayout());
+
         jScrollPane1.setViewportView(jList1);
 
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addGap(158, 158, 158)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(238, Short.MAX_VALUE))
-        );
+        jPanel17.add(jScrollPane1);
 
         getContentPane().add(jPanel17, java.awt.BorderLayout.LINE_END);
 
@@ -565,7 +565,7 @@ public class frame extends javax.swing.JFrame {
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1156, Short.MAX_VALUE)
+            .addGap(0, 998, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -724,20 +724,16 @@ public class frame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_EdicionVerbarraActionPerformed
 
-    public void seleccionarcolor(Color color){
-        this.color =color;
-        VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
-        if(vi !=null){
-            vi.getLienzoImagen().setColor(color);
-            Colores.setBackground(color);
-        }
-    }
+ 
     
     public void actualizarframe(){
         
         VentanaInterna vi=(VentanaInterna)Escritorio.getSelectedFrame();   
         if (vi != null) {
-            //jPanel17.removeAll();
+            jPanel17.removeAll();
+            JList<Figura> list = new JList();
+             jPanel17.setVisible(false);
+            MiLista list_model = new MiLista();
         
             form = vi.getLienzoImagen().getForma();
             if(form == Formas.PUNTO){
@@ -755,9 +751,11 @@ public class frame extends javax.swing.JFrame {
             if(form == null){
                 vi.getLienzoImagen().setFormas(forma);
             }
-            Color col = vi.getLienzoImagen().getPropiedad().getColor();
-            Colores.setBackground(col);
-            if(vi.getLienzoImagen().getPropiedad().getRelleno()){
+            Color col = vi.getLienzoImagen().getPropiedad().getBorde();
+            Borde.setBackground(col);
+            col = vi.getLienzoImagen().getPropiedad().getRelleno();
+            Relleno.setBackground(col);
+            if(vi.getLienzoImagen().getPropiedad().getRellenado()){
                 relleno.setSelected(true);
             }else{
                 relleno.setSelected(false);
@@ -780,56 +778,25 @@ public class frame extends javax.swing.JFrame {
             
             
 
-           
+          
             List<Figura> Lista = vi.getLienzoImagen().GetLista();
+            
             if(!Lista.isEmpty()){
-                List = new JComboBox((ComboBoxModel) Lista);
-            jPanel17.add(List);
-            
-            javax.swing.Jlist<> jListFiguras = new javax.swing.JList<>;//Creamos el objeto que nos visualizará las personas
-            DefaultListModel modelo = new DefaultListModel();//creamos la lista modelo
-            jListFiguras.setModel(modelo);//Asociamos la lista modelo a el objeto que nos visualizará las personas
-            
-            Persona persona = new Persona();//creamos el objeto persona
-
-        
-            modelo.addElement(persona);//Agregamos la persona a la lista
-
-
+             
+            for (Figura s:Lista){
+            list_model.addFigura(s);
             }
-            Figura[] figuras = new Array();
-            Figura hola=null;
-            figuras[1]=hola;
-                    /*new Figura[]{
-            new Persona(10, "Albert", 20),
-            new Persona(15, "Bernard", 21),
-            new Persona(20, "Carl", 22),
-            }*/
-            //for (Figura s:Lista){
+            list.setModel(list_model);
+            jPanel17.add(list);
+            jPanel17.setVisible(true);
                 
-            //JButton boton = new javax.swing.JButton();
-
-            //boton.setText(((Figura)s).toString());
-            //boton.setName(((Figura)s).toString());
-            //boton.addActionListener(new java.awt.event.ActionListener() {
-            //public void actionPerformed(java.awt.event.ActionEvent evt) {
-            //botonActionPerformed(evt);
-            //}
-            //});
-            
-            
-
-            //jPanel17.add(boton);
-                
-               
-                
-            //}
+            }
             
         }
 
         
     }
-    private void botonActionPerformed(java.awt.event.ActionEvent evt) {
+    /*private void botonActionPerformed(java.awt.event.ActionEvent evt) {
         javax.swing.JButton boton;
         boton = (javax.swing.JButton) evt.getSource();
         VentanaInterna vi;
@@ -837,7 +804,7 @@ public class frame extends javax.swing.JFrame {
         if(vi != null){
             vi.getLienzoImagen().setEditar(boton.getName());
         }
-    }  
+    } */ 
    
     private void herramienta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_herramienta
         // TODO add your handling code here:
@@ -1321,10 +1288,29 @@ public class frame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_espectroActionPerformed
 
-    private void ColoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColoresActionPerformed
+    public void selcolor(String tipo,Color color){
+        VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
+         if(vi!=null){
+        if (tipo.equals("Relleno")){
+            Relleno.setBackground(color);
+            vi.getLienzoImagen().getPropiedad().setRelleno(color);
+        }
+        if (tipo.equals("Borde")){
+            Borde.setBackground(color);
+            vi.getLienzoImagen().getPropiedad().setBorde(color);
+        }
+         }
+    }
+    
+    private void RellenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RellenoActionPerformed
         // TODO add your handling code here:
-        new SelCol(this).setVisible(true);
-    }//GEN-LAST:event_ColoresActionPerformed
+        new SelCol(this,"Relleno").setVisible(true);
+    }//GEN-LAST:event_RellenoActionPerformed
+
+    private void BordeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BordeActionPerformed
+        // TODO add your handling code here:
+        new SelCol(this,"Borde").setVisible(true);
+    }//GEN-LAST:event_BordeActionPerformed
     
     private void escalar(double indice){
         VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
@@ -1390,7 +1376,7 @@ public class frame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Alisar;
-    private javax.swing.JButton Colores;
+    private javax.swing.JButton Borde;
     private javax.swing.JMenu Edicion;
     private javax.swing.JCheckBoxMenuItem EdicionVerbarra;
     private javax.swing.JDesktopPane Escritorio;
@@ -1399,6 +1385,7 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JMenuItem FileGuardar;
     private javax.swing.JMenuItem FileNuevo;
     private javax.swing.JComboBox<String> Filtro;
+    private javax.swing.JButton Relleno;
     private javax.swing.JButton aclarar;
     private javax.swing.JButton aumentar;
     private javax.swing.JButton contrastenormal;
@@ -1427,7 +1414,9 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JList<Figura> jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
