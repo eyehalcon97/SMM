@@ -16,4 +16,5 @@ public interface Figura {
     public void setPropiedad(Propiedades propiedad);
     public void setLocation(Point2D pos);
     public String toString();
+    
 }

@@ -16,11 +16,13 @@ public class MiLinea extends Line2D.Double implements Figura{
     private Propiedades propiedad;
     public MiLinea(Point2D pd, Point2D pd1){
         super(pd,pd1);
-        propiedad = new Propiedades();
+        this.propiedad = new Propiedades();
+        this.propiedad.setNombre("Linea");
     }
     public MiLinea(Point2D pd, Point2D pd1,Propiedades propiedad){
         super(pd,pd1);
         this.propiedad = propiedad;
+        this.propiedad.setNombre("Linea");
     }
     
     public boolean isNear(Point2D p){
@@ -48,6 +50,6 @@ public class MiLinea extends Line2D.Double implements Figura{
     }
     @Override
     public String toString(){
-        return "Linea";
+        return propiedad.getNombre();
     }
 }

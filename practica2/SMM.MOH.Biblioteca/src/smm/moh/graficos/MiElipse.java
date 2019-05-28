@@ -15,13 +15,13 @@ public class MiElipse extends Ellipse2D.Double implements Figura{
     private Propiedades propiedad;
     public MiElipse(double x,double y,double h,double w){
         super(x,y,h,w);
-        propiedad = new Propiedades();
-        
+        this.propiedad = new Propiedades();
+        this.propiedad.setNombre("Elipse");
     }
     public MiElipse(double x,double y,double h,double w,Propiedades propiedad){
         super(x,y,h,w);
         this.propiedad =propiedad;
-        
+        this.propiedad.setNombre("Elipse");
     }
     @Override
     public void setLocation(Point2D pos){
@@ -40,7 +40,7 @@ public class MiElipse extends Ellipse2D.Double implements Figura{
     }
     @Override
     public String toString(){
-        return "Elipse";
+        return propiedad.getNombre();
     }
     
 }

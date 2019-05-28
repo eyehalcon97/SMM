@@ -17,6 +17,7 @@ import java.awt.Stroke;
  * @author eyehalcon97
  */
 public class Propiedades {
+    private String Nombre;
     private Color Borde;
     private Color Relleno;
     private boolean relleno;
@@ -29,6 +30,7 @@ public class Propiedades {
     public Propiedades(){
        render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
        render.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+       this.Nombre = null;
        this.Borde=new Color(0,0,0,0);
        this.Relleno=new Color(0,0,0,0);
         this.relleno=false;
@@ -38,9 +40,10 @@ public class Propiedades {
         this.atributos = new BasicStroke(numrelleno);
         actualizartransparencia();
     }
-    public Propiedades(Color Borde,Color Relleno,boolean relleno,boolean alisar,boolean transparencia,int numrelleno){
+    public Propiedades(String Nombre,Color Borde,Color Relleno,boolean relleno,boolean alisar,boolean transparencia,int numrelleno){
         render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         render.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        this.Nombre=Nombre;
         this.Borde=Borde;
         this.Relleno=Relleno;
         this.relleno=relleno;
@@ -53,6 +56,7 @@ public class Propiedades {
     public Propiedades(Propiedades propiedad){
         render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         render.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        this.Nombre = propiedad.getNombre();
         this.Borde=propiedad.getBorde();
         this.Relleno=propiedad.getRelleno();
         this.relleno=propiedad.getRellenado();
@@ -78,6 +82,9 @@ public class Propiedades {
       transparencia = bool;
       actualizartransparencia();
        
+   }
+   public void setNombre(String Nombre){
+       this.Nombre = Nombre;
    }
    private void actualizartransparencia(){
        if(transparencia){
@@ -110,6 +117,10 @@ public class Propiedades {
    }
    public int getNumRelleno(){
        return numrelleno;
+   }
+   
+   public String getNombre(){
+       return Nombre;
    }
        
    public Graphics2D Graphics(Graphics2D g2d){

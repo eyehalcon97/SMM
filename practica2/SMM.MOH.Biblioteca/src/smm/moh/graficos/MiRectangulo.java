@@ -21,10 +21,12 @@ public class MiRectangulo extends Rectangle2D.Double implements Figura{
     public MiRectangulo(double x,double y,double h,double w){
         super(x,y,h,w);
         this.propiedad = new Propiedades();
+        this.propiedad.setNombre("Rectangulo");
     }
     public MiRectangulo(double x,double y,double h,double w,Propiedades propiedad){
         super(x,y,h,w);
         this.propiedad = propiedad;
+        this.propiedad.setNombre("Rectangulo");
     }
     @Override
     public void setLocation(Point2D pos){
@@ -43,7 +45,7 @@ public class MiRectangulo extends Rectangle2D.Double implements Figura{
     }
     @Override
     public String toString(){
-        return "Rectangulo";
+        return propiedad.getNombre();
     }
     
     
