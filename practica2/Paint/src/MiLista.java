@@ -1,7 +1,7 @@
 
 import java.util.ArrayList;
 import javax.swing.AbstractListModel;
-import smm.moh.graficos.Figura;
+import smm.moh.graficos.MiFigura;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,7 +15,7 @@ import smm.moh.graficos.Figura;
  */
 public class MiLista extends AbstractListModel{
 
-    private ArrayList<Figura> lista = new ArrayList<>();
+    private ArrayList<MiFigura> lista = new ArrayList<>();
 
     @Override
     public int getSize() {
@@ -23,11 +23,11 @@ public class MiLista extends AbstractListModel{
     }
 
     @Override
-    public Figura getElementAt(int index) {
-        Figura p = lista.get(index);
+    public MiFigura getElementAt(int index) {
+        MiFigura p = lista.get(index);
         return p;
     }
-    public void addFigura(Figura p){
+    public void addFigura(MiFigura p){
         lista.add(p);
         this.fireIntervalAdded(this, getSize(), getSize()+1);
     }
@@ -35,7 +35,7 @@ public class MiLista extends AbstractListModel{
         lista.remove(index0);
         this.fireIntervalRemoved(index0, getSize(), getSize()+1);
     }
-    public Figura getPersona(int index){
+    public MiFigura getPersona(int index){
         return lista.get(index);
     }
   

@@ -5,76 +5,62 @@
  */
 package smm.moh.graficos;
 
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Stroke;
+import java.awt.geom.Point2D;
 
 /**
  *
  * @author eyehalcon97
  */
-public class Propiedades {
-    private String Nombre;
+public abstract class MiFigura {
+    private String name=null;
     private Color Borde;
-    private Color Relleno;
-    private boolean relleno;
     private boolean alisar;
     private boolean transparencia;
-    private int numrelleno;
+    private int grosor;
     private RenderingHints render;        
-    private Stroke atributos = new BasicStroke(numrelleno);
-    
-    public Propiedades(){
-       render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+    private Stroke atributos = new BasicStroke(grosor);
+    public MiFigura(){
+        render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
        render.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-       this.Nombre = null;
        this.Borde=new Color(0,0,0,0);
-       this.Relleno=new Color(0,0,0,0);
-        this.relleno=false;
         this.alisar=false;
         this.transparencia=false;
-        this.numrelleno=1;
-        this.atributos = new BasicStroke(numrelleno);
+        this.grosor=1;
+        this.atributos = new BasicStroke(grosor);
         actualizartransparencia();
+        
     }
-    public Propiedades(String Nombre,Color Borde,Color Relleno,boolean relleno,boolean alisar,boolean transparencia,int numrelleno){
+    public MiFigura(Color Borde,boolean alisar,boolean transparencia,int grosor){
         render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         render.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        this.Nombre=Nombre;
+        
         this.Borde=Borde;
-        this.Relleno=Relleno;
-        this.relleno=relleno;
         this.alisar=alisar;
         this.transparencia=transparencia;
-        this.numrelleno=numrelleno;
-        this.atributos = new BasicStroke(numrelleno);
+        this.grosor=grosor;
+        this.atributos = new BasicStroke(grosor);
         actualizartransparencia();
     }
-    public Propiedades(Propiedades propiedad){
+    public MiFigura(MiFigura aux){
         render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         render.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        this.Nombre = propiedad.getNombre();
-        this.Borde=propiedad.getBorde();
-        this.Relleno=propiedad.getRelleno();
-        this.relleno=propiedad.getRellenado();
-        this.alisar=propiedad.getAlisar();
-        this.transparencia=propiedad.getTransparencia();
-        this.numrelleno=propiedad.getNumRelleno();
-        this.atributos = new BasicStroke(numrelleno);
+        
+        this.Borde = aux.getBorde();
+        this.alisar = aux.getAlisar();
+        this.transparencia=aux.getTransparencia();
+        this.grosor=aux.getgrosor();
+        this.atributos= new BasicStroke(grosor);
         actualizartransparencia();
     }
-   public void setBorde(Color color){
+    public void setBorde(Color color){
        this.Borde = color;
    }
-   public void setRelleno(Color color){
-       this.Relleno = color;
-   }
-   public void setRelleno(boolean bool){
-       this.relleno = bool;
-   }
+   
    public void setAlisar(boolean bool){
        this.alisar = bool;
    }
@@ -83,44 +69,30 @@ public class Propiedades {
       actualizartransparencia();
        
    }
-   public void setNombre(String Nombre){
-       this.Nombre = Nombre;
-   }
    private void actualizartransparencia(){
        if(transparencia){
             Borde = new Color(Borde.getRed(),Borde.getGreen(),Borde.getBlue(),80);
-            Relleno = new Color(Relleno.getRed(),Relleno.getGreen(),Relleno.getBlue(),80);
         }else{
             Borde = new Color(Borde.getRed(),Borde.getGreen(),Borde.getBlue());
-            Relleno = new Color(Relleno.getRed(),Relleno.getGreen(),Relleno.getBlue());
         }
    }
-   public void setNumrelleno(int num){
-       this.numrelleno = num;
-       atributos = new BasicStroke(numrelleno);
+   public void setgrosor(int num){
+       this.grosor = num;
+       atributos = new BasicStroke(grosor);
    }
    
    public Color getBorde(){
        return Borde;
    }
-   public Color getRelleno(){
-       return Relleno;
-   }
-   public boolean getRellenado(){
-       return relleno;
-   }
+
    public boolean getAlisar(){
        return alisar;
    }
    public boolean getTransparencia(){
        return transparencia;
    }
-   public int getNumRelleno(){
-       return numrelleno;
-   }
-   
-   public String getNombre(){
-       return Nombre;
+   public int getgrosor(){
+       return grosor;
    }
        
    public Graphics2D Graphics(Graphics2D g2d){
@@ -133,5 +105,13 @@ public class Propiedades {
     
         g2d.setStroke(atributos);
     return g2d;
-   }
+    }
+    public abstract void setLocation(Point2D pos);
+    public void setName(String name){
+        this.name = name;
+    }
+    public String toString(){
+        return name;
+    }
 }
+

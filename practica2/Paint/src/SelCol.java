@@ -26,6 +26,7 @@ public class SelCol extends javax.swing.JFrame {
         initComponents();
         cuadro=frame;
         this.tipo = tipo;
+        
     }
     public SelCol() {
         initComponents();

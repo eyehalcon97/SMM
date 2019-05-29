@@ -12,11 +12,11 @@ import java.awt.Shape;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
-import smm.moh.graficos.Figura;
 import smm.moh.graficos.MiElipse;
+import smm.moh.graficos.MiFigura;
 import smm.moh.graficos.MiLinea;
 import smm.moh.graficos.MiRectangulo;
-import smm.moh.graficos.Propiedades;
+
 
 
 /**
@@ -32,22 +32,26 @@ public class Lienzo2D extends javax.swing.JPanel {
     
     private Point2D pin = new Point2D.Double(-10, -10);
     private Point2D pout = new Point2D.Double(-10, -10);
-    private Figura figura = new MiLinea(pin, pout);
+    private MiFigura figura = new MiLinea(pin, pout);
     private Formas forma =null;
-    private Figura figmod = null;
-    private Propiedades propiedad = new Propiedades();
+    private MiFigura figmod = null;
+    private Color borde = Color.BLACK;
+    private Color relleno = Color.black;
+    private boolean rellenado=false;
     private boolean EDITAR=false;
-    List<Figura> Lista = new ArrayList();
+    private boolean alisar=false;
+    private boolean transparencia=false;
+    private int grosor =1;
+    private int rectangulos=1;
+    private int elipses=1;
+    private int puntos=1;
+    private int lineas=1;
+    List<MiFigura> Lista = new ArrayList();
     
     public Lienzo2D() {
         initComponents();
     }
-    public Propiedades getPropiedad(){
-        return propiedad;
-    }
-    public void setPropiedades(Propiedades propiedad){
-        this.propiedad = propiedad;
-    }
+
     
     public void paint(Graphics g){
         super.paint(g);
@@ -60,44 +64,66 @@ public class Lienzo2D extends javax.swing.JPanel {
         
             
      
-        for(Figura s:Lista){
+        for(MiFigura s:Lista){
             
             Graphics2D nuevo;
-            nuevo =s.getPropiedad().Graphics(g2d);
+            nuevo = s.Graphics(g2d);
+            
             g2d = nuevo;
             
                 
             
-            if(s.getPropiedad().getRellenado()){
-               
-            g2d.fill((Shape) s);
-            g2d.draw((Shape) s);
-            }else{
-                g2d.draw((Shape) s);
+            if(s instanceof MiRectangulo){
+                if(((MiRectangulo)s).getRellenado()==true){
+                    g2d.setColor(((MiRectangulo)s).getRelleno());
+                g2d.fill((Shape) ((MiRectangulo) s).getForma());
+                g2d.setColor(((MiRectangulo)s).getBorde());
+                g2d.draw((Shape) ((MiRectangulo) s).getForma());
             }
-        }
-        g2d = propiedad.Graphics(g2d);
+            else{
+                    g2d.setColor(((MiRectangulo)s).getBorde());
+                g2d.draw((Shape) ((MiRectangulo) s).getForma());
+            }
+            }
+            if(s instanceof MiElipse){
+                if(((MiElipse)s).getRellenado()==true){
+                    g2d.setColor(((MiElipse)s).getRelleno());
+                g2d.fill((Shape) ((MiElipse) s).getForma());
+                g2d.setColor(((MiElipse)s).getBorde());
+                g2d.draw((Shape) ((MiElipse) s).getForma());
+            }
+            else{
+                    g2d.setColor(((MiElipse)s).getBorde());
+                g2d.draw((Shape) ((MiElipse) s).getForma());
+            }
+            }
+            if(s instanceof MiLinea){
+                g2d.setColor(((MiLinea)s).getBorde());
+                g2d.draw((Shape) ((MiLinea) s).getForma());
+            }
+        
             
                 
+        }  
             
-            if(propiedad.getRellenado()){
-               
-            g2d.fill((Shape) figura);
-            g2d.draw((Shape) figura);
-            }else{
-                g2d.draw((Shape) figura);
-            }
     }
     public void paintfiguras(Graphics g){
         Graphics2D g2d=(Graphics2D)g;
         pintar(g2d);
     }
-    public void setColor(Color color){
-        this.propiedad.setBorde(color);
-        
-        
+    public void setBorde(Color color){
+        borde = color;
     }
-    public List<Figura> GetLista(){
+    public Color getBorde(){
+        return borde;
+    }
+    public void setRelleno(Color color){
+        relleno = color;
+    }
+    public Color getRelleno(){
+        return relleno;
+    }
+    public List<MiFigura> GetLista(){
         return Lista;
     }
     public void setFormas(Formas forma){
@@ -106,22 +132,31 @@ public class Lienzo2D extends javax.swing.JPanel {
     public Formas getForma(){
         return forma;
     }
-    public void setRelleno(){
-        propiedad.setRelleno(!this.propiedad.getRellenado());
-        
+    public void setRellenado(){
+        rellenado = !rellenado;
+    }
+    public boolean getRellenado(){
+        return rellenado;
     }
     public void setAlisar(){
-        propiedad.setAlisar(!this.propiedad.getAlisar());
-       
+       alisar=!alisar;
+    }
+    public boolean getAlisar(){
+        return alisar;
     }
     
-    public void setNumrelleno(int num){
-        propiedad.setNumrelleno(num);
+    public void setGrosor(int grosor){
+        this.grosor=grosor;
         
     }
+    public int getGrosor(){
+        return grosor;
+    }
     public void setTransparencia(){
-        propiedad.setTransparencia(!this.propiedad.getTransparencia());
-        
+        transparencia=!transparencia;
+    }
+    public boolean getTransparencia(){
+        return transparencia;
     }
     
     public void setEditar(String seleccionada){
@@ -131,16 +166,19 @@ public class Lienzo2D extends javax.swing.JPanel {
     
     public void pintar(){
         
-        Propiedades prop = new Propiedades(propiedad);
+        
        
         double x, y;
         double w, h;
         if(null != forma)switch (forma) {
             case PUNTO:
-                figura = new MiLinea(pin,pin,prop);
+                figura = new MiLinea(pin,pin,borde,alisar,transparencia,grosor);
+                
+                figura.setName("punto: " + puntos);
                 break;
             case LINEA:
-                figura = new MiLinea(pin,pout,prop);
+                figura = new MiLinea(pin,pout,borde,alisar,transparencia,grosor);
+                figura.setName("linea: " + lineas);
                 break;
             case RECTANGULO:
                 if(pin.getX() > pout.getX()){
@@ -159,8 +197,8 @@ public class Lienzo2D extends javax.swing.JPanel {
                     h = pout.getY() - pin.getY();
                 }
                 
-                    figura = new MiRectangulo(x,y, w, h,prop);
-                    
+                    figura = new MiRectangulo(x,y, w, h,borde,alisar,transparencia,grosor,rellenado,relleno);
+                    figura.setName("Rectangulo: " + rectangulos);
                
                 
                 break;
@@ -181,7 +219,8 @@ public class Lienzo2D extends javax.swing.JPanel {
                         y = pin.getY();
                     h = pout.getY() - pin.getY();
                 }
-                figura = new MiElipse(x,y, w, h,prop);
+                figura = new MiElipse(x,y, w, h,borde,alisar,transparencia,grosor,rellenado,relleno);
+                figura.setName("Elipse: " + elipses);
                 break;
             default:
                 break;
@@ -193,13 +232,13 @@ public class Lienzo2D extends javax.swing.JPanel {
     }
     
     
-    private Figura getSelectedShape(String Seleccionada){
-    for(Figura s:Lista){
+    private MiFigura getSelectedShape(String Seleccionada){
+    for(MiFigura s:Lista){
         System.out.println(Seleccionada);
         System.out.println("uno");
-        System.out.println(((Figura)s).toString());
+        System.out.println(((MiFigura)s).toString());
        // System.out.println("");    
-    if((((Figura)s).toString()).equals(Seleccionada)){
+    if((((MiFigura)s).toString()).equals(Seleccionada)){
         System.out.println("entro");
         return s;
     }
@@ -210,7 +249,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     
     return null;
     }
-    private void actualizar(Figura forma,java.awt.event.MouseEvent evt){
+    private void actualizar(MiFigura forma,java.awt.event.MouseEvent evt){
         if(forma != null){
                 forma.setLocation(evt.getPoint());
         }
@@ -319,7 +358,20 @@ public class Lienzo2D extends javax.swing.JPanel {
             
         }else{
         Lista.add(figura);
-        
+        if(figura instanceof MiLinea){
+            if(((MiLinea)figura).EsPunto()==true){
+                puntos++;
+            }
+            else{
+                lineas++;
+            }
+        }
+        if(figura instanceof MiRectangulo){
+            rectangulos++;
+        }
+        if(figura instanceof MiElipse){
+            elipses++;
+        }
         
         }
         pintar();

@@ -5,6 +5,7 @@
  */
 package smm.moh.graficos;
 
+import java.awt.Color;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
@@ -12,44 +13,60 @@ import java.awt.geom.Point2D;
  *
  * @author eyehalcon97
  */
-public class MiLinea extends Line2D.Double implements Figura{
-    private Propiedades propiedad;
+public class MiLinea extends MiFigura{
+    private Line2D forma;
+    
     public MiLinea(Point2D pd, Point2D pd1){
-        super(pd,pd1);
-        this.propiedad = new Propiedades();
-        this.propiedad.setNombre("Linea");
+        super();
+        forma = new Line2D.Double(pd, pd1);
+        
     }
-    public MiLinea(Point2D pd, Point2D pd1,Propiedades propiedad){
-        super(pd,pd1);
-        this.propiedad = propiedad;
-        this.propiedad.setNombre("Linea");
+    public MiLinea(Point2D pd, Point2D pd1,Color Borde,boolean alisar,boolean transparencia,int grosor){
+        super(Borde,alisar,transparencia,grosor);
+        forma = new Line2D.Double(pd, pd1);
+    }
+    public MiLinea(MiLinea aux){
+        super((MiFigura)aux);
+        forma=aux.getForma();
     }
     
     public boolean isNear(Point2D p){
-        return this.ptLineDist(p)<=2.0;
+        return forma.ptLineDist(p)<=2.0;
     }
     
-    @Override
+    
     public boolean contains(Point2D p) {        
         return isNear(p);
     }
-    @Override
+    
     public void setLocation(Point2D pos){
-        double dx=pos.getX()-this.getX1();
-        double dy=pos.getY()-this.getY1();
-        Point2D newp2 = new Point2D.Double(this.getX2()+dx,this.getY2()+dy);
-        this.setLine(pos,newp2);
+        double dx=pos.getX()-forma.getX1();
+        double dy=pos.getY()-forma.getY1();
+        Point2D newp2 = new Point2D.Double(forma.getX2()+dx,forma.getY2()+dy);
+        forma.setLine(pos,newp2);
+        
     }
-    @Override
-    public void setPropiedad(Propiedades propiedad){
-        this.propiedad=propiedad;
+    
+    public void setForma(Line2D forma){
+        this.forma=forma;
     }
-    @Override
-    public Propiedades getPropiedad(){
-        return propiedad;
+    
+    public Line2D getForma(){
+        return forma;
     }
-    @Override
-    public String toString(){
-        return propiedad.getNombre();
+
+    public boolean EsPunto(){
+        boolean resultado=false;
+        if(forma.getP1()==forma.getP2()){
+            resultado=true;
+        }
+        return resultado;
+    }
+    public boolean EsLinea(){
+        boolean resultado=false;
+        if(forma.getP1()!=forma.getP2()){
+            resultado=true;
+        }
+        return resultado;
     }
 }

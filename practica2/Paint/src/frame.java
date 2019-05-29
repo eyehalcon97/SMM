@@ -32,7 +32,9 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JList;
-import smm.moh.graficos.Figura;
+import smm.moh.graficos.MiFigura;
+import smm.moh.graficos.MiLinea;
+
 
 
 
@@ -553,7 +555,7 @@ public class frame extends javax.swing.JFrame {
 
         getContentPane().add(head, java.awt.BorderLayout.PAGE_START);
 
-        jPanel17.setLayout(new java.awt.GridLayout());
+        jPanel17.setLayout(new java.awt.GridLayout(1, 0));
 
         jScrollPane1.setViewportView(jList1);
 
@@ -731,7 +733,7 @@ public class frame extends javax.swing.JFrame {
         VentanaInterna vi=(VentanaInterna)Escritorio.getSelectedFrame();   
         if (vi != null) {
             jPanel17.removeAll();
-            JList<Figura> list = new JList();
+            JList<MiFigura> list = new JList();
              jPanel17.setVisible(false);
             MiLista list_model = new MiLista();
         
@@ -751,26 +753,26 @@ public class frame extends javax.swing.JFrame {
             if(form == null){
                 vi.getLienzoImagen().setFormas(forma);
             }
-            Color col = vi.getLienzoImagen().getPropiedad().getBorde();
+            Color col = vi.getLienzoImagen().getBorde();
             Borde.setBackground(col);
-            col = vi.getLienzoImagen().getPropiedad().getRelleno();
+            col = vi.getLienzoImagen().getRelleno();
             Relleno.setBackground(col);
-            if(vi.getLienzoImagen().getPropiedad().getRellenado()){
+            if(vi.getLienzoImagen().getRellenado()){
                 relleno.setSelected(true);
             }else{
                 relleno.setSelected(false);
             }
-            if(vi.getLienzoImagen().getPropiedad().getTransparencia()){
+            if(vi.getLienzoImagen().getTransparencia()){
                 transparencia.setSelected(true);
             }else{
                 transparencia.setSelected(false);
             }
-            if(vi.getLienzoImagen().getPropiedad().getAlisar()){
+            if(vi.getLienzoImagen().getAlisar()){
                 Alisar.setSelected(true);
             }else{
                 Alisar.setSelected(false);
             }
-            numeroalisar.setValue(vi.getLienzoImagen().getPropiedad().getNumRelleno());
+            numeroalisar.setValue(vi.getLienzoImagen().getGrosor());
             jSlider1.setValue((int)(vi.getLienzoImagen().getBrillo()));
             jSlider2.setValue(vi.getLienzoImagen().getRotacion());
             Filtro.setSelectedItem(vi.getLienzoImagen().getFiltro());
@@ -779,13 +781,17 @@ public class frame extends javax.swing.JFrame {
             
 
           
-            List<Figura> Lista = vi.getLienzoImagen().GetLista();
-            
+            List<MiFigura> Lista = vi.getLienzoImagen().GetLista();
+            int lineas=0;
             if(!Lista.isEmpty()){
-             
-            for (Figura s:Lista){
-            list_model.addFigura(s);
-            }
+                
+                int puntos=0;
+                int rectangulos=0;
+                int elipses=0;
+                
+                Lista.forEach((s) -> {
+                    list_model.addFigura(s);
+                });
             list.setModel(list_model);
             jPanel17.add(list);
             jPanel17.setVisible(true);
@@ -870,7 +876,7 @@ public class frame extends javax.swing.JFrame {
         VentanaInterna vi;  
         vi = (VentanaInterna)Escritorio.getSelectedFrame();
         if(vi != null){
-        vi.getLienzoImagen().setRelleno();
+        vi.getLienzoImagen().setRellenado();
         }
         
         
@@ -890,7 +896,7 @@ public class frame extends javax.swing.JFrame {
        VentanaInterna vi;  
         vi = (VentanaInterna)Escritorio.getSelectedFrame();
         if(vi != null){
-        vi.getLienzoImagen().setNumrelleno(Integer.parseInt(numeroalisar.getValue().toString()));
+        vi.getLienzoImagen().setGrosor(Integer.parseInt(numeroalisar.getValue().toString()));
         }
     }//GEN-LAST:event_numeroalisarStateChanged
 
@@ -1293,11 +1299,11 @@ public class frame extends javax.swing.JFrame {
          if(vi!=null){
         if (tipo.equals("Relleno")){
             Relleno.setBackground(color);
-            vi.getLienzoImagen().getPropiedad().setRelleno(color);
+            vi.getLienzoImagen().setRelleno(color);
         }
         if (tipo.equals("Borde")){
             Borde.setBackground(color);
-            vi.getLienzoImagen().getPropiedad().setBorde(color);
+            vi.getLienzoImagen().setBorde(color);
         }
          }
     }
@@ -1416,7 +1422,7 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JList<Figura> jList1;
+    private javax.swing.JList<MiFigura> jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
