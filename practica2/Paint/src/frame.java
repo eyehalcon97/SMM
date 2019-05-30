@@ -32,8 +32,10 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JList;
+import smm.moh.graficos.MiElipse;
 import smm.moh.graficos.MiFigura;
 import smm.moh.graficos.MiLinea;
+import smm.moh.graficos.MiRectangulo;
 
 
 
@@ -66,11 +68,14 @@ public class frame extends javax.swing.JFrame {
     Formas forma=null;
     BufferedImage imgSource;
     Color colors[] = { Color.RED, Color.BLUE, Color.BLACK, Color.WHITE };
-      
+    JList<MiFigura> li =null;
+    private javax.swing.JScrollPane jScroll = new javax.swing.JScrollPane();
+    private int rotacion=0;
     public frame() {
         initComponents();
         this.setSize(800, 600);
         jPanel17.setVisible(false);
+        
     }
     
 
@@ -151,8 +156,6 @@ public class frame extends javax.swing.JFrame {
         transparencia = new javax.swing.JToggleButton();
         Alisar = new javax.swing.JToggleButton();
         jPanel17 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
         Escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
@@ -322,13 +325,7 @@ public class frame extends javax.swing.JFrame {
         jPanel12.setLayout(new java.awt.GridLayout(1, 0));
 
         jSlider2.setMaximum(360);
-        jSlider2.setMinorTickSpacing(90);
-        jSlider2.setPaintTicks(true);
-        jSlider2.setSnapToTicks(true);
         jSlider2.setToolTipText("");
-        jSlider2.setValue(0);
-        jSlider2.setAutoscrolls(true);
-        jSlider2.setValueIsAdjusting(true);
         jSlider2.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSlider2StateChanged(evt);
@@ -556,18 +553,13 @@ public class frame extends javax.swing.JFrame {
         getContentPane().add(head, java.awt.BorderLayout.PAGE_START);
 
         jPanel17.setLayout(new java.awt.GridLayout(1, 0));
-
-        jScrollPane1.setViewportView(jList1);
-
-        jPanel17.add(jScrollPane1);
-
         getContentPane().add(jPanel17, java.awt.BorderLayout.LINE_END);
 
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 998, Short.MAX_VALUE)
+            .addGap(0, 1256, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -681,7 +673,7 @@ public class frame extends javax.swing.JFrame {
         int resp = dlg.showSaveDialog(this);     
         if (resp == JFileChooser.APPROVE_OPTION) {     
             try {       
-                BufferedImage img = vi.getLienzoImagen().getImagen();      
+                BufferedImage img = vi.getLienzoImagen().getImagen(true);      
                 if (img != null) {        
                     File f = dlg.getSelectedFile();       
                     ImageIO.write(img, "png", f);         
@@ -703,7 +695,7 @@ public class frame extends javax.swing.JFrame {
                 File f = dlg.getSelectedFile();         
                 BufferedImage img = ImageIO.read(f);       
                 VentanaInterna vi = new VentanaInterna(this);        
-                vi.getLienzoImagen().setImage(img);        
+                vi.getLienzoImagen().setImagen(img);        
                 this.Escritorio.add(vi);        
                 vi.setTitle(f.getName());        
                 vi.setVisible(true);     
@@ -733,10 +725,14 @@ public class frame extends javax.swing.JFrame {
         VentanaInterna vi=(VentanaInterna)Escritorio.getSelectedFrame();   
         if (vi != null) {
             jPanel17.removeAll();
-            JList<MiFigura> list = new JList();
-             jPanel17.setVisible(false);
+            li = new JList();
+            li.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                liValueChanged(evt);
+            }
+            });
+              jPanel17.setVisible(false);
             MiLista list_model = new MiLista();
-        
             form = vi.getLienzoImagen().getForma();
             if(form == Formas.PUNTO){
             lapiz.setSelected(true);
@@ -774,7 +770,7 @@ public class frame extends javax.swing.JFrame {
             }
             numeroalisar.setValue(vi.getLienzoImagen().getGrosor());
             jSlider1.setValue((int)(vi.getLienzoImagen().getBrillo()));
-            jSlider2.setValue(vi.getLienzoImagen().getRotacion());
+            jSlider2.setValue(vi.getLienzoImagen().getRotacion()%360);
             Filtro.setSelectedItem(vi.getLienzoImagen().getFiltro());
             espectro.setSelectedItem(vi.getLienzoImagen().getEspectro());
             
@@ -782,35 +778,82 @@ public class frame extends javax.swing.JFrame {
 
           
             List<MiFigura> Lista = vi.getLienzoImagen().GetLista();
-            int lineas=0;
+
             if(!Lista.isEmpty()){
-                
-                int puntos=0;
-                int rectangulos=0;
-                int elipses=0;
                 
                 Lista.forEach((s) -> {
                     list_model.addFigura(s);
                 });
-            list.setModel(list_model);
-            jPanel17.add(list);
+            li.setModel(list_model);
+            
+            //jPanel17.add(li);
+            
+            jScroll.setViewportView(li);
+
+            jPanel17.add(jScroll);
             jPanel17.setVisible(true);
-                
+            
             }
             
         }
 
         
     }
-    /*private void botonActionPerformed(java.awt.event.ActionEvent evt) {
-        javax.swing.JButton boton;
-        boton = (javax.swing.JButton) evt.getSource();
-        VentanaInterna vi;
-        vi = (VentanaInterna)Escritorio.getSelectedFrame();
-        if(vi != null){
-            vi.getLienzoImagen().setEditar(boton.getName());
-        }
-    } */ 
+    private void liValueChanged(javax.swing.event.ListSelectionEvent evt) {                                    
+        String seleccionada = li.getSelectedValue().toString();
+        Actualizarfigura(li.getSelectedValue());
+    } 
+    
+    
+    public void Actualizarfigura(MiFigura figura){
+         VentanaInterna vi=(VentanaInterna)Escritorio.getSelectedFrame();   
+        if (vi != null) {
+        System.out.println("figuir");
+        Color col = figura.getBorde();
+            Borde.setBackground(col);
+            vi.getLienzoImagen().setBorde(col);
+            if(figura.getTransparencia()){
+                transparencia.setSelected(true);
+                vi.getLienzoImagen().setTransparencia(true);
+            }else{
+                transparencia.setSelected(false);
+                vi.getLienzoImagen().setTransparencia(true);
+            }
+            if(figura.getAlisar()){
+                Alisar.setSelected(true);
+                vi.getLienzoImagen().setAlisar(true);
+            }else{
+                Alisar.setSelected(false);
+                vi.getLienzoImagen().setAlisar(false);
+            }
+            numeroalisar.setValue(figura.getGrosor());
+            vi.getLienzoImagen().setGrosor(figura.getGrosor());
+            if(figura instanceof MiElipse){
+            col = ((MiElipse)figura).getRelleno();
+            Relleno.setBackground(col);
+            vi.getLienzoImagen().setRelleno(col);
+            if(((MiElipse)figura).getRellenado()){
+                relleno.setSelected(true);
+                vi.getLienzoImagen().setRellenado(true);
+            }else{
+                relleno.setSelected(false);
+                vi.getLienzoImagen().setRellenado(false);
+            }
+            }
+            if(figura instanceof MiRectangulo){
+            col = ((MiRectangulo)figura).getRelleno();
+            Relleno.setBackground(col);
+            vi.getLienzoImagen().setRelleno(col);
+            if(((MiRectangulo)figura).getRellenado()){
+                relleno.setSelected(true);
+                vi.getLienzoImagen().setRellenado(true);
+            }else{
+                relleno.setSelected(false);
+                vi.getLienzoImagen().setRellenado(false);
+            }
+            }
+        }       
+    }
    
     private void herramienta(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_herramienta
         // TODO add your handling code here:
@@ -863,11 +906,8 @@ public class frame extends javax.swing.JFrame {
          
          Escritorio.add(vi);
          vi.setVisible(true);
-         BufferedImage img;
-         img = new BufferedImage(300,300,BufferedImage.TYPE_INT_RGB);
-         img.createGraphics().setPaint(Color.white);
-         img.createGraphics().fill(new Rectangle2D.Float(0.0f, 0.0f, img.getWidth(), img.getHeight()));
-         vi.getLienzoImagen().setImage(img);
+         
+         
          actualizarframe();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -876,9 +916,16 @@ public class frame extends javax.swing.JFrame {
         VentanaInterna vi;  
         vi = (VentanaInterna)Escritorio.getSelectedFrame();
         if(vi != null){
-        vi.getLienzoImagen().setRellenado();
+        vi.getLienzoImagen().setRellenado(!vi.getLienzoImagen().getRellenado());
+        if(li.getSelectedValue() != null){
+        if(li.getSelectedValue() instanceof MiElipse){
+            ((MiElipse)li.getSelectedValue()).getRellenado(!((MiElipse)li.getSelectedValue()).getRellenado());
         }
-        
+        if(li.getSelectedValue() instanceof MiRectangulo){
+            ((MiRectangulo)li.getSelectedValue()).setRellenado(!(((MiRectangulo)li.getSelectedValue()).getRellenado()));
+        }
+        }
+        }
         
     }//GEN-LAST:event_rellenoActionPerformed
 
@@ -887,7 +934,10 @@ public class frame extends javax.swing.JFrame {
         VentanaInterna vi;  
         vi = (VentanaInterna)Escritorio.getSelectedFrame();
         if(vi != null){
-        vi.getLienzoImagen().setAlisar();
+        vi.getLienzoImagen().setAlisar(!vi.getLienzoImagen().getAlisar());
+        if(li.getSelectedValue() != null){
+        li.getSelectedValue().setAlisar(!li.getSelectedValue().getAlisar());
+        }
         }
     }//GEN-LAST:event_AlisarActionPerformed
 
@@ -897,6 +947,9 @@ public class frame extends javax.swing.JFrame {
         vi = (VentanaInterna)Escritorio.getSelectedFrame();
         if(vi != null){
         vi.getLienzoImagen().setGrosor(Integer.parseInt(numeroalisar.getValue().toString()));
+        if(li.getSelectedValue() != null){
+        li.getSelectedValue().setGrosor(Integer.parseInt(numeroalisar.getValue().toString()));
+        }
         }
     }//GEN-LAST:event_numeroalisarStateChanged
 
@@ -905,7 +958,10 @@ public class frame extends javax.swing.JFrame {
         VentanaInterna vi;  
         vi = (VentanaInterna)Escritorio.getSelectedFrame();
         if(vi != null){
-       vi.getLienzoImagen().setTransparencia();
+       vi.getLienzoImagen().setTransparencia(!vi.getLienzoImagen().getTransparencia());
+       if(li.getSelectedValue() != null){
+       li.getSelectedValue().setTransparencia(!li.getSelectedValue().getTransparencia());
+       }
         }
     }//GEN-LAST:event_transparenciaActionPerformed
 
@@ -922,7 +978,7 @@ public class frame extends javax.swing.JFrame {
         VentanaInterna vi = (VentanaInterna) this.Escritorio.getSelectedFrame();
         if (vi != null)
         {   if(Filtro.getSelectedItem().toString() != "Seleccione"){
-            imgSource = vi.getLienzoImagen().getImagen();
+            imgSource = vi.getLienzoImagen().getImagen(false);
             if (this.imgSource != null)
                 try
                 {
@@ -972,7 +1028,7 @@ public class frame extends javax.swing.JFrame {
         // TODO add your handling code here:
           VentanaInterna vi =(VentanaInterna)(Escritorio.getSelectedFrame());
           if(vi != null){
-              imgSource = vi.getLienzoImagen().getImagen();
+              imgSource = vi.getLienzoImagen().getImagen(false);
           }
     }//GEN-LAST:event_jSlider1FocusGained
 
@@ -1000,7 +1056,7 @@ public class frame extends javax.swing.JFrame {
                     rop = new RescaleOp(1.0f, value, null);
                 }
                 BufferedImage imgdest = rop.filter(this.imgSource, null);
-                vi.getLienzoImagen().setImage(imgdest);
+                vi.getLienzoImagen().setImagen(imgdest);
                 vi.getLienzoImagen().repaint();
                 
             } catch (Exception e)
@@ -1013,7 +1069,7 @@ public class frame extends javax.swing.JFrame {
         // TODO add your handling code here:
         VentanaInterna vi = (VentanaInterna) (Escritorio.getSelectedFrame());   
         if (vi != null) {     
-            BufferedImage imgSource = vi.getLienzoImagen().getImagen();
+            BufferedImage imgSource = vi.getLienzoImagen().getImagen(false);
              if(imgSource!=null){             
             try{              
                 int type = LookupTableProducer.TYPE_GAMMA_CORRECTION;
@@ -1034,7 +1090,7 @@ public class frame extends javax.swing.JFrame {
         // TODO add your handling code here:
         VentanaInterna vi = (VentanaInterna) (Escritorio.getSelectedFrame());   
         if (vi != null) {     
-            BufferedImage imgSource = vi.getLienzoImagen().getImagen();
+            BufferedImage imgSource = vi.getLienzoImagen().getImagen(false);
              if(imgSource!=null){             
                 try{              
                 int type = LookupTableProducer.TYPE_SFUNCION;
@@ -1055,7 +1111,7 @@ public class frame extends javax.swing.JFrame {
         // TODO add your handling code here:
         VentanaInterna vi = (VentanaInterna) (Escritorio.getSelectedFrame());   
         if (vi != null) {     
-            BufferedImage imgSource = vi.getLienzoImagen().getImagen();
+            BufferedImage imgSource = vi.getLienzoImagen().getImagen(false);
              if(imgSource!=null){             
                 try{              
                     int type = LookupTableProducer.TYPE_LOGARITHM;
@@ -1073,7 +1129,7 @@ public class frame extends javax.swing.JFrame {
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
         VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
-        imgSource = vi.getLienzoImagen().getImagen();
+        imgSource = vi.getLienzoImagen().getImagen(false);
         
         if (vi != null){
             try
@@ -1094,10 +1150,7 @@ public class frame extends javax.swing.JFrame {
         VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
         if(vi != null){
         rotar(90);
-        grados=grados+90;
-        if(grados >=360){
-            grados=grados-360;
-        }
+        
         
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -1107,10 +1160,7 @@ public class frame extends javax.swing.JFrame {
         VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
         if(vi != null){
             rotar(180);
-            grados=grados+180;
-        if(grados >=360){
-            grados=grados-360;
-        }
+            
         
         }
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -1120,10 +1170,7 @@ public class frame extends javax.swing.JFrame {
         VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
         if(vi != null){
             rotar(270);
-            grados=grados+270;
-        if(grados >=360){
-            grados=grados-360;
-        }
+            
         
         }
     }//GEN-LAST:event_jButton7ActionPerformed
@@ -1138,89 +1185,35 @@ public class frame extends javax.swing.JFrame {
         VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
         if(vi != null){
             int valor = jSlider2.getValue();
-            vi.getLienzoImagen().setRotacion(valor);
-            int rota = 0;
-            switch (valor)
-                    {
-                        case 0: // --seleccione--
-                            if(grados>0 ){
-                                rota = 360-grados;
-                            }
-                            if(grados==0){
-                                rota=0;
-                            }
-                            grados=0;
-                            rotar(rota);
-                            break;
-                        case 90:
-                            if(grados>90){
-                                rota = 360+90-grados;
-                            }
-                            if(grados<90){
-                                rota=90-grados;
-                            }
-                            if(grados==90){
-                                rota=0;
-                            }
-                            grados=90;
-                            rotar(rota);
-                            break;
-                        case 180: 
-                            if(grados>180){
-                                rota = 360+180-grados;
-                            }
-                            if(grados<180){
-                                rota=180-grados;
-                            }
-                            if(grados==180){
-                                rota=0;
-                            }
-                            grados=180;
-                            rotar(rota);
-                            break;
-                        case 270: 
-                            if(grados>270){
-                                rota = 360+270-grados;
-                            }
-                            if(grados<270){
-                                rota=270-grados;
-                            }
-                            if(grados==270){
-                                rota=0;
-                            }
-                            grados=270;
-                            rotar(rota);
-                            break;
-                        case 360: 
-                            if(grados<360 ){
-                                rota = 360-grados;
-                            }
-                            if(grados==360){
-                                rota=0;
-                            }
-                    
-                            grados=0;
-                            rotar(rota);
-                            break;
-                        
-                    }
+            if(valor<rotacion){
+                rotar(rotacion-valor);
+            }
+            rotar(valor-rotacion);
+            rotacion = valor;
         }
     }//GEN-LAST:event_jSlider2StateChanged
 
     private void reducirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reducirActionPerformed
         // TODO add your handling code here:
         escalar(0.75);
+        actualizarVentana();
     }//GEN-LAST:event_reducirActionPerformed
 
     private void aumentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aumentarActionPerformed
         // TODO add your handling code here:
         escalar(1.25);
+        actualizarVentana();
     }//GEN-LAST:event_aumentarActionPerformed
-
+    public void actualizarVentana(){
+        VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
+        if(vi !=null){
+            vi.actualizardesplazable();
+        }
+    }
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
         VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
-        imgSource = vi.getLienzoImagen().getImagen();
+        imgSource = vi.getLienzoImagen().getImagen(true);
         for(int i=0;i<imgSource.getColorModel().getNumColorComponents();i++){
         //Creamos el modelo de color de la nueva imagen basado en un espcio de color GRAY );
             ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY); 
@@ -1245,7 +1238,7 @@ public class frame extends javax.swing.JFrame {
             
         {
             if(espectro.getSelectedItem().toString()!="Seleccione"){
-            imgSource = vi.getLienzoImagen().getImagen();
+            imgSource = vi.getLienzoImagen().getImagen(true);
             
             if (this.imgSource != null)
                 try
@@ -1300,37 +1293,59 @@ public class frame extends javax.swing.JFrame {
         if (tipo.equals("Relleno")){
             Relleno.setBackground(color);
             vi.getLienzoImagen().setRelleno(color);
+            if(li.getSelectedValue() !=null){
+                if(li.getSelectedValue() instanceof MiElipse){
+                    ((MiElipse)li.getSelectedValue()).setRelleno(color);
+                }
+                if(li.getSelectedValue() instanceof MiRectangulo){
+                    ((MiRectangulo)li.getSelectedValue()).setRelleno(color);
+                }
+                vi.getLienzoImagen().repaint();
+            }
         }
         if (tipo.equals("Borde")){
             Borde.setBackground(color);
             vi.getLienzoImagen().setBorde(color);
+            if(li.getSelectedValue() !=null){
+             li.getSelectedValue().setBorde(color);
+             vi.getLienzoImagen().repaint();
+            }
         }
          }
     }
     
     private void RellenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RellenoActionPerformed
         // TODO add your handling code here:
+        VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
+         if(vi!=null){
         new SelCol(this,"Relleno").setVisible(true);
+         }
     }//GEN-LAST:event_RellenoActionPerformed
 
     private void BordeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BordeActionPerformed
         // TODO add your handling code here:
+        VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
+         if(vi!=null){
         new SelCol(this,"Borde").setVisible(true);
+         }
     }//GEN-LAST:event_BordeActionPerformed
     
     private void escalar(double indice){
         VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
-        imgSource = vi.getLienzoImagen().getImagen();
+        imgSource = vi.getLienzoImagen().getImagen(true);
         AffineTransform at = AffineTransform.getScaleInstance(indice, indice);
         AffineTransformOp atop;
         atop = new AffineTransformOp(at,AffineTransformOp.TYPE_BILINEAR); 
         BufferedImage imgdest = atop.filter(imgSource, null);
         vi.getLienzoImagen().setImagen(imgdest);
         vi.repaint();
+        actualizarVentana();
     }
     private void rotar(int angulo){
         VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
-        imgSource = vi.getLienzoImagen().getImagen();
+        if(vi!=null){
+        vi.getLienzoImagen().setRotacion(angulo+vi.getLienzoImagen().getRotacion());
+        imgSource = vi.getLienzoImagen().getImagen(true);
         double r = Math.toRadians(angulo); 
         Point c = new Point(imgSource.getWidth()/2, imgSource.getHeight()/2); 
         AffineTransform at = AffineTransform.getRotateInstance(r,c.x,c.y); 
@@ -1339,6 +1354,12 @@ public class frame extends javax.swing.JFrame {
         BufferedImage imgdest = atop.filter(imgSource, null);
         vi.getLienzoImagen().setImagen(imgdest);
         vi.repaint();
+        actualizarVentana();
+        
+        
+        }
+        ////////////////////
+        
     }
     private LookupTable seno(double w){
         double K = 255.0; // Cte de normalización
@@ -1422,7 +1443,6 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JList<MiFigura> jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
@@ -1444,7 +1464,6 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSlider jSlider1;

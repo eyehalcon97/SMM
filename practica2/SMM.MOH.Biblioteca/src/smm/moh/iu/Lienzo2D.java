@@ -32,7 +32,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     
     private Point2D pin = new Point2D.Double(-10, -10);
     private Point2D pout = new Point2D.Double(-10, -10);
-    private MiFigura figura = new MiLinea(pin, pout);
+    private MiFigura figura = new MiLinea(pin,pin);
     private Formas forma =null;
     private MiFigura figmod = null;
     private Color borde = Color.BLACK;
@@ -132,14 +132,14 @@ public class Lienzo2D extends javax.swing.JPanel {
     public Formas getForma(){
         return forma;
     }
-    public void setRellenado(){
-        rellenado = !rellenado;
+    public void setRellenado(boolean rellenado){
+        this.rellenado = rellenado;
     }
     public boolean getRellenado(){
         return rellenado;
     }
-    public void setAlisar(){
-       alisar=!alisar;
+    public void setAlisar(boolean alisar){
+       this.alisar=alisar;
     }
     public boolean getAlisar(){
         return alisar;
@@ -152,8 +152,8 @@ public class Lienzo2D extends javax.swing.JPanel {
     public int getGrosor(){
         return grosor;
     }
-    public void setTransparencia(){
-        transparencia=!transparencia;
+    public void setTransparencia(boolean transparencia){
+        this.transparencia=transparencia;
     }
     public boolean getTransparencia(){
         return transparencia;

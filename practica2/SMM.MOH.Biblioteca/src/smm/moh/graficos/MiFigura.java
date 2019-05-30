@@ -53,7 +53,7 @@ public abstract class MiFigura {
         this.Borde = aux.getBorde();
         this.alisar = aux.getAlisar();
         this.transparencia=aux.getTransparencia();
-        this.grosor=aux.getgrosor();
+        this.grosor=aux.getGrosor();
         this.atributos= new BasicStroke(grosor);
         actualizartransparencia();
     }
@@ -76,7 +76,7 @@ public abstract class MiFigura {
             Borde = new Color(Borde.getRed(),Borde.getGreen(),Borde.getBlue());
         }
    }
-   public void setgrosor(int num){
+   public void setGrosor(int num){
        this.grosor = num;
        atributos = new BasicStroke(grosor);
    }
@@ -91,7 +91,7 @@ public abstract class MiFigura {
    public boolean getTransparencia(){
        return transparencia;
    }
-   public int getgrosor(){
+   public int getGrosor(){
        return grosor;
    }
        

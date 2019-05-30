@@ -16,7 +16,6 @@ public class MiElipse extends MiFigura{
     private Ellipse2D forma;
     private boolean rellenado;
     private Color relleno;
-    private static int num=0;
     public MiElipse(double x,double y,double h,double w){
         super();
         this.forma = new Ellipse2D.Double(x, y, h, w);
@@ -59,6 +58,7 @@ public class MiElipse extends MiFigura{
     }
     public Color getRelleno(){
         return relleno;
+        
     }
         
     

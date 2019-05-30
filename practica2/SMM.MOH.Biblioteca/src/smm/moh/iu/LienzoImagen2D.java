@@ -22,12 +22,13 @@ public class LienzoImagen2D extends Lienzo2D{
     private int rotacion=0;
     private String filtro="Seleccione";
     private String espectro="Seleccione";
-    public void setImage(BufferedImage img){
-        this.img = img;
-        if(img != null){
-            setPreferredSize(new Dimension(img.getWidth(),img.getHeight()));
-        }
-        Lista.clear();
+    
+    public LienzoImagen2D(){
+        super();
+        img = new BufferedImage(300,300,BufferedImage.TYPE_INT_RGB);
+        img.createGraphics().setPaint(Color.white);
+         img.createGraphics().fill(new Rectangle2D.Float(0.0f, 0.0f, img.getWidth(), img.getHeight()));
+         
     }
     public void setBrillo(float brillo){
         this.brillo =  brillo;
@@ -53,10 +54,13 @@ public class LienzoImagen2D extends Lienzo2D{
     public String getEspectro(){
         return espectro;
     }
-    public BufferedImage getImagen(){
-        
-            
+    public BufferedImage getImagen(boolean imagen){
             Graphics g = img.getGraphics();
+            
+            if(imagen){
+                this.Lista.clear();
+            }
+            
             
             super.paintfiguras(g);
             
@@ -65,8 +69,11 @@ public class LienzoImagen2D extends Lienzo2D{
         
     }
     public void setImagen(BufferedImage img){
-        this.img =img;
-        
+        this.img = img;
+        if(img != null){
+            setPreferredSize(new Dimension(img.getWidth(),img.getHeight()));
+            
+        }
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);

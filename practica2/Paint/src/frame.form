@@ -432,18 +432,15 @@
                         <Component class="javax.swing.JSlider" name="jSlider2">
                           <Properties>
                             <Property name="maximum" type="int" value="360"/>
-                            <Property name="minorTickSpacing" type="int" value="90"/>
-                            <Property name="paintTicks" type="boolean" value="true"/>
-                            <Property name="snapToTicks" type="boolean" value="true"/>
                             <Property name="toolTipText" type="java.lang.String" value=""/>
-                            <Property name="value" type="int" value="0"/>
-                            <Property name="autoscrolls" type="boolean" value="true"/>
-                            <Property name="valueIsAdjusting" type="boolean" value="true"/>
                           </Properties>
                           <Events>
                             <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSlider2StateChanged"/>
                             <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jSlider2PropertyChange"/>
                           </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
+                          </AuxValues>
                         </Component>
                         <Component class="javax.swing.JButton" name="jButton5">
                           <Properties>
@@ -777,27 +774,6 @@
         <Property name="columns" type="int" value="0"/>
         <Property name="rows" type="int" value="1"/>
       </Layout>
-      <SubComponents>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-          <AuxValues>
-            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-          </AuxValues>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JList" name="jList1">
-              <Properties>
-                <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                  <StringArray count="0"/>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;MiFigura&gt;"/>
-              </AuxValues>
-            </Component>
-          </SubComponents>
-        </Container>
-      </SubComponents>
     </Container>
     <Container class="javax.swing.JDesktopPane" name="Escritorio">
       <Constraints>
@@ -809,7 +785,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="998" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="1256" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">

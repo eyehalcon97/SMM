@@ -59,7 +59,7 @@ public class MiRectangulo extends MiFigura{
     public boolean getRellenado(){
         return rellenado;
     }
-    public void getRellenado(boolean rellenado){
+    public void setRellenado(boolean rellenado){
         this.rellenado = rellenado;
     }
     public void setRelleno(Color relleno){
