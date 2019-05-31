@@ -6,6 +6,10 @@
 package smm.moh.graficos;
 
 import java.awt.Color;
+
+import java.awt.Graphics2D;
+
+import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
@@ -59,6 +63,18 @@ public class MiElipse extends MiFigura{
     public Color getRelleno(){
         return relleno;
         
+    }
+    public void draw(Graphics2D g2d){
+        if(getRellenado()==true){
+                    g2d.setColor(relleno);
+                g2d.fill((Shape) (forma));
+                g2d.setColor(getBorde());
+                g2d.draw((Shape)forma);
+            }
+            else{
+                    g2d.setColor(getBorde());
+                g2d.draw((Shape)forma);
+            }
     }
         
     

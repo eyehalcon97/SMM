@@ -56,17 +56,11 @@ public class Lienzo2D extends javax.swing.JPanel {
     public void paint(Graphics g){
         super.paint(g);
     Graphics2D g2d=(Graphics2D)g;
-    pintar(g2d);
-        
-    }
-    
-    public void pintar(Graphics2D g2d){
-        
+    for(MiFigura s:Lista){
             
-     
-        for(MiFigura s:Lista){
             
-            Graphics2D nuevo;
+            s.draw(g2d);
+            /*Graphics2D nuevo;
             nuevo = s.Graphics(g2d);
             
             g2d = nuevo;
@@ -103,8 +97,18 @@ public class Lienzo2D extends javax.swing.JPanel {
             }
         
             
-                
-        }  
+              */  
+            
+                    }
+        
+    }
+    
+    public void pintar(Graphics2D g2d){
+        
+            
+     
+        
+        
             
     }
     public void paintfiguras(Graphics g){

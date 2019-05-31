@@ -6,6 +6,8 @@
 package smm.moh.graficos;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Shape;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
@@ -68,5 +70,9 @@ public class MiLinea extends MiFigura{
             resultado=true;
         }
         return resultado;
+    }
+    public void draw(Graphics2D g2d){
+        g2d.setColor(getBorde());
+        g2d.draw((Shape)forma);
     }
 }

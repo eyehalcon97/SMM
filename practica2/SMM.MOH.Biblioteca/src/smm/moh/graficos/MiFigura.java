@@ -9,6 +9,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Point2D;
 
@@ -18,7 +19,7 @@ import java.awt.geom.Point2D;
  */
 public abstract class MiFigura {
     private String name=null;
-    private Color Borde;
+    private Color borde;
     private boolean alisar;
     private boolean transparencia;
     private int grosor;
@@ -27,7 +28,7 @@ public abstract class MiFigura {
     public MiFigura(){
         render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
        render.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-       this.Borde=new Color(0,0,0,0);
+       this.borde=new Color(0,0,0,0);
         this.alisar=false;
         this.transparencia=false;
         this.grosor=1;
@@ -35,11 +36,11 @@ public abstract class MiFigura {
         actualizartransparencia();
         
     }
-    public MiFigura(Color Borde,boolean alisar,boolean transparencia,int grosor){
+    public MiFigura(Color borde,boolean alisar,boolean transparencia,int grosor){
         render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         render.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         
-        this.Borde=Borde;
+        this.borde=borde;
         this.alisar=alisar;
         this.transparencia=transparencia;
         this.grosor=grosor;
@@ -50,7 +51,7 @@ public abstract class MiFigura {
         render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         render.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         
-        this.Borde = aux.getBorde();
+        this.borde = aux.getBorde();
         this.alisar = aux.getAlisar();
         this.transparencia=aux.getTransparencia();
         this.grosor=aux.getGrosor();
@@ -58,7 +59,7 @@ public abstract class MiFigura {
         actualizartransparencia();
     }
     public void setBorde(Color color){
-       this.Borde = color;
+       this.borde = color;
    }
    
    public void setAlisar(boolean bool){
@@ -71,9 +72,9 @@ public abstract class MiFigura {
    }
    private void actualizartransparencia(){
        if(transparencia){
-            Borde = new Color(Borde.getRed(),Borde.getGreen(),Borde.getBlue(),80);
+            borde = new Color(borde.getRed(),borde.getGreen(),borde.getBlue(),80);
         }else{
-            Borde = new Color(Borde.getRed(),Borde.getGreen(),Borde.getBlue());
+            borde = new Color(borde.getRed(),borde.getGreen(),borde.getBlue());
         }
    }
    public void setGrosor(int num){
@@ -82,7 +83,7 @@ public abstract class MiFigura {
    }
    
    public Color getBorde(){
-       return Borde;
+       return borde;
    }
 
    public boolean getAlisar(){
@@ -97,7 +98,7 @@ public abstract class MiFigura {
        
    public Graphics2D Graphics(Graphics2D g2d){
        
-        g2d.setColor(Borde);
+        g2d.setColor(borde);
        
     if(alisar){
         g2d.setRenderingHints(render);
@@ -113,5 +114,6 @@ public abstract class MiFigura {
     public String toString(){
         return name;
     }
+    public abstract void draw(Graphics2D g2d);
 }
 
