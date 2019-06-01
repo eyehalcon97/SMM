@@ -47,7 +47,7 @@ public class MiElipse extends MiFigura{
     public void setLocation(Point2D pos){
         double dx=pos.getX()-(forma.getWidth()/2);
         double dy=pos.getY()-(forma.getHeight()/2);
-        this.forma = new Ellipse2D.Double(dx, dy, forma.getHeight(),forma.getWidth());       
+        this.forma = new Ellipse2D.Double(dx, dy,forma.getWidth(), forma.getHeight());      
     }
     public void setForma(Ellipse2D forma){
         this.forma = forma;

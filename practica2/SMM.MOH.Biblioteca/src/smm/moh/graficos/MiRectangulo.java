@@ -49,7 +49,7 @@ public class MiRectangulo extends MiFigura{
     public void setLocation(Point2D pos){
         double dx=pos.getX()-(forma.getWidth()/2);
         double dy=pos.getY()-(forma.getHeight()/2);
-        this.forma = new Rectangle2D.Double(dx, dy,forma.getHeight(), forma.getWidth());
+        this.forma = new Rectangle2D.Double(dx, dy,forma.getWidth(), forma.getHeight());
         
     }
     
@@ -93,12 +93,19 @@ public class MiRectangulo extends MiFigura{
             relleno = new Color(relleno.getRed(),relleno.getGreen(),relleno.getBlue());
         }
    }
-    @Override
+    
+        @Override
     public void drawSelected(Graphics2D g2d) {
         g2d.setColor(new Color(0,0,0,80));
-        g2d.draw(forma.getBounds2D());
+        Rectangle2D aux=forma.getBounds2D();
+        Rectangle2D rectangulo =  new Rectangle2D.Double(aux.getX()-10,aux.getY()-10,aux.getWidth()+20,aux.getHeight()+20);
+        
+       
         float []dash={6f,2.0f,6.0f};
         g2d.setStroke(new BasicStroke(super.getGrosor(),BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,5.0f, dash, 0.0f));
+         g2d.draw(rectangulo);
     }
+        
+    
         
 }
