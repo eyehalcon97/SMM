@@ -24,7 +24,7 @@ public abstract class MiFigura {
     protected boolean transparencia;
     private int grosor;
     private RenderingHints render;        
-    private Stroke atributos = new BasicStroke(grosor);
+    protected Stroke atributos = new BasicStroke(grosor);
     public MiFigura(){
         render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
        render.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);

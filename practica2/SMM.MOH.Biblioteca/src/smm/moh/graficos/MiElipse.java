@@ -5,6 +5,7 @@
  */
 package smm.moh.graficos;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 
 import java.awt.Graphics2D;
@@ -68,6 +69,7 @@ public class MiElipse extends MiFigura{
         
     }
     public void draw(Graphics2D g2d){
+        g2d.setStroke(atributos);
         if(getRellenado()==true){
             g2d.setColor(relleno);
             g2d.fill((Shape) (forma));
@@ -87,8 +89,12 @@ public class MiElipse extends MiFigura{
    }
     @Override
     public void drawSelected(Graphics2D g2d) {
-        g2d.setColor(new Color(200,200,200));
+        g2d.setColor(new Color(0,0,0,80));
+        float []dash={6f,2.0f,6.0f};
+        g2d.setStroke(new BasicStroke(super.getGrosor(),BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,5.0f, dash, 0.0f));
         g2d.draw(forma.getBounds2D());
+        
+        
     }
         
     

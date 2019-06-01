@@ -5,6 +5,7 @@
  */
 package smm.moh.graficos;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
@@ -74,6 +75,7 @@ public class MiLinea extends MiFigura{
         return resultado;
     }
     public void draw(Graphics2D g2d){
+        g2d.setStroke(atributos);
         g2d.setColor(getBorde());
         g2d.draw((Shape)forma);
     }
