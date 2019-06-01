@@ -18,12 +18,18 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
      * Creates new form VentanaInterna
      */
     frame cuadro=null;
+    int vertical;
+    int horizontal;
     public VentanaInterna() {
         initComponents();
     }
-    public VentanaInterna(frame cuadro){
-        initComponents();
+    public VentanaInterna(frame cuadro,int vertical,int horizontal){
         this.cuadro=cuadro;
+        this.vertical=vertical;
+        this.horizontal=horizontal;
+        initComponents();
+        
+        
     }
     
     public smm.moh.iu.LienzoImagen2D getLienzoImagen(){
@@ -42,7 +48,7 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        lienzoImagen2D1 = new smm.moh.iu.LienzoImagen2D();
+        lienzoImagen2D1 = new smm.moh.iu.LienzoImagen2D(vertical,horizontal);
 
         setClosable(true);
         setIconifiable(true);
@@ -71,11 +77,11 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
         lienzoImagen2D1.setLayout(lienzoImagen2D1Layout);
         lienzoImagen2D1Layout.setHorizontalGroup(
             lienzoImagen2D1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 402, Short.MAX_VALUE)
+            .addGap(0, 459, Short.MAX_VALUE)
         );
         lienzoImagen2D1Layout.setVerticalGroup(
             lienzoImagen2D1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 292, Short.MAX_VALUE)
+            .addGap(0, 380, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(lienzoImagen2D1);
@@ -84,11 +90,11 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
         );
 
         pack();

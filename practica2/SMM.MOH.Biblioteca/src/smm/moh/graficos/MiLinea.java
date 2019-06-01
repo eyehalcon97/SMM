@@ -11,6 +11,7 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 
 /**
  *
@@ -75,6 +76,9 @@ public class MiLinea extends MiFigura{
         return resultado;
     }
     public void draw(Graphics2D g2d){
+        if(alisar){
+            g2d.setRenderingHints(render);
+        }
         g2d.setStroke(atributos);
         g2d.setColor(getBorde());
         g2d.draw((Shape)forma);
@@ -82,6 +86,10 @@ public class MiLinea extends MiFigura{
 
     @Override
     public void drawSelected(Graphics2D g2d) {
+        g2d.setColor(new Color(0,0,0,80));
+        float []dash={6f,2.0f,6.0f};
+        g2d.setStroke(new BasicStroke(2,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,5.0f, dash, 0.0f));
         g2d.draw(forma.getBounds2D());
+
     }
 }

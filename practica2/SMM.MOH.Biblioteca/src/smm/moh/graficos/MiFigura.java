@@ -20,10 +20,10 @@ import java.awt.geom.Point2D;
 public abstract class MiFigura {
     private String name=null;
     protected Color borde;
-    private boolean alisar;
+    protected boolean alisar;
     protected boolean transparencia;
     private int grosor;
-    private RenderingHints render;        
+    protected RenderingHints render;        
     protected Stroke atributos = new BasicStroke(grosor);
     public MiFigura(){
         render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);

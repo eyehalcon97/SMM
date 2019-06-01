@@ -71,11 +71,11 @@ public class frame extends javax.swing.JFrame {
     JList<MiFigura> li =null;
     private javax.swing.JScrollPane jScroll = new javax.swing.JScrollPane();
     private int rotacion=0;
+
     public frame() {
         initComponents();
         this.setSize(800, 600);
         jPanel17.setVisible(false);
-        
     }
     
 
@@ -683,7 +683,7 @@ public class frame extends javax.swing.JFrame {
             try{       
                 File f = dlg.getSelectedFile();         
                 BufferedImage img = ImageIO.read(f);       
-                VentanaInterna vi = new VentanaInterna(this);        
+                VentanaInterna vi = new VentanaInterna(this,img.getHeight(),img.getWidth());        
                 vi.getLienzoImagen().setImagen(img);        
                 this.Escritorio.add(vi);        
                 vi.setTitle(f.getName());        
@@ -874,20 +874,29 @@ public class frame extends javax.swing.JFrame {
         nav2.setVisible(barraformas);
         
     }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
-
+    
+    public void nuevoLienzo(int altura,int anchura){
+        if(anchura != 0 && altura != 0){
+            VentanaInterna vi = new VentanaInterna(this,anchura,altura);
+            Escritorio.add(vi);
+         vi.setVisible(true);
+         
+         System.out.println("hola");
+         actualizarframe();
+         
+         altura =0;
+         anchura=0;
+        }
+    }
     private void jCheckBoxMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxMenuItem3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         VentanaInterna vi = new VentanaInterna(this);
-         
-         Escritorio.add(vi);
-         vi.setVisible(true);
+        new SelLienzo(this).setVisible(true);
          
          
-         actualizarframe();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void rellenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rellenoActionPerformed
@@ -1206,7 +1215,7 @@ public class frame extends javax.swing.JFrame {
             int bandList[] = {i};
             WritableRaster bandRaster = (WritableRaster)imgSource.getRaster().createWritableChild(0,0,imgSource.getWidth(), imgSource.getHeight(), 0, 0, bandList);
             BufferedImage imgBanda = new BufferedImage(cm, bandRaster, false, null);
-            VentanaInterna vi2=new VentanaInterna(this);
+            VentanaInterna vi2=new VentanaInterna(this,0,0);
             vi2.getLienzoImagen().setImagen(imgBanda);
             Escritorio.add(vi2);
             vi2.setTitle(vi2.getTitle()+ i);

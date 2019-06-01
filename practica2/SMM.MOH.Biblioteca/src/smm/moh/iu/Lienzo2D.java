@@ -46,11 +46,15 @@ public class Lienzo2D extends javax.swing.JPanel {
     private int elipses=1;
     private int puntos=1;
     private int lineas=1;
+    protected int vertical=0;
+    protected int horizontal=0;
     List<MiFigura> Lista = new ArrayList();
     Graphics2D g2d;
     
-    public Lienzo2D() {
+    public Lienzo2D(int vertical,int horizontal) {
         initComponents();
+        this.vertical=vertical;
+        this.horizontal=horizontal;
     }
 
     

@@ -76,6 +76,9 @@ public class MiRectangulo extends MiFigura{
         
     }
     public void draw(Graphics2D g2d){
+        if(alisar){
+            g2d.setRenderingHints(render);
+        }
         g2d.setStroke(atributos);
         if(rellenado){
                 g2d.setColor(relleno);
@@ -102,7 +105,7 @@ public class MiRectangulo extends MiFigura{
         
        
         float []dash={6f,2.0f,6.0f};
-        g2d.setStroke(new BasicStroke(super.getGrosor(),BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,5.0f, dash, 0.0f));
+        g2d.setStroke(new BasicStroke(2,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,5.0f, dash, 0.0f));
          g2d.draw(rectangulo);
     }
         
