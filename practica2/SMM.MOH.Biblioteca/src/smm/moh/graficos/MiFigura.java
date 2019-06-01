@@ -19,9 +19,9 @@ import java.awt.geom.Point2D;
  */
 public abstract class MiFigura {
     private String name=null;
-    private Color borde;
+    protected Color borde;
     private boolean alisar;
-    private boolean transparencia;
+    protected boolean transparencia;
     private int grosor;
     private RenderingHints render;        
     private Stroke atributos = new BasicStroke(grosor);
@@ -33,7 +33,7 @@ public abstract class MiFigura {
         this.transparencia=false;
         this.grosor=1;
         this.atributos = new BasicStroke(grosor);
-        actualizartransparencia();
+        
         
     }
     public MiFigura(Color borde,boolean alisar,boolean transparencia,int grosor){
@@ -45,7 +45,7 @@ public abstract class MiFigura {
         this.transparencia=transparencia;
         this.grosor=grosor;
         this.atributos = new BasicStroke(grosor);
-        actualizartransparencia();
+        
     }
     public MiFigura(MiFigura aux){
         render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
@@ -56,7 +56,7 @@ public abstract class MiFigura {
         this.transparencia=aux.getTransparencia();
         this.grosor=aux.getGrosor();
         this.atributos= new BasicStroke(grosor);
-        actualizartransparencia();
+        
     }
     public void setBorde(Color color){
        this.borde = color;
@@ -70,7 +70,7 @@ public abstract class MiFigura {
       actualizartransparencia();
        
    }
-   private void actualizartransparencia(){
+   public void actualizartransparencia(){
        if(transparencia){
             borde = new Color(borde.getRed(),borde.getGreen(),borde.getBlue(),80);
         }else{
@@ -96,17 +96,6 @@ public abstract class MiFigura {
        return grosor;
    }
        
-   public Graphics2D Graphics(Graphics2D g2d){
-       
-        g2d.setColor(borde);
-       
-    if(alisar){
-        g2d.setRenderingHints(render);
-    }
-    
-        g2d.setStroke(atributos);
-    return g2d;
-    }
     public abstract void setLocation(Point2D pos);
     public void setName(String name){
         this.name = name;
@@ -115,5 +104,7 @@ public abstract class MiFigura {
         return name;
     }
     public abstract void draw(Graphics2D g2d);
+    public abstract void drawSelected(Graphics2D g2d);
+ 
 }
 

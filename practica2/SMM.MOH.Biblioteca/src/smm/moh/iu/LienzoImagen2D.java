@@ -9,8 +9,10 @@ import java.awt.Color;
 import smm.moh.iu.Lienzo2D;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import smm.moh.graficos.MiFigura;
 
 /**
  *
@@ -56,23 +58,19 @@ public class LienzoImagen2D extends Lienzo2D{
     }
     public BufferedImage getImagen(boolean imagen){
             Graphics g = img.getGraphics();
-            
+            Graphics2D g2d=(Graphics2D)g;
             if(imagen){
+                for(MiFigura s:Lista){
+                s.draw(g2d);
+                }
                 this.Lista.clear();
             }
-            
-            
-            super.paintfiguras(g);
-            
             return img;
-            
-        
     }
     public void setImagen(BufferedImage img){
         this.img = img;
         if(img != null){
             setPreferredSize(new Dimension(img.getWidth(),img.getHeight()));
-            
         }
     }
     public void paintComponent(Graphics g){

@@ -144,7 +144,6 @@ public class frame extends javax.swing.JFrame {
         linea = new javax.swing.JToggleButton();
         rectangulo = new javax.swing.JToggleButton();
         elipse = new javax.swing.JToggleButton();
-        editar = new javax.swing.JToggleButton();
         nav3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -474,16 +473,6 @@ public class frame extends javax.swing.JFrame {
         });
         nav2.add(elipse);
 
-        editar.setName("Editar");
-        menu.add(editar);
-        editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/seleccion.png"))); // NOI18N
-        editar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                herramienta(evt);
-            }
-        });
-        nav2.add(editar);
-
         jPanel8.add(nav2);
 
         nav3.setLayout(new java.awt.GridLayout(0, 2));
@@ -724,15 +713,7 @@ public class frame extends javax.swing.JFrame {
         
         VentanaInterna vi=(VentanaInterna)Escritorio.getSelectedFrame();   
         if (vi != null) {
-            jPanel17.removeAll();
-            li = new JList();
-            li.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                liValueChanged(evt);
-            }
-            });
-              jPanel17.setVisible(false);
-            MiLista list_model = new MiLista();
+           
             form = vi.getLienzoImagen().getForma();
             if(form == Formas.PUNTO){
             lapiz.setSelected(true);
@@ -753,30 +734,36 @@ public class frame extends javax.swing.JFrame {
             Borde.setBackground(col);
             col = vi.getLienzoImagen().getRelleno();
             Relleno.setBackground(col);
-            if(vi.getLienzoImagen().getRellenado()){
-                relleno.setSelected(true);
-            }else{
-                relleno.setSelected(false);
-            }
-            if(vi.getLienzoImagen().getTransparencia()){
-                transparencia.setSelected(true);
-            }else{
-                transparencia.setSelected(false);
-            }
-            if(vi.getLienzoImagen().getAlisar()){
-                Alisar.setSelected(true);
-            }else{
-                Alisar.setSelected(false);
-            }
+            relleno.setSelected(vi.getLienzoImagen().getRellenado());
+            transparencia.setSelected(vi.getLienzoImagen().getTransparencia());
+            Alisar.setSelected(vi.getLienzoImagen().getAlisar());
+            
             numeroalisar.setValue(vi.getLienzoImagen().getGrosor());
             jSlider1.setValue((int)(vi.getLienzoImagen().getBrillo()));
             jSlider2.setValue(vi.getLienzoImagen().getRotacion()%360);
             Filtro.setSelectedItem(vi.getLienzoImagen().getFiltro());
             espectro.setSelectedItem(vi.getLienzoImagen().getEspectro());
-            
-            
 
-          
+            actualizarlista();
+            
+        }
+        
+     
+
+        
+    }
+    public void actualizarlista(){
+        VentanaInterna vi=(VentanaInterna)Escritorio.getSelectedFrame();   
+        if (vi != null) {
+            jPanel17.removeAll();
+            li = new JList();
+            li.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                liValueChanged(evt);
+            }
+            });
+              jPanel17.setVisible(false);
+            MiLista list_model = new MiLista();
             List<MiFigura> Lista = vi.getLienzoImagen().GetLista();
 
             if(!Lista.isEmpty()){
@@ -794,38 +781,27 @@ public class frame extends javax.swing.JFrame {
             jPanel17.setVisible(true);
             
             }
-            
         }
-
-        
     }
     private void liValueChanged(javax.swing.event.ListSelectionEvent evt) {                                    
-        String seleccionada = li.getSelectedValue().toString();
         Actualizarfigura(li.getSelectedValue());
+          VentanaInterna vi=(VentanaInterna)Escritorio.getSelectedFrame();   
+        if (vi != null) {
+        vi.getLienzoImagen().setEditar(li.getSelectedIndex());
+        }
     } 
     
     
     public void Actualizarfigura(MiFigura figura){
          VentanaInterna vi=(VentanaInterna)Escritorio.getSelectedFrame();   
         if (vi != null) {
-        System.out.println("figuir");
         Color col = figura.getBorde();
             Borde.setBackground(col);
             vi.getLienzoImagen().setBorde(col);
-            if(figura.getTransparencia()){
-                transparencia.setSelected(true);
-                vi.getLienzoImagen().setTransparencia(true);
-            }else{
-                transparencia.setSelected(false);
-                vi.getLienzoImagen().setTransparencia(true);
-            }
-            if(figura.getAlisar()){
-                Alisar.setSelected(true);
-                vi.getLienzoImagen().setAlisar(true);
-            }else{
-                Alisar.setSelected(false);
-                vi.getLienzoImagen().setAlisar(false);
-            }
+            transparencia.setSelected(figura.getTransparencia());
+            vi.getLienzoImagen().setTransparencia(figura.getTransparencia());
+            Alisar.setSelected(figura.getAlisar());
+            vi.getLienzoImagen().setAlisar(figura.getAlisar());
             numeroalisar.setValue(figura.getGrosor());
             vi.getLienzoImagen().setGrosor(figura.getGrosor());
             if(figura instanceof MiElipse){
@@ -852,6 +828,7 @@ public class frame extends javax.swing.JFrame {
                 vi.getLienzoImagen().setRellenado(false);
             }
             }
+            
         }       
     }
    
@@ -872,15 +849,17 @@ public class frame extends javax.swing.JFrame {
             case "Elipse":
                 forma = Formas.ELIPSE;
                 break;
-            case "Editar":
-                forma = Formas.EDITAR;
-                break;
+            
         }      
         estado.setText(forma.toString());
         VentanaInterna vi;  
         vi = (VentanaInterna)Escritorio.getSelectedFrame();
         if(vi != null){
             vi.getLienzoImagen().setFormas(forma);
+            if(li.getSelectedValue()!= null){
+                actualizarlista();
+            }
+            
         }
     }//GEN-LAST:event_herramienta
 
@@ -924,6 +903,7 @@ public class frame extends javax.swing.JFrame {
         if(li.getSelectedValue() instanceof MiRectangulo){
             ((MiRectangulo)li.getSelectedValue()).setRellenado(!(((MiRectangulo)li.getSelectedValue()).getRellenado()));
         }
+        vi.getLienzoImagen().repaint();
         }
         }
         
@@ -937,7 +917,9 @@ public class frame extends javax.swing.JFrame {
         vi.getLienzoImagen().setAlisar(!vi.getLienzoImagen().getAlisar());
         if(li.getSelectedValue() != null){
         li.getSelectedValue().setAlisar(!li.getSelectedValue().getAlisar());
+        vi.getLienzoImagen().repaint();
         }
+        
         }
     }//GEN-LAST:event_AlisarActionPerformed
 
@@ -949,6 +931,7 @@ public class frame extends javax.swing.JFrame {
         vi.getLienzoImagen().setGrosor(Integer.parseInt(numeroalisar.getValue().toString()));
         if(li.getSelectedValue() != null){
         li.getSelectedValue().setGrosor(Integer.parseInt(numeroalisar.getValue().toString()));
+        vi.getLienzoImagen().repaint();
         }
         }
     }//GEN-LAST:event_numeroalisarStateChanged
@@ -961,7 +944,9 @@ public class frame extends javax.swing.JFrame {
        vi.getLienzoImagen().setTransparencia(!vi.getLienzoImagen().getTransparencia());
        if(li.getSelectedValue() != null){
        li.getSelectedValue().setTransparencia(!li.getSelectedValue().getTransparencia());
+       vi.getLienzoImagen().repaint();
        }
+       
         }
     }//GEN-LAST:event_transparenciaActionPerformed
 
@@ -1417,7 +1402,6 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JButton aumentar;
     private javax.swing.JButton contrastenormal;
     private javax.swing.JButton contrasteoscuro;
-    private javax.swing.JToggleButton editar;
     private javax.swing.JToggleButton elipse;
     private javax.swing.JComboBox<String> espectro;
     private javax.swing.JLabel estado;

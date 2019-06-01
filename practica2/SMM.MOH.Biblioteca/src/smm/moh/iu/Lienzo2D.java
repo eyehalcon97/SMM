@@ -47,6 +47,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     private int puntos=1;
     private int lineas=1;
     List<MiFigura> Lista = new ArrayList();
+    Graphics2D g2d;
     
     public Lienzo2D() {
         initComponents();
@@ -55,66 +56,15 @@ public class Lienzo2D extends javax.swing.JPanel {
     
     public void paint(Graphics g){
         super.paint(g);
-    Graphics2D g2d=(Graphics2D)g;
-    for(MiFigura s:Lista){
-            
-            
+        g2d=(Graphics2D)g;
+        for(MiFigura s:Lista){
             s.draw(g2d);
-            /*Graphics2D nuevo;
-            nuevo = s.Graphics(g2d);
-            
-            g2d = nuevo;
-            
-                
-            
-            if(s instanceof MiRectangulo){
-                if(((MiRectangulo)s).getRellenado()==true){
-                    g2d.setColor(((MiRectangulo)s).getRelleno());
-                g2d.fill((Shape) ((MiRectangulo) s).getForma());
-                g2d.setColor(((MiRectangulo)s).getBorde());
-                g2d.draw((Shape) ((MiRectangulo) s).getForma());
+            if(EDITAR){
+                figmod.drawSelected(g2d);
             }
-            else{
-                    g2d.setColor(((MiRectangulo)s).getBorde());
-                g2d.draw((Shape) ((MiRectangulo) s).getForma());
-            }
-            }
-            if(s instanceof MiElipse){
-                if(((MiElipse)s).getRellenado()==true){
-                    g2d.setColor(((MiElipse)s).getRelleno());
-                g2d.fill((Shape) ((MiElipse) s).getForma());
-                g2d.setColor(((MiElipse)s).getBorde());
-                g2d.draw((Shape) ((MiElipse) s).getForma());
-            }
-            else{
-                    g2d.setColor(((MiElipse)s).getBorde());
-                g2d.draw((Shape) ((MiElipse) s).getForma());
-            }
-            }
-            if(s instanceof MiLinea){
-                g2d.setColor(((MiLinea)s).getBorde());
-                g2d.draw((Shape) ((MiLinea) s).getForma());
-            }
-        
-            
-              */  
-            
-                    }
-        
+        }
     }
-    
-    public void pintar(Graphics2D g2d){
-        
-            
-     
-        
-        
-            
-    }
-    public void paintfiguras(Graphics g){
-        Graphics2D g2d=(Graphics2D)g;
-        pintar(g2d);
-    }
+
     public void setBorde(Color color){
         borde = color;
     }
@@ -131,6 +81,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         return Lista;
     }
     public void setFormas(Formas forma){
+        EDITAR = false;
         this.forma=forma;
     }
     public Formas getForma(){
@@ -163,9 +114,10 @@ public class Lienzo2D extends javax.swing.JPanel {
         return transparencia;
     }
     
-    public void setEditar(String seleccionada){
+    public void setEditar(int seleccionada){
         EDITAR=true;
-        figmod = getSelectedShape(seleccionada);
+        figmod = Lista.get(seleccionada);
+        repaint();
     }
     
     public void pintar(){
@@ -235,24 +187,14 @@ public class Lienzo2D extends javax.swing.JPanel {
            repaint();
     }
     
-    
-    private MiFigura getSelectedShape(String Seleccionada){
-    for(MiFigura s:Lista){
-        System.out.println(Seleccionada);
-        System.out.println("uno");
-        System.out.println(((MiFigura)s).toString());
-       // System.out.println("");    
-    if((((MiFigura)s).toString()).equals(Seleccionada)){
-        System.out.println("entro");
-        return s;
-    }
+  
+ 
+  
     //MiLinea line= MiLineas; 
     //((MiLinea) s).contains(p);
          
-    }
+   
     
-    return null;
-    }
     private void actualizar(MiFigura forma,java.awt.event.MouseEvent evt){
         if(forma != null){
                 forma.setLocation(evt.getPoint());
@@ -354,7 +296,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         if(EDITAR ){
             if(figmod != null){
                     actualizar(figmod,evt);
-                    figmod=null;
+                    
                     
                 }
            // editar();

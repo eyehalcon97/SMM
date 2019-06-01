@@ -21,15 +21,17 @@ public class MiLinea extends MiFigura{
     public MiLinea(Point2D pd, Point2D pd1){
         super();
         forma = new Line2D.Double(pd, pd1);
-        
+        actualizartransparencia();
     }
     public MiLinea(Point2D pd, Point2D pd1,Color Borde,boolean alisar,boolean transparencia,int grosor){
         super(Borde,alisar,transparencia,grosor);
         forma = new Line2D.Double(pd, pd1);
+        actualizartransparencia();
     }
     public MiLinea(MiLinea aux){
         super((MiFigura)aux);
         forma=aux.getForma();
+        actualizartransparencia();
     }
     
     public boolean isNear(Point2D p){
@@ -74,5 +76,10 @@ public class MiLinea extends MiFigura{
     public void draw(Graphics2D g2d){
         g2d.setColor(getBorde());
         g2d.draw((Shape)forma);
+    }
+
+    @Override
+    public void drawSelected(Graphics2D g2d) {
+        g2d.draw(forma.getBounds2D());
     }
 }

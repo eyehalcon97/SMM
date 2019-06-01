@@ -25,6 +25,7 @@ public class MiElipse extends MiFigura{
         this.forma = new Ellipse2D.Double(x, y, h, w);
         rellenado = false;
         relleno = Color.BLACK;
+        actualizartransparencia();
         
     }
     public MiElipse(double x,double y,double h,double w,Color Borde,boolean alisar,boolean transparencia,int grosor,boolean rellenado,Color relleno){
@@ -32,12 +33,14 @@ public class MiElipse extends MiFigura{
         this.forma = new Ellipse2D.Double(x, y, h, w);
         this.rellenado=rellenado;
         this.relleno=relleno;
+        actualizartransparencia();
     }
     public MiElipse(MiElipse aux){
         super((MiFigura)aux);
         forma = aux.getForma();
         rellenado=aux.getRellenado();
         relleno=aux.getRelleno();
+        actualizartransparencia();
     }
     
     public void setLocation(Point2D pos){
@@ -66,15 +69,26 @@ public class MiElipse extends MiFigura{
     }
     public void draw(Graphics2D g2d){
         if(getRellenado()==true){
-                    g2d.setColor(relleno);
-                g2d.fill((Shape) (forma));
-                g2d.setColor(getBorde());
-                g2d.draw((Shape)forma);
-            }
-            else{
-                    g2d.setColor(getBorde());
-                g2d.draw((Shape)forma);
-            }
+            g2d.setColor(relleno);
+            g2d.fill((Shape) (forma));
+        }
+        else{
+            g2d.setColor(getBorde());
+            g2d.draw((Shape)forma);
+        }
+    }
+    public void actualizartransparencia(){
+       super.actualizartransparencia();
+       if(transparencia){
+            relleno = new Color(relleno.getRed(),relleno.getGreen(),relleno.getBlue(),80);
+        }else{
+            relleno = new Color(relleno.getRed(),relleno.getGreen(),relleno.getBlue());
+        }
+   }
+    @Override
+    public void drawSelected(Graphics2D g2d) {
+        g2d.setColor(new Color(200,200,200));
+        g2d.draw(forma.getBounds2D());
     }
         
     

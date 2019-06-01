@@ -20,26 +20,29 @@ import java.awt.geom.Rectangle2D;
 public class MiRectangulo extends MiFigura{
     private Rectangle2D forma;
     private boolean rellenado;
-    private Color relleno;
+    private Color relleno=Color.BLACK;
     
     public MiRectangulo(double x,double y,double h,double w){
         super();
         this.forma = new Rectangle2D.Double(x, y, h, w);
         this.rellenado=false;
         this.relleno=Color.BLACK;
-        
+        actualizartransparencia();
     }
     public MiRectangulo(double x,double y,double h,double w,Color Borde,boolean alisar,boolean transparencia,int grosor,boolean rellenado,Color relleno){
         super(Borde,alisar,transparencia,grosor);
         this.forma = new Rectangle2D.Double(x, y, h, w);
         this.rellenado=rellenado;
         this.relleno = relleno;
+        actualizartransparencia();
+
     }
     public MiRectangulo(MiRectangulo aux){
         super((MiFigura)aux);
         forma = aux.getForma();
         rellenado=aux.getRellenado();
         relleno=aux.getRelleno();
+        actualizartransparencia();
     }
     
     public void setLocation(Point2D pos){
@@ -73,17 +76,26 @@ public class MiRectangulo extends MiFigura{
     }
     public void draw(Graphics2D g2d){
         
-        if(getRellenado()==true){
-                    g2d.setColor(relleno);
+        if(rellenado){
+                g2d.setColor(relleno);
                 g2d.fill((Shape) (forma));
-                g2d.setColor(this.getBorde());
-                g2d.draw((Shape) (forma));
+                
+        }
+        g2d.setColor(borde);
+        g2d.draw((Shape) (forma));
     }
-        else{
-                    g2d.setColor(this.getBorde());
-                g2d.draw((Shape) (forma));
-            }
-        
+    public void actualizartransparencia(){
+        super.actualizartransparencia();
+       if(transparencia){
+            relleno = new Color(relleno.getRed(),relleno.getGreen(),relleno.getBlue(),80);
+        }else{
+            relleno = new Color(relleno.getRed(),relleno.getGreen(),relleno.getBlue());
+        }
+   }
+    @Override
+    public void drawSelected(Graphics2D g2d) {
+        g2d.setColor(new Color(0,0,0,80));
+        g2d.draw(forma.getBounds2D());
     }
         
 }
