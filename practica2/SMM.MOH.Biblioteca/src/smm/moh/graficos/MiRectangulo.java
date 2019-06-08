@@ -18,34 +18,30 @@ import java.awt.geom.Rectangle2D;
  *
  * @author eyehalcon97
  */
-public class MiRectangulo extends MiFigura{
+public class MiRectangulo extends MiRectangularShape{
     private Rectangle2D forma;
-    private boolean rellenado;
-    private Color relleno=Color.BLACK;
+
     
     public MiRectangulo(double x,double y,double h,double w){
         super();
         this.forma = new Rectangle2D.Double(x, y, h, w);
-        this.rellenado=false;
-        this.relleno=Color.BLACK;
         actualizartransparencia();
+        
+        
     }
     public MiRectangulo(double x,double y,double h,double w,Color Borde,boolean alisar,boolean transparencia,int grosor,boolean rellenado,Color relleno){
-        super(Borde,alisar,transparencia,grosor);
+        super(Borde,alisar,transparencia,grosor,rellenado,relleno);
         this.forma = new Rectangle2D.Double(x, y, h, w);
-        this.rellenado=rellenado;
-        this.relleno = relleno;
         actualizartransparencia();
 
     }
     public MiRectangulo(MiRectangulo aux){
-        super((MiFigura)aux);
+        super((MiRectangularShape)aux);
         forma = aux.getForma();
-        rellenado=aux.getRellenado();
-        relleno=aux.getRelleno();
         actualizartransparencia();
     }
     
+    @Override
     public void setLocation(Point2D pos){
         double dx=pos.getX()-(forma.getWidth()/2);
         double dy=pos.getY()-(forma.getHeight()/2);
@@ -62,19 +58,7 @@ public class MiRectangulo extends MiFigura{
     }
     
     
-    public boolean getRellenado(){
-        return rellenado;
-    }
-    public void setRellenado(boolean rellenado){
-        this.rellenado = rellenado;
-    }
-    public void setRelleno(Color relleno){
-        this.relleno=relleno;
-    }
-    public Color getRelleno(){
-        return relleno;
-        
-    }
+    @Override
     public void draw(Graphics2D g2d){
         if(alisar){
             g2d.setRenderingHints(render);
@@ -87,16 +71,9 @@ public class MiRectangulo extends MiFigura{
         }
         g2d.setColor(borde);
         g2d.draw((Shape) (forma));
+        
+        
     }
-    public void actualizartransparencia(){
-        super.actualizartransparencia();
-       if(transparencia){
-            relleno = new Color(relleno.getRed(),relleno.getGreen(),relleno.getBlue(),80);
-        }else{
-            relleno = new Color(relleno.getRed(),relleno.getGreen(),relleno.getBlue());
-        }
-   }
-    
         @Override
     public void drawSelected(Graphics2D g2d) {
         g2d.setColor(new Color(0,0,0,80));
@@ -108,6 +85,7 @@ public class MiRectangulo extends MiFigura{
         g2d.setStroke(new BasicStroke(2,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,5.0f, dash, 0.0f));
          g2d.draw(rectangulo);
     }
+
         
     
         

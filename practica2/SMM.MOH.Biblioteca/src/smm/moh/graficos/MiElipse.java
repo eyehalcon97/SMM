@@ -14,10 +14,8 @@ import java.awt.geom.Point2D;
 /*
  * @author eyehalcon97
  */
-public class MiElipse extends MiFigura{
+public class MiElipse extends MiRectangularShape{
     private Ellipse2D forma;
-    private boolean rellenado;
-    private Color relleno;
     public MiElipse(double x,double y,double h,double w){
         super();
         this.forma = new Ellipse2D.Double(x, y, h, w);
@@ -27,20 +25,19 @@ public class MiElipse extends MiFigura{
         
     }
     public MiElipse(double x,double y,double h,double w,Color Borde,boolean alisar,boolean transparencia,int grosor,boolean rellenado,Color relleno){
-        super(Borde,alisar,transparencia,grosor);
+        super(Borde,alisar,transparencia,grosor,rellenado,relleno);
         this.forma = new Ellipse2D.Double(x, y, h, w);
-        this.rellenado=rellenado;
-        this.relleno=relleno;
         actualizartransparencia();
     }
     public MiElipse(MiElipse aux){
-        super((MiFigura)aux);
+        super((MiRectangularShape)aux);
         forma = aux.getForma();
         rellenado=aux.getRellenado();
         relleno=aux.getRelleno();
         actualizartransparencia();
     }
     
+    @Override
     public void setLocation(Point2D pos){
         double dx=pos.getX()-(forma.getWidth()/2);
         double dy=pos.getY()-(forma.getHeight()/2);
@@ -52,42 +49,25 @@ public class MiElipse extends MiFigura{
     public Ellipse2D getForma(){
         return forma;
     }
-    public boolean getRellenado(){
-        return rellenado;
-    }
-    public void getRellenado(boolean rellenado){
-        this.rellenado = rellenado;
-    }
-    public void setRelleno(Color relleno){
-        this.relleno=relleno;
-    }
-    public Color getRelleno(){
-        return relleno;
-        
-    }
+ 
+    @Override
     public void draw(Graphics2D g2d){
         if(alisar){
             g2d.setRenderingHints(render);
         }
         g2d.setStroke(atributos);
-        if(getRellenado()==true){
-            g2d.setColor(relleno);
-            g2d.fill((Shape) (forma));
+        if(rellenado){
+                g2d.setColor(relleno);
+                g2d.fill((Shape) (forma));
+                
         }
-        else{
-            g2d.setColor(getBorde());
-            g2d.draw((Shape)forma);
-        }
+        g2d.setColor(borde);
+        g2d.draw((Shape) (forma));
+        
         
     }
-    public void actualizartransparencia(){
-       super.actualizartransparencia();
-       if(transparencia){
-            relleno = new Color(relleno.getRed(),relleno.getGreen(),relleno.getBlue(),80);
-        }else{
-            relleno = new Color(relleno.getRed(),relleno.getGreen(),relleno.getBlue());
-        }
-   }
+
+  
     @Override
     public void drawSelected(Graphics2D g2d) {
         g2d.setColor(new Color(0,0,0,80));

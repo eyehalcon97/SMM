@@ -8,7 +8,6 @@ package smm.moh.iu;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Shape;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +15,8 @@ import smm.moh.graficos.MiElipse;
 import smm.moh.graficos.MiFigura;
 import smm.moh.graficos.MiLinea;
 import smm.moh.graficos.MiRectangulo;
+import smm.moh.graficos.MiString;
+
 
 
 
@@ -46,27 +47,44 @@ public class Lienzo2D extends javax.swing.JPanel {
     private int elipses=1;
     private int puntos=1;
     private int lineas=1;
+    private int strings=1;
     protected int vertical=0;
     protected int horizontal=0;
+    private String string=null;
     List<MiFigura> Lista = new ArrayList();
     Graphics2D g2d;
-    
+    public Lienzo2D(){
+        initComponents();
+    }
     public Lienzo2D(int vertical,int horizontal) {
         initComponents();
         this.vertical=vertical;
         this.horizontal=horizontal;
+        
+        System.out.println(this.horizontal);
     }
-
+    public int getVertical(){
+        return vertical;
+    }
+    public int getHorizontal(){
+        return horizontal;
+    }
     
     public void paint(Graphics g){
         super.paint(g);
         g2d=(Graphics2D)g;
+        g2d.clipRect(0,0,vertical,horizontal);
+
+        
         for(MiFigura s:Lista){
             s.draw(g2d);
             if(EDITAR){
                 figmod.drawSelected(g2d);
             }
         }
+        
+        
+        
     }
 
     public void setBorde(Color color){
@@ -83,6 +101,9 @@ public class Lienzo2D extends javax.swing.JPanel {
     }
     public List<MiFigura> GetLista(){
         return Lista;
+    }
+    public void setLista(List<MiFigura> lista){
+        this.Lista = lista;
     }
     public void setFormas(Formas forma){
         EDITAR = false;
@@ -103,7 +124,13 @@ public class Lienzo2D extends javax.swing.JPanel {
     public boolean getAlisar(){
         return alisar;
     }
-    
+    public void setString(String string){
+        this.string = string;
+       
+    }
+    public String getString(){
+        return string;
+    }
     public void setGrosor(int grosor){
         this.grosor=grosor;
         
@@ -161,6 +188,13 @@ public class Lienzo2D extends javax.swing.JPanel {
                     figura.setName("Rectangulo: " + rectangulos);
                
                 
+                break;
+            case STRING:
+                if(string !=null){
+                figura = new MiString(pin.getX(),pin.getY(),borde,alisar,transparencia,grosor,string);
+                figura.setName("String: " + strings);
+                }
+
                 break;
                 
             case ELIPSE:
@@ -322,9 +356,13 @@ public class Lienzo2D extends javax.swing.JPanel {
         if(figura instanceof MiElipse){
             elipses++;
         }
+        if(figura instanceof MiString){
+            strings++;
+        }
         
         }
         pintar();
+        repaint();
        
     }//GEN-LAST:event_formMouseReleased
 

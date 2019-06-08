@@ -11,7 +11,7 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
+
 
 /**
  *
@@ -45,6 +45,7 @@ public class MiLinea extends MiFigura{
         return isNear(p);
     }
     
+    @Override
     public void setLocation(Point2D pos){
         double dx=pos.getX()-forma.getX1();
         double dy=pos.getY()-forma.getY1();
@@ -75,6 +76,7 @@ public class MiLinea extends MiFigura{
         }
         return resultado;
     }
+    @Override
     public void draw(Graphics2D g2d){
         if(alisar){
             g2d.setRenderingHints(render);

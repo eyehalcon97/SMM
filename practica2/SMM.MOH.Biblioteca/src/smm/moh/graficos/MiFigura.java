@@ -9,7 +9,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Point2D;
 
@@ -100,6 +99,7 @@ public abstract class MiFigura {
     public void setName(String name){
         this.name = name;
     }
+    @Override
     public String toString(){
         return name;
     }

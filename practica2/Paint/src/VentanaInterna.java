@@ -1,5 +1,5 @@
 
-import smm.moh.iu.LienzoImagen2D;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -28,8 +28,8 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
         this.vertical=vertical;
         this.horizontal=horizontal;
         initComponents();
-        
-        
+        System.out.println(horizontal );
+        actualizardesplazable();
     }
     
     public smm.moh.iu.LienzoImagen2D getLienzoImagen(){
@@ -73,6 +73,12 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
             }
         });
 
+        lienzoImagen2D1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lienzoImagen2D1MouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout lienzoImagen2D1Layout = new javax.swing.GroupLayout(lienzoImagen2D1);
         lienzoImagen2D1.setLayout(lienzoImagen2D1Layout);
         lienzoImagen2D1Layout.setHorizontalGroup(
@@ -90,11 +96,11 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -106,18 +112,23 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
         cuadro.actualizarframe();
         
     }//GEN-LAST:event_formInternalFrameActivated
+
+    private void lienzoImagen2D1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lienzoImagen2D1MouseReleased
+        // TODO add your handling code here:
+        cuadro.actualizarframe();
+    }//GEN-LAST:event_lienzoImagen2D1MouseReleased
     public void actualizardesplazable(){
-        jScrollPane1.setViewportView(lienzoImagen2D1);
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, lienzoImagen2D1.getImagen(false).getHeight(), Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, lienzoImagen2D1.getHorizontal(), Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, lienzoImagen2D1.getImagen(false).getWidth(), Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, lienzoImagen2D1.getVertical(), Short.MAX_VALUE)
         );
     }
 

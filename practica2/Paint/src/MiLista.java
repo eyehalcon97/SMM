@@ -36,8 +36,9 @@ public class MiLista extends AbstractListModel{
         lista.remove(index0);
         this.fireIntervalRemoved(index0, getSize(), getSize()+1);
     }
-    public MiFigura getPersona(int index){
+    public MiFigura getFigura(int index){
         return lista.get(index);
     }
+    
   
 }

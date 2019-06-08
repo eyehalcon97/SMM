@@ -21,4 +21,5 @@ public enum Formas {
     LINEA,
     RECTANGULO,
     ELIPSE,
+    STRING,
 }
