@@ -25,6 +25,7 @@ import sm.image.KernelProducer;
 import sm.image.LookupTableProducer;
 import java.awt.image.LookupTable;
 import java.util.List;
+import javax.sound.sampled.LineEvent;
 import javax.swing.JList;
 import sm.sound.SMClipPlayer;
 import sm.sound.SMPlayer;
@@ -32,6 +33,7 @@ import smm.moh.graficos.MiElipse;
 import smm.moh.graficos.MiFigura;
 import smm.moh.graficos.MiRectangularShape;
 import smm.moh.graficos.MiRectangulo;
+import smm.moh.audio.ManejadorAudio;
 
 
 
@@ -157,7 +159,7 @@ public class frame extends javax.swing.JFrame {
         transparencia = new javax.swing.JToggleButton();
         Alisar = new javax.swing.JToggleButton();
         jPanel18 = new javax.swing.JPanel();
-        jButton9 = new javax.swing.JButton();
+        botonplay = new javax.swing.JButton();
         listaReproduccion = new javax.swing.JComboBox<>();
         jPanel17 = new javax.swing.JPanel();
         Escritorio = new javax.swing.JDesktopPane();
@@ -554,13 +556,13 @@ public class frame extends javax.swing.JFrame {
 
         jPanel18.setLayout(new java.awt.GridBagLayout());
 
-        jButton9.setText("play");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        botonplay.setText("play");
+        botonplay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                botonplayActionPerformed(evt);
             }
         });
-        jPanel18.add(jButton9, new java.awt.GridBagConstraints());
+        jPanel18.add(botonplay, new java.awt.GridBagConstraints());
 
         jPanel18.add(listaReproduccion, new java.awt.GridBagConstraints());
 
@@ -711,6 +713,7 @@ public class frame extends javax.swing.JFrame {
         if( resp == JFileChooser.APPROVE_OPTION) {     
             try{       
                 File f = dlg.getSelectedFile();
+                
                 boolean encontrado = false;
                     int j=0;
                     for(int i=f.toString().length()-1;encontrado;i--){
@@ -741,8 +744,7 @@ public class frame extends javax.swing.JFrame {
                 vi.setVisible(true);     
                 actualizarframe();
                 }
-                if(f.toString().contains(".wav")){
-                   
+                if(f.toString().contains(".wav") || f.toString().contains(".au")){
                     
                     listaReproduccion.addItem(f); 
 
@@ -1456,17 +1458,26 @@ public class frame extends javax.swing.JFrame {
          }
     }//GEN-LAST:event_BordeActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void botonplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonplayActionPerformed
         // TODO add your handling code here:
         SMPlayer player = null; 
         File f = (File)listaReproduccion.getSelectedItem(); 
         if(f!=null){   
-            player = new SMClipPlayer(f);   
+            player = new SMClipPlayer(f);
+            ((SMClipPlayer)player).addLineListener( new ManejadorAudio());
+           
             if (player != null) {     
-                player.play();    
+                player.play(); 
             } 
+            /*if (((SMClipPlayer)player).getType() == LineEvent.Type.START) {       
+                botonplay.setEnabled (false); 
+            }             
+            if (event.getType() == LineEvent.Type.STOP) {       
+                botonplay.setEnabled (true); 
+            }*/
+            
         }
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_botonplayActionPerformed
     
     private void escalar(double indice){
         VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
@@ -1501,6 +1512,7 @@ public class frame extends javax.swing.JFrame {
         
         }
         ////////////////////
+        
         
     }
     private LookupTable seno(double w){
@@ -1558,6 +1570,7 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JToggleButton String;
     private javax.swing.JButton aclarar;
     private javax.swing.JButton aumentar;
+    private javax.swing.JButton botonplay;
     private javax.swing.JButton contrastenormal;
     private javax.swing.JButton contrasteoscuro;
     private javax.swing.JToggleButton elipse;
@@ -1573,7 +1586,6 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
