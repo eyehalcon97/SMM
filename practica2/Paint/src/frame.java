@@ -29,6 +29,8 @@ import javax.sound.sampled.LineEvent;
 import javax.swing.JList;
 import sm.sound.SMClipPlayer;
 import sm.sound.SMPlayer;
+import sm.sound.SMRecorder;
+import sm.sound.SMSoundRecorder;
 import smm.moh.graficos.MiElipse;
 import smm.moh.graficos.MiFigura;
 import smm.moh.graficos.MiRectangularShape;
@@ -73,12 +75,15 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JButton subir;
     private javax.swing.JButton bajar =new javax.swing.JButton();
     private javax.swing.JPanel mod =new javax.swing.JPanel();
-
+    private SMPlayer player = null; 
+    private SMRecorder recorder=null;
+    private File rec=new File("Bufer");
 
     public frame() {
         initComponents();
         this.setSize(800, 600);
         jPanel17.setVisible(false);
+        botonstop.setVisible(false);
     }
     
 
@@ -159,7 +164,9 @@ public class frame extends javax.swing.JFrame {
         transparencia = new javax.swing.JToggleButton();
         Alisar = new javax.swing.JToggleButton();
         jPanel18 = new javax.swing.JPanel();
+        botonRecord = new javax.swing.JButton();
         botonplay = new javax.swing.JButton();
+        botonstop = new javax.swing.JButton();
         listaReproduccion = new javax.swing.JComboBox<>();
         jPanel17 = new javax.swing.JPanel();
         Escritorio = new javax.swing.JDesktopPane();
@@ -556,6 +563,16 @@ public class frame extends javax.swing.JFrame {
 
         jPanel18.setLayout(new java.awt.GridBagLayout());
 
+        botonRecord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/record24x24.png"))); // NOI18N
+        botonRecord.setText("Record");
+        botonRecord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonRecordActionPerformed(evt);
+            }
+        });
+        jPanel18.add(botonRecord, new java.awt.GridBagConstraints());
+
+        botonplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play24x24.png"))); // NOI18N
         botonplay.setText("play");
         botonplay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -564,6 +581,20 @@ public class frame extends javax.swing.JFrame {
         });
         jPanel18.add(botonplay, new java.awt.GridBagConstraints());
 
+        botonstop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/stop24x24.png"))); // NOI18N
+        botonstop.setText("stop");
+        botonstop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonstopActionPerformed(evt);
+            }
+        });
+        jPanel18.add(botonstop, new java.awt.GridBagConstraints());
+
+        listaReproduccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaReproduccionActionPerformed(evt);
+            }
+        });
         jPanel18.add(listaReproduccion, new java.awt.GridBagConstraints());
 
         jPanel8.add(jPanel18);
@@ -1460,24 +1491,50 @@ public class frame extends javax.swing.JFrame {
 
     private void botonplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonplayActionPerformed
         // TODO add your handling code here:
-        SMPlayer player = null; 
+        player = null; 
         File f = (File)listaReproduccion.getSelectedItem(); 
         if(f!=null){   
             player = new SMClipPlayer(f);
-            ((SMClipPlayer)player).addLineListener( new ManejadorAudio());
-           
+            ((SMClipPlayer)player).addLineListener( new ManejadorAudio(botonplay,botonstop));
             if (player != null) {     
-                player.play(); 
-            } 
-            /*if (((SMClipPlayer)player).getType() == LineEvent.Type.START) {       
-                botonplay.setEnabled (false); 
-            }             
-            if (event.getType() == LineEvent.Type.STOP) {       
-                botonplay.setEnabled (true); 
-            }*/
-            
+                player.play();
+                botonstop.setVisible(true);
+                botonRecord.setVisible(false);
+            }
         }
     }//GEN-LAST:event_botonplayActionPerformed
+
+    private void listaReproduccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaReproduccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listaReproduccionActionPerformed
+
+    private void botonstopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonstopActionPerformed
+        // TODO add your handling code here:
+        if (player != null) {     
+                player.stop();
+                botonplay.setVisible(true);
+                botonstop.setVisible(false);
+                botonRecord.setVisible(true);
+            }
+        if (recorder != null){
+            recorder.stop();
+            recorder = null;
+            botonplay.setVisible(true);
+            botonstop.setVisible(false);
+            botonRecord.setVisible(true);
+            listaReproduccion.addItem(rec);
+        }
+    }//GEN-LAST:event_botonstopActionPerformed
+
+    private void botonRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRecordActionPerformed
+        // TODO add your handling code here:
+        botonplay.setVisible(false);
+        botonstop.setVisible(true);
+        botonRecord.setVisible(false);
+        recorder = new SMSoundRecorder(rec);
+        recorder.record();
+        
+    }//GEN-LAST:event_botonRecordActionPerformed
     
     private void escalar(double indice){
         VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
@@ -1570,7 +1627,9 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JToggleButton String;
     private javax.swing.JButton aclarar;
     private javax.swing.JButton aumentar;
+    private javax.swing.JButton botonRecord;
     private javax.swing.JButton botonplay;
+    private javax.swing.JButton botonstop;
     private javax.swing.JButton contrastenormal;
     private javax.swing.JButton contrasteoscuro;
     private javax.swing.JToggleButton elipse;
