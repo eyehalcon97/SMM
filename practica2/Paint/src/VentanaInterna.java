@@ -28,7 +28,6 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
         this.vertical=vertical;
         this.horizontal=horizontal;
         initComponents();
-        System.out.println(horizontal );
         actualizardesplazable();
     }
     

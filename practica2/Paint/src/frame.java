@@ -717,22 +717,40 @@ public class frame extends javax.swing.JFrame {
 
     private void FileGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FileGuardarActionPerformed
         // TODO add your handling code here:
-        VentanaInterna vi=(VentanaInterna)Escritorio.getSelectedFrame();   
-        if (vi != null) {     
-            JFileChooser dlg = new JFileChooser();
+        if(listaReproduccion.getSelectedItem() ==null){
+            VentanaInterna vi=(VentanaInterna)Escritorio.getSelectedFrame();   
+            if (vi != null) {     
+                JFileChooser dlg = new JFileChooser();
             
-        int resp = dlg.showSaveDialog(this);     
-        if (resp == JFileChooser.APPROVE_OPTION) {     
-            try {       
-                BufferedImage img = vi.getLienzoImagen().getImagen(true);      
-                if (img != null) {        
-                    File f = dlg.getSelectedFile();       
-                    ImageIO.write(img, "png", f);         
-                    vi.setTitle(f.getName());       
-                    }    
-                }catch (Exception ex) {       
-                    System.err.println("Error al guardar la imagen");     
+            int resp = dlg.showSaveDialog(this);     
+            if (resp == JFileChooser.APPROVE_OPTION) {     
+                try {       
+                    BufferedImage img = vi.getLienzoImagen().getImagen(true);      
+                    if (img != null) {        
+                        File f = dlg.getSelectedFile();       
+                        ImageIO.write(img, "png", f);         
+                        vi.setTitle(f.getName());       
+                        }    
+                    }catch (Exception ex) {       
+                        System.err.println("Error al guardar la imagen");     
+                    }
                 }
+            }
+        
+        }else{
+            
+        JFileChooser dlg = new JFileChooser();
+        int resp = dlg.showSaveDialog(this);
+        if (resp == JFileChooser.APPROVE_OPTION) {
+
+            File f = new File( dlg.getSelectedFile().getAbsolutePath() ){
+                @Override
+                public String toString(){
+                    return this.getName();
+                }
+            };
+            rec.renameTo(f);
+
             }
         }
     }//GEN-LAST:event_FileGuardarActionPerformed
@@ -1550,7 +1568,7 @@ public class frame extends javax.swing.JFrame {
     private void rotar(int angulo){
         VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
         if(vi!=null){
-            //vi.getLienzoImagen().setRotacion(angulo+vi.getLienzoImagen().getRotacion());
+            vi.getLienzoImagen().setRotacion(angulo+vi.getLienzoImagen().getRotacion());
             imgSource = vi.getLienzoImagen().getImagen(true);
             BufferedImage imgdest=new BufferedImage(imgSource.getHeight(),imgSource.getWidth(),BufferedImage.TYPE_INT_ARGB);
             

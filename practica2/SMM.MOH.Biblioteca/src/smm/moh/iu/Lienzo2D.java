@@ -73,7 +73,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     public void paint(Graphics g){
         super.paint(g);
         g2d=(Graphics2D)g;
-        g2d.clipRect(0,0,vertical,horizontal);
+        g2d.clipRect(0,0,horizontal,vertical);
 
         
         for(MiFigura s:Lista){
