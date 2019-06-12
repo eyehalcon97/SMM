@@ -31,7 +31,9 @@ public class MiRectangulo extends MiRectangularShape{
     }
     public MiRectangulo(double x,double y,double h,double w,Color Borde,boolean alisar,boolean transparencia,int grosor,boolean rellenado,Color relleno){
         super(Borde,alisar,transparencia,grosor,rellenado,relleno);
+        
         this.forma = new Rectangle2D.Double(x, y, h, w);
+        
         actualizartransparencia();
 
     }
@@ -46,7 +48,12 @@ public class MiRectangulo extends MiRectangularShape{
         double dx=pos.getX()-(forma.getWidth()/2);
         double dy=pos.getY()-(forma.getHeight()/2);
         this.forma = new Rectangle2D.Double(dx, dy,forma.getWidth(), forma.getHeight());
-        
+    }
+    public Point2D getLocation(){
+        double dx=forma.getX()+(forma.getWidth()/2);
+        double dy=forma.getY()+(forma.getHeight()/2);
+        Point2D punto = new Point2D.Double(dx, dy);
+        return punto;
     }
     
     public void setForma(Rectangle2D forma){

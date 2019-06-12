@@ -43,6 +43,13 @@ public class MiElipse extends MiRectangularShape{
         double dy=pos.getY()-(forma.getHeight()/2);
         this.forma = new Ellipse2D.Double(dx, dy,forma.getWidth(), forma.getHeight());      
     }
+    @Override
+    public Point2D getLocation(){
+        double dx=forma.getX()+(forma.getWidth()/2);
+        double dy=forma.getY()+(forma.getHeight()/2);
+        Point2D punto = new Point2D.Double(dx, dy);
+        return punto;
+    }
     public void setForma(Ellipse2D forma){
         this.forma = forma;
     }
@@ -74,6 +81,6 @@ public class MiElipse extends MiRectangularShape{
         float []dash={6f,2.0f,6.0f};
         g2d.setStroke(new BasicStroke(2,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,5.0f, dash, 0.0f));
         g2d.draw(forma.getBounds2D());
-
+        
     }
 }

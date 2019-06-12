@@ -15,12 +15,14 @@ public class SelString extends javax.swing.JFrame {
      * Creates new form SelString
      */
     private frame origen=null;
+    private boolean audio=false;
     public SelString() {
         initComponents();
     }
-    public SelString(frame origen){
+    public SelString(frame origen,boolean audio){
         initComponents();
         this.origen = origen;
+        this.audio=audio;
     }
 
     /**
@@ -84,7 +86,12 @@ public class SelString extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        origen.setString(Texto.getText());
+        if(audio ==false){
+            origen.setString(Texto.getText());
+        }else{
+            origen.setnamerec(Texto.getText());
+        }
+        
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 

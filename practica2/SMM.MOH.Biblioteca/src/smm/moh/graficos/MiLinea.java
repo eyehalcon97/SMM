@@ -51,7 +51,9 @@ public class MiLinea extends MiFigura{
         double dy=pos.getY()-forma.getY1();
         Point2D newp2 = new Point2D.Double(forma.getX2()+dx,forma.getY2()+dy);
         forma.setLine(pos,newp2);
-        
+    }
+    public Point2D getLocation(){
+        return forma.getP1();
     }
     
     public void setForma(Line2D forma){

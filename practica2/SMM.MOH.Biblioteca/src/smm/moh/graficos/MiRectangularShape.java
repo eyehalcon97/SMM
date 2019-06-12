@@ -60,6 +60,7 @@ public abstract class MiRectangularShape extends MiFigura{
         }
    }
     
+    
         @Override
      public abstract void draw(Graphics2D g2d);
         @Override

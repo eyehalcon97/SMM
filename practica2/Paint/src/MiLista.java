@@ -16,7 +16,7 @@ import smm.moh.graficos.MiFigura;
 public class MiLista extends AbstractListModel{
 
     private ArrayList<MiFigura> lista = new ArrayList<>();
-    
+
 
     @Override
     public int getSize() {

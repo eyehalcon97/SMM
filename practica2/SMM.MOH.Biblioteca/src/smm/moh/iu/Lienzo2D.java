@@ -82,7 +82,7 @@ public class Lienzo2D extends javax.swing.JPanel {
                 figmod.drawSelected(g2d);
             }
         }
-        
+        System.out.println(Lista.size());
         
         
     }
@@ -183,8 +183,9 @@ public class Lienzo2D extends javax.swing.JPanel {
                         y = pin.getY();
                     h = pout.getY() - pin.getY();
                 }
-                
+                    
                     figura = new MiRectangulo(x,y, w, h,borde,alisar,transparencia,grosor,rellenado,relleno);
+                    
                     figura.setName("Rectangulo: " + rectangulos);
                
                 

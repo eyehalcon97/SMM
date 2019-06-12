@@ -22,15 +22,20 @@ public class ManejadorAudio implements LineListener {
     }
     public void update(LineEvent event) {     
         if (event.getType() == LineEvent.Type.START) {   
-            botonPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/stop24x24.png")));
-            botonPlay.setVisible(false);
-            botonStop.setVisible(true);
+            
+            botonPlay.setEnabled(false);
+            botonStop.setEnabled(true);
         }     
         if (event.getType() == LineEvent.Type.STOP) {  
-            botonPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play24x24.png")));
-            botonStop.setVisible(false);
-            botonPlay.setVisible(true);
-        }                 
+            
+            botonStop.setEnabled(false);
+            botonPlay.setEnabled(true);
+        }          
+        if (event.getType() == LineEvent.Type.CLOSE){ 
+            
+            botonStop.setEnabled(false);
+            botonPlay.setEnabled(true);
+        }    
 
     } 
 

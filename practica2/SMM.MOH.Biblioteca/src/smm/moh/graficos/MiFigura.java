@@ -103,6 +103,7 @@ public abstract class MiFigura {
     public String toString(){
         return name;
     }
+    public abstract Point2D getLocation();
     public abstract void draw(Graphics2D g2d);
     public abstract void drawSelected(Graphics2D g2d);
  
