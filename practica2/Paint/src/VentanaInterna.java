@@ -1,5 +1,6 @@
 
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 
 
 
@@ -23,9 +24,10 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
     /**
      * Creates new form VentanaInterna
      */
-    frame cuadro=null;
-    int vertical;
-    int horizontal;
+    private frame cuadro=null;
+    private int vertical=100;
+    private int horizontal=100;
+    
     public VentanaInterna() {
         initComponents();
     }
@@ -33,9 +35,9 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
         this.cuadro=cuadro;
         this.vertical=vertical;
         this.horizontal=horizontal;
+        
         initComponents();
         actualizardesplazable();
-        
     }
     
     public smm.moh.iu.LienzoImagen2D getLienzoImagen(){
@@ -79,6 +81,8 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
+
+        jScrollPane1.setAutoscrolls(true);
 
         lienzoImagen2D1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -127,9 +131,18 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         // TODO add your handling code here:
         actualizardesplazable();
+        
         cuadro.actualizarframe();
         
+        
+        
     }//GEN-LAST:event_formInternalFrameActivated
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+        // TODO add your handling code here:
+        cuadro.actualizarframe();
+        
+    }//GEN-LAST:event_formInternalFrameClosed
 
     private void lienzoImagen2D1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lienzoImagen2D1MouseReleased
         // TODO add your handling code here:
@@ -138,40 +151,46 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
         cuadro.Seleccionarfigura(figura);
     }//GEN-LAST:event_lienzoImagen2D1MouseReleased
 
-    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        // TODO add your handling code here:
-        cuadro.actualizarframe();
-        
-    }//GEN-LAST:event_formInternalFrameClosed
-
     private void lienzoImagen2D1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lienzoImagen2D1MouseEntered
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_lienzoImagen2D1MouseEntered
-
-    private void lienzoImagen2D1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lienzoImagen2D1MouseDragged
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_lienzoImagen2D1MouseDragged
 
     private void lienzoImagen2D1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lienzoImagen2D1MouseMoved
         // TODO add your handling code here:
         cuadro.actualizarpuntero(evt.getX(), evt.getY());
     }//GEN-LAST:event_lienzoImagen2D1MouseMoved
-    public void actualizardesplazable(){
 
+    private void lienzoImagen2D1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lienzoImagen2D1MouseDragged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lienzoImagen2D1MouseDragged
+    public void actualizardesplazable(){
+        
+        javax.swing.GroupLayout lienzoImagen2D1Layout = new javax.swing.GroupLayout(lienzoImagen2D1);
+        lienzoImagen2D1.setLayout(lienzoImagen2D1Layout);
+        lienzoImagen2D1Layout.setHorizontalGroup(
+            lienzoImagen2D1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, horizontal, Short.MAX_VALUE)
+        );
+        lienzoImagen2D1Layout.setVerticalGroup(
+            lienzoImagen2D1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, vertical, Short.MAX_VALUE)
+        );
+    
+        
+        jScrollPane1.setViewportView(lienzoImagen2D1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, 0, horizontal, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, 0, vertical, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
-
+        pack();
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

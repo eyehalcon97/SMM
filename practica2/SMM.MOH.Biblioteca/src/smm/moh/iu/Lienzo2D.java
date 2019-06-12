@@ -41,7 +41,6 @@ public class Lienzo2D extends javax.swing.JPanel {
     private boolean rellenado=false;
     private boolean EDITAR=false;
     private boolean alisar=false;
-    private boolean transparencia=false;
     private int grosor =1;
     private int rectangulos=1;
     private int elipses=1;
@@ -50,6 +49,10 @@ public class Lienzo2D extends javax.swing.JPanel {
     private int strings=1;
     protected int vertical=0;
     protected int horizontal=0;
+    private boolean deghorizontal=false;
+    private boolean degvertical=false;
+    private int numtrans=255;
+    private Color degradado=Color.WHITE;
     private String string=null;
     List<MiFigura> Lista = new ArrayList();
     Graphics2D g2d;
@@ -93,6 +96,18 @@ public class Lienzo2D extends javax.swing.JPanel {
     public Color getBorde(){
         return borde;
     }
+    public void setdegvertical(boolean degvertical){
+        this.degvertical = degvertical;
+    }
+    public void setdeghorizontal(boolean deghorizontal){
+        this.deghorizontal = deghorizontal;
+    }
+    public boolean getdegvertical(){
+        return degvertical;
+    }
+    public boolean getdeghorizontal(){
+        return deghorizontal;
+    }
     public void setRelleno(Color color){
         relleno = color;
     }
@@ -118,6 +133,12 @@ public class Lienzo2D extends javax.swing.JPanel {
     public boolean getRellenado(){
         return rellenado;
     }
+    public void setDegradado(Color degradado){
+        this.degradado=degradado;
+    }
+    public Color getDegradado(){
+        return degradado;
+    }
     public void setAlisar(boolean alisar){
        this.alisar=alisar;
     }
@@ -131,6 +152,12 @@ public class Lienzo2D extends javax.swing.JPanel {
     public String getString(){
         return string;
     }
+    public void setNumtrans(int numtrans){
+       this.numtrans = numtrans;
+   }
+   public int getNumtrans(){
+       return numtrans;
+   }
     public void setGrosor(int grosor){
         this.grosor=grosor;
         
@@ -138,12 +165,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     public int getGrosor(){
         return grosor;
     }
-    public void setTransparencia(boolean transparencia){
-        this.transparencia=transparencia;
-    }
-    public boolean getTransparencia(){
-        return transparencia;
-    }
+
     
     public void setEditar(int seleccionada){
         EDITAR=true;
@@ -159,12 +181,12 @@ public class Lienzo2D extends javax.swing.JPanel {
         double w, h;
         if(null != forma)switch (forma) {
             case PUNTO:
-                figura = new MiLinea(pin,pin,borde,alisar,transparencia,grosor);
+                figura = new MiLinea(pin,pin,borde,alisar,grosor,numtrans);
                 
                 figura.setName("punto: " + puntos);
                 break;
             case LINEA:
-                figura = new MiLinea(pin,pout,borde,alisar,transparencia,grosor);
+                figura = new MiLinea(pin,pout,borde,alisar,grosor,numtrans);
                 figura.setName("linea: " + lineas);
                 break;
             case RECTANGULO:
@@ -184,7 +206,7 @@ public class Lienzo2D extends javax.swing.JPanel {
                     h = pout.getY() - pin.getY();
                 }
                     
-                    figura = new MiRectangulo(x,y, w, h,borde,alisar,transparencia,grosor,rellenado,relleno);
+                    figura = new MiRectangulo(x,y, w, h,borde,alisar,grosor,rellenado,relleno,numtrans,degradado,deghorizontal,degvertical);
                     
                     figura.setName("Rectangulo: " + rectangulos);
                
@@ -192,7 +214,7 @@ public class Lienzo2D extends javax.swing.JPanel {
                 break;
             case STRING:
                 if(string !=null){
-                figura = new MiString(pin.getX(),pin.getY(),borde,alisar,transparencia,grosor,string);
+                figura = new MiString(pin.getX(),pin.getY(),borde,alisar,grosor,string,numtrans);
                 figura.setName("String: " + strings);
                 }
 
@@ -214,7 +236,7 @@ public class Lienzo2D extends javax.swing.JPanel {
                         y = pin.getY();
                     h = pout.getY() - pin.getY();
                 }
-                figura = new MiElipse(x,y, w, h,borde,alisar,transparencia,grosor,rellenado,relleno);
+                figura = new MiElipse(x,y, w, h,borde,alisar,grosor,rellenado,relleno,numtrans,degradado,deghorizontal,degvertical);
                 figura.setName("Elipse: " + elipses);
                 break;
             default:
@@ -239,6 +261,7 @@ public class Lienzo2D extends javax.swing.JPanel {
                 forma.setLocation(evt.getPoint());
         }
     }
+    
     
                           
 

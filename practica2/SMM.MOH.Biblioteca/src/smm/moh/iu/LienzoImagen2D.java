@@ -7,9 +7,10 @@ package smm.moh.iu;
 
 import java.awt.Color;
 import smm.moh.iu.Lienzo2D;
-import java.awt.Dimension;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import smm.moh.graficos.MiFigura;
@@ -21,9 +22,9 @@ import smm.moh.graficos.MiFigura;
 public class LienzoImagen2D extends Lienzo2D{
     private BufferedImage img=null;
     private float brillo=0;
-    private int rotacion=0;
     private String filtro="Seleccione";
     private String espectro="Seleccione";
+    private Point centro = null;
     public LienzoImagen2D(){
         super();
     }
@@ -34,14 +35,13 @@ public class LienzoImagen2D extends Lienzo2D{
         img = new BufferedImage(vertical,horizontal,BufferedImage.TYPE_INT_RGB);
         img.createGraphics().setPaint(Color.white);
          img.createGraphics().fill(new Rectangle2D.Float(0.0f, 0.0f, img.getWidth(), img.getHeight()));
+         centro = new Point(img.getHeight()/2, img.getWidth()/2);
          
     }
     public void setBrillo(float brillo){
         this.brillo =  brillo;
     }
-    public void setRotacion(int rotacion){
-        this.rotacion=rotacion;
-    }
+
     public void setFiltro(String filtro){
         this.filtro = filtro;
     }
@@ -51,9 +51,7 @@ public class LienzoImagen2D extends Lienzo2D{
     public float getBrillo(){
         return brillo;
     }
-    public int getRotacion(){
-        return rotacion;
-    }
+
     public String getFiltro(){
         return filtro;
     }
@@ -83,5 +81,11 @@ public class LienzoImagen2D extends Lienzo2D{
         if(img !=null){
             g.drawImage(img, 0, 0, this);
         }
+    }
+    public void setPoint(Point centro){
+        this.centro = centro;
+    }
+    public Point getPoint(){
+        return centro;
     }
 }

@@ -20,30 +20,31 @@ public abstract class MiFigura {
     private String name=null;
     protected Color borde;
     protected boolean alisar;
-    protected boolean transparencia;
     private int grosor;
     protected RenderingHints render;        
     protected Stroke atributos = new BasicStroke(grosor);
+    protected int numtrans=100;
     public MiFigura(){
         render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
        render.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
        this.borde=new Color(0,0,0,0);
         this.alisar=false;
-        this.transparencia=false;
         this.grosor=1;
         this.atributos = new BasicStroke(grosor);
+        this.numtrans=100;
         
         
     }
-    public MiFigura(Color borde,boolean alisar,boolean transparencia,int grosor){
+    public MiFigura(Color borde,boolean alisar,int grosor,int numtrans){
         render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         render.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         
         this.borde=borde;
         this.alisar=alisar;
-        this.transparencia=transparencia;
+
         this.grosor=grosor;
         this.atributos = new BasicStroke(grosor);
+        this.numtrans=numtrans;
         
     }
     public MiFigura(MiFigura aux){
@@ -52,10 +53,9 @@ public abstract class MiFigura {
         
         this.borde = aux.getBorde();
         this.alisar = aux.getAlisar();
-        this.transparencia=aux.getTransparencia();
         this.grosor=aux.getGrosor();
         this.atributos= new BasicStroke(grosor);
-        
+        this.numtrans = aux.getNumtrans();
     }
     public void setBorde(Color color){
        this.borde = color;
@@ -64,17 +64,16 @@ public abstract class MiFigura {
    public void setAlisar(boolean bool){
        this.alisar = bool;
    }
-   public void setTransparencia(boolean bool){
-      transparencia = bool;
-      actualizartransparencia();
-       
+
+   public void setNumtrans(int numtrans){
+       this.numtrans = numtrans;
+   }
+   public int getNumtrans(){
+       return numtrans;
    }
    public void actualizartransparencia(){
-       if(transparencia){
-            borde = new Color(borde.getRed(),borde.getGreen(),borde.getBlue(),80);
-        }else{
-            borde = new Color(borde.getRed(),borde.getGreen(),borde.getBlue());
-        }
+            borde = new Color(borde.getRed(),borde.getGreen(),borde.getBlue(),numtrans);
+
    }
    public void setGrosor(int num){
        this.grosor = num;
@@ -88,9 +87,7 @@ public abstract class MiFigura {
    public boolean getAlisar(){
        return alisar;
    }
-   public boolean getTransparencia(){
-       return transparencia;
-   }
+
    public int getGrosor(){
        return grosor;
    }

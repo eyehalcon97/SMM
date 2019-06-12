@@ -29,8 +29,8 @@ public class MiRectangulo extends MiRectangularShape{
         
         
     }
-    public MiRectangulo(double x,double y,double h,double w,Color Borde,boolean alisar,boolean transparencia,int grosor,boolean rellenado,Color relleno){
-        super(Borde,alisar,transparencia,grosor,rellenado,relleno);
+    public MiRectangulo(double x,double y,double h,double w,Color Borde,boolean alisar,int grosor,boolean rellenado,Color relleno,int numtrans,Color degradado,boolean deghorizontal,boolean degvertical){
+        super(Borde,alisar,grosor,rellenado,relleno,numtrans,degradado,deghorizontal,degvertical);
         
         this.forma = new Rectangle2D.Double(x, y, h, w);
         
@@ -67,6 +67,8 @@ public class MiRectangulo extends MiRectangularShape{
     
     @Override
     public void draw(Graphics2D g2d){
+        actualizartransparencia();
+        g2d = actualizargradiente(g2d);
         if(alisar){
             g2d.setRenderingHints(render);
         }

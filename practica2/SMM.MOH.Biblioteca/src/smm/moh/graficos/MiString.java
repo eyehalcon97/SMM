@@ -29,22 +29,21 @@ public class MiString extends MiFigura{
         
         this.forma = new Line2D.Double(x, y,x,y);
         this.string = string;
-        actualizartransparencia();
+        
         
         
     }
-    public MiString(double x,double y,Color Borde,boolean alisar,boolean transparencia,int grosor,String string){
-        super(Borde,alisar,transparencia,grosor);
+    public MiString(double x,double y,Color Borde,boolean alisar,int grosor,String string,int numtrans){
+        super(Borde,alisar,grosor,numtrans);
         this.forma = new Line2D.Double(x, y,x,y);
         this.string = string;
-        actualizartransparencia();
 
     }
     public MiString(MiString aux){
         super((MiFigura)aux);
         forma = aux.getForma();
         string = aux.getString();
-        actualizartransparencia();
+
     }
      public boolean isNear(Point2D p){
         return forma.ptLineDist(p)<=2.0;
@@ -81,9 +80,11 @@ public class MiString extends MiFigura{
     
     @Override
     public void draw(Graphics2D g2d){
+        actualizartransparencia();
         if(alisar){
             g2d.setRenderingHints(render);
         }
+                
         g2d.setStroke(atributos);
 
         g2d.setColor(borde);

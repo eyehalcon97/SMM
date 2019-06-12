@@ -67,7 +67,7 @@ public class frame extends javax.swing.JFrame {
     Formas form = null;
     Color color = new Color(0,0,0);
     Formas forma=null;
-    BufferedImage imgSource;
+    BufferedImage imgSource=null;
     Color colors[] = { Color.RED, Color.BLUE,Color.BLACK,Color.WHITE };
 
     int cordenadaX = 0;
@@ -158,13 +158,17 @@ public class frame extends javax.swing.JFrame {
         nav3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        degh = new javax.swing.JButton();
         Relleno = new javax.swing.JButton();
         Borde = new javax.swing.JButton();
+        Degradado = new javax.swing.JButton();
+        degv = new javax.swing.JButton();
         nav4 = new javax.swing.JPanel();
         numeroalisar = new javax.swing.JSpinner();
         relleno = new javax.swing.JToggleButton();
-        transparencia = new javax.swing.JToggleButton();
         Alisar = new javax.swing.JToggleButton();
+        numtrans = new javax.swing.JSlider();
         jPanel18 = new javax.swing.JPanel();
         botonRecord = new javax.swing.JButton();
         botonplay = new javax.swing.JButton();
@@ -206,11 +210,14 @@ public class frame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        pie.setPreferredSize(new java.awt.Dimension(2409, 100));
         pie.setLayout(new java.awt.BorderLayout());
 
         estado.setText("Paint");
         pie.add(estado, java.awt.BorderLayout.PAGE_END);
 
+        jPanel1.setMinimumSize(new java.awt.Dimension(869, 50));
+        jPanel1.setPreferredSize(new java.awt.Dimension(2409, 80));
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -302,11 +309,11 @@ public class frame extends javax.swing.JFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 453, Short.MAX_VALUE)
+            .addGap(0, 440, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 40, Short.MAX_VALUE)
         );
 
         jPanel10.add(jPanel11);
@@ -315,11 +322,11 @@ public class frame extends javax.swing.JFrame {
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 453, Short.MAX_VALUE)
+            .addGap(0, 440, Short.MAX_VALUE)
         );
         jPanel21Layout.setVerticalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 40, Short.MAX_VALUE)
         );
 
         jPanel10.add(jPanel21);
@@ -332,7 +339,7 @@ public class frame extends javax.swing.JFrame {
         });
         jPanel10.add(jButton10);
 
-        jButton9.setText("funcion");
+        jButton9.setText("MiFuncion (sqrt(log10(x))");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -381,6 +388,11 @@ public class frame extends javax.swing.JFrame {
         jSlider2.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSlider2StateChanged(evt);
+            }
+        });
+        jSlider2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jSlider2FocusLost(evt);
             }
         });
         jSlider2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -538,7 +550,7 @@ public class frame extends javax.swing.JFrame {
 
         jPanel8.add(nav2);
 
-        nav3.setLayout(new java.awt.GridLayout(0, 2));
+        nav3.setLayout(new java.awt.GridLayout(0, 4));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Relleno");
@@ -547,6 +559,18 @@ public class frame extends javax.swing.JFrame {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Borde");
         nav3.add(jLabel8);
+
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("Degradado");
+        nav3.add(jLabel11);
+
+        degh.setText("Horizontal");
+        degh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deghActionPerformed(evt);
+            }
+        });
+        nav3.add(degh);
 
         Relleno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -561,6 +585,21 @@ public class frame extends javax.swing.JFrame {
             }
         });
         nav3.add(Borde);
+
+        Degradado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DegradadoActionPerformed(evt);
+            }
+        });
+        nav3.add(Degradado);
+
+        degv.setText("Vertical");
+        degv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                degvActionPerformed(evt);
+            }
+        });
+        nav3.add(degv);
 
         jPanel8.add(nav3);
 
@@ -582,14 +621,6 @@ public class frame extends javax.swing.JFrame {
         });
         nav4.add(relleno);
 
-        transparencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/transparencia.png"))); // NOI18N
-        transparencia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                transparenciaActionPerformed(evt);
-            }
-        });
-        nav4.add(transparencia);
-
         Alisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alisar.png"))); // NOI18N
         Alisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -597,6 +628,14 @@ public class frame extends javax.swing.JFrame {
             }
         });
         nav4.add(Alisar);
+
+        numtrans.setMaximum(255);
+        numtrans.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                numtransStateChanged(evt);
+            }
+        });
+        nav4.add(numtrans);
 
         jPanel8.add(nav4);
 
@@ -758,7 +797,7 @@ public class frame extends javax.swing.JFrame {
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 732, Short.MAX_VALUE)
+            .addGap(0, 771, Short.MAX_VALUE)
         );
 
         getContentPane().add(Escritorio, java.awt.BorderLayout.CENTER);
@@ -969,12 +1008,15 @@ public class frame extends javax.swing.JFrame {
         estado.setVisible(barraestado);
         
     }//GEN-LAST:event_EdicionVerbarraActionPerformed
-
+    public void actualizarimgSource(){
+        imgSource=null;
+    }
  
     
     public void actualizarframe(){
         
         VentanaInterna vi=(VentanaInterna)Escritorio.getSelectedFrame();   
+
         if (vi != null) {
             jPanel17.setVisible(true);
            
@@ -999,15 +1041,15 @@ public class frame extends javax.swing.JFrame {
             col = vi.getLienzoImagen().getRelleno();
             Relleno.setBackground(col);
             relleno.setSelected(vi.getLienzoImagen().getRellenado());
-            transparencia.setSelected(vi.getLienzoImagen().getTransparencia());
+            numtrans.setValue(vi.getLienzoImagen().getNumtrans());
             Alisar.setSelected(vi.getLienzoImagen().getAlisar());
-            
+            numtrans.setValue(vi.getLienzoImagen().getNumtrans());
             numeroalisar.setValue(vi.getLienzoImagen().getGrosor());
             jSlider1.setValue((int)(vi.getLienzoImagen().getBrillo()));
-            jSlider2.setValue(vi.getLienzoImagen().getRotacion()%360);
             Filtro.setSelectedItem(vi.getLienzoImagen().getFiltro());
             espectro.setSelectedItem(vi.getLienzoImagen().getEspectro());
-
+            degh.setSelected(vi.getLienzoImagen().getdeghorizontal());
+            degv.setSelected(vi.getLienzoImagen().getdegvertical());
             actualizarlista();
 
         }else{
@@ -1049,36 +1091,42 @@ public class frame extends javax.swing.JFrame {
                 Color col = figura.getBorde();
             Borde.setBackground(col);
             vi.getLienzoImagen().setBorde(col);
-            transparencia.setSelected(figura.getTransparencia());
-            vi.getLienzoImagen().setTransparencia(figura.getTransparencia());
+            numtrans.setValue(figura.getNumtrans());
+            vi.getLienzoImagen().setNumtrans(figura.getNumtrans());
+            
             Alisar.setSelected(figura.getAlisar());
             vi.getLienzoImagen().setAlisar(figura.getAlisar());
             numeroalisar.setValue(figura.getGrosor());
             vi.getLienzoImagen().setGrosor(figura.getGrosor());
-            if(figura instanceof MiElipse){
-                col = ((MiElipse)figura).getRelleno();
+            
+            if(figura instanceof MiRectangularShape){
+                col = ((MiRectangularShape)figura).getRelleno();
                 Relleno.setBackground(col);
                 vi.getLienzoImagen().setRelleno(col);
-            if(((MiElipse)figura).getRellenado()){
-                relleno.setSelected(true);
-                vi.getLienzoImagen().setRellenado(true);
-            }else{
-                relleno.setSelected(false);
-                vi.getLienzoImagen().setRellenado(false);
-                }
-            }
-            if(figura instanceof MiRectangulo){
-                col = ((MiRectangulo)figura).getRelleno();
-                Relleno.setBackground(col);
-                vi.getLienzoImagen().setRelleno(col);
-                if(((MiRectangulo)figura).getRellenado()){
+                col = ((MiRectangularShape)figura).getDegradado();
+                Degradado.setBackground(col);
+                vi.getLienzoImagen().setDegradado(col);
+                if(((MiRectangularShape)figura).getRellenado()){
                     relleno.setSelected(true);
                     vi.getLienzoImagen().setRellenado(true);
-                }else{
+                    }else{
                     relleno.setSelected(false);
                     vi.getLienzoImagen().setRellenado(false);
+                    }
+                if(((MiRectangularShape) figura).getVertical()){
+                    degv.setSelected(true);
+                }else{
+                    degv.setSelected(false);
+                }
+                if(((MiRectangularShape) figura).getHorizontal()){
+                    degh.setSelected(true);
+                    vi.getLienzoImagen().setdegvertical(true);
+                }else{
+                    degh.setSelected(false);
+                    vi.getLienzoImagen().setdegvertical(false);
                 }
             }
+           
             }
         }       
     }
@@ -1138,11 +1186,11 @@ public class frame extends javax.swing.JFrame {
          
 
          actualizarframe();
-         
          altura =0;
          anchura=0;
         }
     }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         new SelLienzo(this).setVisible(true);
@@ -1194,20 +1242,6 @@ public class frame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_numeroalisarStateChanged
 
-    private void transparenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transparenciaActionPerformed
-        // TODO add your handling code here:
-        VentanaInterna vi;  
-        vi = (VentanaInterna)Escritorio.getSelectedFrame();
-        if(vi != null){
-       vi.getLienzoImagen().setTransparencia(!vi.getLienzoImagen().getTransparencia());
-       if(li.getSelectedValue() != null){
-       li.getSelectedValue().setTransparencia(!li.getSelectedValue().getTransparencia());
-       vi.getLienzoImagen().repaint();
-       }
-       
-        }
-    }//GEN-LAST:event_transparenciaActionPerformed
-
     private void jCheckBoxMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem2ActionPerformed
         // TODO add your handling code here:
         barraatributos = !barraatributos;
@@ -1245,9 +1279,7 @@ public class frame extends javax.swing.JFrame {
                         case "laplaciano":
                             k = KernelProducer.createKernel(KernelProducer.TYPE_LAPLACIANA_3x3);
                             break;
-                        case "43":
-                            k = KernelProducer.createKernel((43));
-                            break;
+                        
                     }
                     if (k != null)
                     {
@@ -1564,6 +1596,18 @@ public class frame extends javax.swing.JFrame {
              vi.getLienzoImagen().repaint();
             }
         }
+        if (tipo.equals("Degradado")){
+            Degradado.setBackground(color);
+            vi.getLienzoImagen().setBorde(color);
+            if(li.getSelectedValue() !=null){
+                if(li.getSelectedValue()  instanceof MiRectangularShape){
+                ((MiRectangularShape)li.getSelectedValue()).setDegradado(color);
+             vi.getLienzoImagen().repaint();
+            }
+                
+             
+            }
+            }
          }
     }
     public void setnamerec(String name){
@@ -1758,6 +1802,63 @@ public class frame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jSlider2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jSlider2FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSlider2FocusLost
+
+    private void numtransStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_numtransStateChanged
+        // TODO add your handling code here:
+        VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
+        imgSource = vi.getLienzoImagen().getImagen(false);
+        
+        if (vi != null){
+            if(li.getSelectedValue() != null){
+                li.getSelectedValue().setNumtrans(numtrans.getValue());
+            }else{
+            vi.getLienzoImagen().setNumtrans(numtrans.getValue());
+            }
+            vi.getLienzoImagen().repaint();
+        }
+    }//GEN-LAST:event_numtransStateChanged
+
+    private void DegradadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DegradadoActionPerformed
+        // TODO add your handling code here:
+        VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
+         if(vi!=null){
+        new SelCol(this,"Degradado").setVisible(true);
+         }
+    }//GEN-LAST:event_DegradadoActionPerformed
+
+    private void deghActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deghActionPerformed
+        // TODO add your handling code here:
+        VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
+         if(vi!=null){
+             if(li.getSelectedValue()!= null){
+                 if(li.getSelectedValue() instanceof MiRectangularShape){
+                     ((MiRectangularShape)li.getSelectedValue()).setHorizontal(!((MiRectangularShape)li.getSelectedValue()).getHorizontal());
+                 }
+                 
+             }else{
+                 vi.getLienzoImagen().setdeghorizontal(!vi.getLienzoImagen().getdeghorizontal());
+             }
+         }
+    }//GEN-LAST:event_deghActionPerformed
+
+    private void degvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_degvActionPerformed
+        // TODO add your handling code here:
+        VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
+         if(vi!=null){
+             if(li.getSelectedValue()!= null){
+                 if(li.getSelectedValue() instanceof MiRectangularShape){
+                     ((MiRectangularShape)li.getSelectedValue()).setVertical(!((MiRectangularShape)li.getSelectedValue()).getVertical());
+                 }
+                 
+             }else{
+                 vi.getLienzoImagen().setdegvertical(!vi.getLienzoImagen().getdegvertical());
+             }
+         }
+    }//GEN-LAST:event_degvActionPerformed
     
     private void escalar(double indice){
         VentanaInterna vi = (VentanaInterna) Escritorio.getSelectedFrame();
@@ -1782,14 +1883,16 @@ public class frame extends javax.swing.JFrame {
                 formas=false;
             }
             try{
+
                 BufferedImage Dest = new BufferedImage(imgSource.getHeight(), imgSource.getWidth(), BufferedImage.TYPE_INT_ARGB);
                 double r = Math.toRadians(jSlider2.getValue());
-                Point p = new Point(imgSource.getWidth()/2, imgSource.getHeight()/2);
+                Point p = vi.getLienzoImagen().getPoint();
                 AffineTransform at = AffineTransform.getRotateInstance(r,p.x,p.y);
                 AffineTransformOp atop = new AffineTransformOp(at,AffineTransformOp.TYPE_BILINEAR);
                 Dest = atop.filter(imgSource, null);
                 vi.getLienzoImagen().setImagen(Dest);
                 vi.repaint();
+                
                 
             }catch(IllegalArgumentException e){
                 System.err.println();
@@ -1853,6 +1956,7 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JToggleButton Alisar;
     private javax.swing.JButton Bajar;
     private javax.swing.JButton Borde;
+    private javax.swing.JButton Degradado;
     private javax.swing.JMenu Edicion;
     private javax.swing.JCheckBoxMenuItem EdicionVerbarra;
     private javax.swing.JButton Eliminar;
@@ -1875,6 +1979,8 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JButton botonstop;
     private javax.swing.JButton contrastenormal;
     private javax.swing.JButton contrasteoscuro;
+    private javax.swing.JButton degh;
+    private javax.swing.JButton degv;
     private javax.swing.JToggleButton elipse;
     private javax.swing.JComboBox<String> espectro;
     private javax.swing.JLabel estado;
@@ -1893,6 +1999,7 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1947,10 +2054,10 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JPanel nav3;
     private javax.swing.JPanel nav4;
     private javax.swing.JSpinner numeroalisar;
+    private javax.swing.JSlider numtrans;
     private javax.swing.JPanel pie;
     private javax.swing.JToggleButton rectangulo;
     private javax.swing.JButton reducir;
     private javax.swing.JToggleButton relleno;
-    private javax.swing.JToggleButton transparencia;
     // End of variables declaration//GEN-END:variables
 }
