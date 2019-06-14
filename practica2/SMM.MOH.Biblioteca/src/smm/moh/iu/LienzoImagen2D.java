@@ -18,6 +18,8 @@ import smm.moh.graficos.MiFigura;
 /**
  *
  * @author eyehalcon97
+ * Lienzo con imagenes dentro de el
+ * 
  */
 public class LienzoImagen2D extends Lienzo2D{
     private BufferedImage img=null;
@@ -25,9 +27,18 @@ public class LienzoImagen2D extends Lienzo2D{
     private String filtro="Seleccione";
     private String espectro="Seleccione";
     private Point centro = null;
+     /**
+    * Constructor por defecto
+    */
     public LienzoImagen2D(){
         super();
     }
+    /**
+    * Constructor de LienzoImagen2D
+    * @param vertical: tamaño vertical del lienzo
+    * @param horizontal: tamaño horizontal del lienzo
+    * Creara un Lienzo en blanco a partir de un rectangulo
+    */
     public LienzoImagen2D(int vertical,int horizontal){
         
         super(vertical,horizontal);
@@ -38,26 +49,56 @@ public class LienzoImagen2D extends Lienzo2D{
          centro = new Point(img.getHeight()/2, img.getWidth()/2);
          
     }
+    /**
+    * Modificador de brillo
+    * @param brillo: el nuevo brillo
+    */
     public void setBrillo(float brillo){
         this.brillo =  brillo;
     }
+    /**
+    * Modificador de filtro
+    * @param filtro: el nuevo filtro
+    */
 
     public void setFiltro(String filtro){
         this.filtro = filtro;
     }
+    /**
+    * Modificador de espectro
+    * @param espectro: el nuevo espectro
+    */
     public void setEspectro(String espectro){
         this.espectro =espectro;
     }
+    /**
+    * Consultor de brillo
+    * 
+    */
     public float getBrillo(){
         return brillo;
     }
-
+    /**
+    * Consultor de Filtro
+    * 
+    */
     public String getFiltro(){
         return filtro;
     }
+    /**
+    * Consultor de Espectro
+    * 
+    */
     public String getEspectro(){
         return espectro;
     }
+    /**
+    * Consultor de Imagen
+    * @param imagen: booleano que indica si queremos
+    * que nos devulvan los objetos dibujados dentro del lienzo
+    * dichos objetos pasan a ser parte de la imagen y se borran de 
+    * la lista
+    */
     public BufferedImage getImagen(boolean imagen){
             Graphics g = img.getGraphics();
             Graphics2D g2d=(Graphics2D)g;
@@ -69,6 +110,12 @@ public class LienzoImagen2D extends Lienzo2D{
             }
             return img;
     }
+    /**
+    * Modificador de Imagen
+    * @param img: la nueva imagen
+    * Se introduce una nueva imagen y se cambia 
+    * los valores del tamaño del lienzo
+    */
     public void setImagen(BufferedImage img){
         this.img = img;
         if(this.img != null){
@@ -76,15 +123,20 @@ public class LienzoImagen2D extends Lienzo2D{
             vertical = img.getHeight();
         }
     }
+    /**
+    * Metodo para repintar el componente
+    * @param g: el graphics necesario para pintar
+    */
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         if(img !=null){
             g.drawImage(img, 0, 0, this);
         }
     }
-    public void setPoint(Point centro){
-        this.centro = centro;
-    }
+    /**
+    * Consultor del Punto centro de la imagen
+    * 
+    */
     public Point getPoint(){
         return centro;
     }

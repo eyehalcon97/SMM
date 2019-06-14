@@ -8,26 +8,36 @@
 
 
 import java.awt.Color;
-import java.awt.Frame;
 
 
 /**
  *
  * @author eyehalcon97
+ * Cuadro de seleccion de color
  */
 public class SelCol extends javax.swing.JFrame {
 
     /**
      * Creates new form SelCol
      */
-    frame cuadro = null;
+    VentanaPrincipal cuadro = null;
     String tipo = null;
-    public SelCol(frame frame,String tipo) {
+    /**
+    *
+    * Constructor
+    * @param frame: Ventana a la que pertenece
+    * @param tipo: para que queremos el color
+    */
+    public SelCol(VentanaPrincipal frame,String tipo) {
         initComponents();
         cuadro=frame;
         this.tipo = tipo;
         
     }
+    /**
+    *
+    * Constructor por defecto
+    */
     public SelCol() {
         initComponents();
         cuadro = null;

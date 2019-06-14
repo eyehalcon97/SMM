@@ -8,18 +8,29 @@
 /**
  *
  * @author eyehalcon97
+ * Selecciona el String que queremos
  */
 public class SelString extends javax.swing.JFrame {
 
     /**
      * Creates new form SelString
      */
-    private frame origen=null;
+    private VentanaPrincipal origen=null;
     private boolean audio=false;
+    /**
+    *
+    * Constructor por defecto
+    */
     public SelString() {
         initComponents();
     }
-    public SelString(frame origen,boolean audio){
+    /**
+    *
+    * Constructor
+    * @param origen: Ventana a la que pertenece
+    * @param audio: true si lo queremos para nombre de audio
+    */
+    public SelString(VentanaPrincipal origen,boolean audio){
         initComponents();
         this.origen = origen;
         this.audio=audio;

@@ -1,10 +1,4 @@
 
-import java.awt.Dimension;
-import java.awt.image.BufferedImage;
-
-
-
-
 
 
 
@@ -18,20 +12,31 @@ import java.awt.image.BufferedImage;
 /**
  *
  * @author eyehalcon97
+ * Clase que gestiona las ventanas internas
  */
 public class VentanaInterna extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form VentanaInterna
      */
-    private frame cuadro=null;
+    private VentanaPrincipal cuadro=null;
     private int vertical=100;
     private int horizontal=100;
-    
+    /**
+    *
+    * Constructor por defecto
+    */
     public VentanaInterna() {
         initComponents();
     }
-    public VentanaInterna(frame cuadro,int vertical,int horizontal){
+    /**
+    *
+    * Constructor
+    * @param cuadro: Ventana a la que pertenece
+    * @param vertical: tamaño del lienzo vertical
+    * @param horizontal: tamaño del lienzo horizontal
+    */
+    public VentanaInterna(VentanaPrincipal cuadro,int vertical,int horizontal){
         this.cuadro=cuadro;
         this.vertical=vertical;
         this.horizontal=horizontal;
@@ -39,7 +44,24 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
         initComponents();
         actualizardesplazable();
     }
-    
+    /**
+    *
+    * Consultor de vertical
+    */
+    public int getVertical(){
+        return vertical;
+    }
+    /**
+    *
+    * Consultor de Horizontal
+    */
+    public int getHorizontal(){
+        return horizontal;
+    }
+    /**
+    *
+    * Consultor del lienzo
+    */
     public smm.moh.iu.LienzoImagen2D getLienzoImagen(){
         return lienzoImagen2D1;
     }
@@ -163,17 +185,21 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
     private void lienzoImagen2D1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lienzoImagen2D1MouseDragged
         // TODO add your handling code here:
     }//GEN-LAST:event_lienzoImagen2D1MouseDragged
+    /**
+    *
+    * Actualiza el tamaño de los desplazables de la ventana al tamaño del lienzo
+    */
     public void actualizardesplazable(){
         
         javax.swing.GroupLayout lienzoImagen2D1Layout = new javax.swing.GroupLayout(lienzoImagen2D1);
         lienzoImagen2D1.setLayout(lienzoImagen2D1Layout);
         lienzoImagen2D1Layout.setHorizontalGroup(
             lienzoImagen2D1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, horizontal, Short.MAX_VALUE)
+            .addGap(0, lienzoImagen2D1.getWidth(), Short.MAX_VALUE)
         );
         lienzoImagen2D1Layout.setVerticalGroup(
             lienzoImagen2D1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, vertical, Short.MAX_VALUE)
+            .addGap(0, lienzoImagen2D1.getHeight(), Short.MAX_VALUE)
         );
     
         

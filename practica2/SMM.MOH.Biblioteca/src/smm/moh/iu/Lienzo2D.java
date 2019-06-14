@@ -24,6 +24,7 @@ import smm.moh.graficos.MiString;
 /**
  *
  * @author eyehalcon97
+ * Clase lienzo
  */
 public class Lienzo2D extends javax.swing.JPanel {
 
@@ -56,23 +57,47 @@ public class Lienzo2D extends javax.swing.JPanel {
     private String string=null;
     List<MiFigura> Lista = new ArrayList();
     Graphics2D g2d;
+    /**
+    * Constructor por defecto
+    * 
+    */
     public Lienzo2D(){
         initComponents();
     }
+    /**
+    * Constructor
+    * @param vertical: tamaño del lienzo vertical
+    * @param horizontal:tamaño del lienzo horizontal
+    * 
+    */
     public Lienzo2D(int vertical,int horizontal) {
         initComponents();
         this.vertical=vertical;
         this.horizontal=horizontal;
         
-        System.out.println(this.horizontal);
     }
+    /**
+    * Consultor de vertical
+    * 
+    */
     public int getVertical(){
         return vertical;
     }
+    /**
+    * Consultor de horizontal
+    * 
+    */
     public int getHorizontal(){
         return horizontal;
     }
-    
+     /**
+    * Metodo para pintar el componente
+    * @param  g: graphics para pintarlo
+    * Recorre el vector de las figuras y pinta
+    * todas ellas, si una esta seleccionada para 
+    * editar, dibuja su contorno
+    * 
+    */
     public void paint(Graphics g){
         super.paint(g);
         g2d=(Graphics2D)g;
@@ -85,94 +110,215 @@ public class Lienzo2D extends javax.swing.JPanel {
                 figmod.drawSelected(g2d);
             }
         }
-        System.out.println(Lista.size());
         
         
     }
-
+    /**
+    * Modificador de Borde
+    * @param color: el nuevo color del borde
+    */
     public void setBorde(Color color){
         borde = color;
     }
+    /**
+    * Consultor de Borde
+    * 
+    */
     public Color getBorde(){
         return borde;
     }
+    /**
+    * Modificador de degradado vertical
+    * @param degvertical: activa o desactiva el degradado
+    * Solo puede haber un tipo de degradado por lo
+    * que desactiva el otro degradado
+    */
     public void setdegvertical(boolean degvertical){
         this.degvertical = degvertical;
+        if(degvertical){
+            deghorizontal=false;
+        }
     }
+    /**
+    * Modificador de degradado horizontal
+    * @param deghorizontal: activa o desactiva el degradado
+    * Solo puede haber un tipo de degradado por lo
+    * que desactiva el otro degradado
+    */
     public void setdeghorizontal(boolean deghorizontal){
         this.deghorizontal = deghorizontal;
+        if(deghorizontal){
+            degvertical=false;
+        }
     }
+    /**
+    * Consultor de degradado vertical
+    * 
+    */
     public boolean getdegvertical(){
         return degvertical;
     }
+    /**
+    * Consultor de degradado horizontal
+    * 
+    */
     public boolean getdeghorizontal(){
         return deghorizontal;
     }
+    /**
+    * Modificador del Relleno
+    * @param color: color del relleno
+    * 
+    */
     public void setRelleno(Color color){
         relleno = color;
     }
+    /**
+    * Consultor de Relleno
+    * 
+    */
     public Color getRelleno(){
         return relleno;
     }
+    /**
+    * Consultor de la lista de figuras
+    *
+    */
     public List<MiFigura> GetLista(){
         return Lista;
     }
+    /**
+    * Modificador de la lista de figuras
+    * @param lista: la nueva lista
+    *
+    */
     public void setLista(List<MiFigura> lista){
         this.Lista = lista;
     }
+    /**
+    * Modificador de la lista de figuras
+    * @param forma: la nueva forma
+    *
+    */
     public void setFormas(Formas forma){
         EDITAR = false;
         this.forma=forma;
     }
+    /**
+    * Consultor de forma
+    * 
+    */
     public Formas getForma(){
         return forma;
     }
+    /**
+    * Consultor de forma
+    * 
+    */
     public void setRellenado(boolean rellenado){
         this.rellenado = rellenado;
     }
+    /**
+    * Consultor de Rellenado
+    * 
+    */
     public boolean getRellenado(){
         return rellenado;
     }
+    /**
+    * Modificador del degradado
+    * @param degradado: el nuevo color del degradado
+    *
+    */
     public void setDegradado(Color degradado){
         this.degradado=degradado;
     }
+    /**
+    * Consultor de degradado
+    * 
+    */
     public Color getDegradado(){
         return degradado;
     }
+    /**
+    * Modificador de alisar
+    * @param alisar: el nuevo alisar
+    *
+    */
     public void setAlisar(boolean alisar){
        this.alisar=alisar;
     }
+    /**
+    * Consultor de Alisar
+    * 
+    */
     public boolean getAlisar(){
         return alisar;
     }
+    /**
+    * Modificador de la variable string
+    * @param string: string a modificar
+    */
     public void setString(String string){
         this.string = string;
        
     }
+    /**
+    * Consultor de la variable string
+    * 
+    */
     public String getString(){
         return string;
     }
+    /**
+    * Modificador del numero de transparencia
+    * @param numtrans: nuevo numero de transparencia
+    *
+    */
     public void setNumtrans(int numtrans){
        this.numtrans = numtrans;
    }
+    /**
+    * Consultor de numero transparencia
+    * 
+    */
    public int getNumtrans(){
        return numtrans;
    }
+    /**
+    * Modificador del grosor
+    * @param grosor: numero de nuevo grosor
+    *
+    */
     public void setGrosor(int grosor){
         this.grosor=grosor;
         
     }
+    /**
+    * Consultor del grosor
+    * 
+    */
     public int getGrosor(){
         return grosor;
     }
 
-    
+     /**
+    * Modificador de Editar
+    * @param seleccionada: valor de la nueva Editar
+    * pone Editar a true para que se vea la figura 
+    * a editar
+    *
+    */
     public void setEditar(int seleccionada){
         EDITAR=true;
         figmod = Lista.get(seleccionada);
         repaint();
     }
-    
+     /**
+    * Metodo que pinta una figura sobre el lienzo
+    * 
+    *
+    */
     public void pintar(){
         
         
@@ -249,12 +395,12 @@ public class Lienzo2D extends javax.swing.JPanel {
     }
     
   
- 
-  
-    //MiLinea line= MiLineas; 
-    //((MiLinea) s).contains(p);
-         
-   
+     /**
+    * Metodo para mover la figura por el lienzo
+    * @param forma: la figura que movemos
+    * @param evt: el evento del mouse donde se movera
+    *
+    */
     
     private void actualizar(MiFigura forma,java.awt.event.MouseEvent evt){
         if(forma != null){
@@ -311,16 +457,10 @@ public class Lienzo2D extends javax.swing.JPanel {
           pout=new Point2D.Float(evt.getX(),evt.getY());
           
             if(EDITAR){
-                
-                
                 actualizar(figmod,evt);
-               
-
             }
-            
             pintar();
-            
-        //figmod = null;
+
     }//GEN-LAST:event_formMouseDragged
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
@@ -331,9 +471,6 @@ public class Lienzo2D extends javax.swing.JPanel {
         // TODO add your handling code here:
                pin=new Point2D.Float(evt.getX(),evt.getY());
                if(EDITAR){
-                   
-                   
-            //editar();
             actualizar(figmod,evt);
             pin = new Point2D.Double(-10, -10);
                     pout = new Point2D.Double(-10, -10);
@@ -361,9 +498,7 @@ public class Lienzo2D extends javax.swing.JPanel {
                     
                     
                 }
-           // editar();
            
-            
         }else{
         Lista.add(figura);
         if(figura instanceof MiLinea){
@@ -383,7 +518,6 @@ public class Lienzo2D extends javax.swing.JPanel {
         if(figura instanceof MiString){
             strings++;
         }
-        
         }
         pintar();
         repaint();

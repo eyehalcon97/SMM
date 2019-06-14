@@ -7,6 +7,7 @@
 /**
  *
  * @author eyehalcon97
+ * Mi clase acerca de
  */
 public class Acercade extends javax.swing.JDialog {
 

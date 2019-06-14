@@ -7,6 +7,7 @@
 /**
  *
  * @author eyehalcon97
+ * Selecciona el tamaño del lienzo
  */
 public class SelLienzo extends javax.swing.JFrame {
 
@@ -15,14 +16,23 @@ public class SelLienzo extends javax.swing.JFrame {
      */
     private int vertical=300;
     private int horizontal=300;
-    frame marco=null;
-    public SelLienzo(frame marco) {
+    VentanaPrincipal marco=null;
+    /**
+    *
+    * Constructor
+    * @param marco: VentanaPrincipal a la que pertenece
+    */
+    public SelLienzo(VentanaPrincipal marco) {
         initComponents();
         this.setTitle("Tamaño");
         this.marco=marco;
         horizontal=300;
         vertical=300;
     }
+    /**
+    *
+    * Constructor por defecto
+    */
     public SelLienzo(){
         initComponents();
     }
@@ -179,6 +189,11 @@ public class SelLienzo extends javax.swing.JFrame {
         horizontal = Integer.parseInt(Anchura.getValue().toString());
         
     }//GEN-LAST:event_Valor
+    /**
+    *
+    * Le dice a la ventana principal el tamaño
+    * deseado
+    */
     private void elegir(){
 
         marco.nuevoLienzo(vertical,horizontal);

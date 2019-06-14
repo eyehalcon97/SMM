@@ -16,35 +16,54 @@ import java.awt.geom.Point2D;
 /**
  *
  * @author eyehalcon97
+ * Mi clase Linea
  */
 public class MiLinea extends MiFigura{
     private Line2D forma;
-    
+    /**
+    *
+    *   Contructor por defecto
+    * @param pd: primer punto
+    * @param pd1: segundo punto
+    */
     public MiLinea(Point2D pd, Point2D pd1){
         super();
         forma = new Line2D.Double(pd, pd1);
 
     }
+    /**
+    *
+    *   Contructor por defecto
+    * @param pd: primer punto
+    * @param pd1: segundo punto
+    * @param Borde: Color del borde
+    * @param alisar: bool de alisar
+    * @param grosor: numero de grosor
+    * @param numtrans: numero de transparencia
+    */
     public MiLinea(Point2D pd, Point2D pd1,Color Borde,boolean alisar,int grosor,int numtrans){
         super(Borde,alisar,grosor,numtrans);
         forma = new Line2D.Double(pd, pd1);
 
     }
+    /**
+    *
+    *   Contructor copia
+    */
     public MiLinea(MiLinea aux){
         super((MiFigura)aux);
         forma=aux.getForma();
 
     }
-    
-    public boolean isNear(Point2D p){
-        return forma.ptLineDist(p)<=2.0;
-    }
-    
-    
-    public boolean contains(Point2D p) {        
-        return isNear(p);
-    }
-    
+
+        
+    /**
+    *
+    * Posiciona la figura en la posicion 
+    * seleccionada
+    * @param pos: punto donde se posiciona
+    * 
+    */
     @Override
     public void setLocation(Point2D pos){
         double dx=pos.getX()-forma.getX1();
@@ -52,17 +71,39 @@ public class MiLinea extends MiFigura{
         Point2D newp2 = new Point2D.Double(forma.getX2()+dx,forma.getY2()+dy);
         forma.setLine(pos,newp2);
     }
+        
+    /**
+    *
+    * Consultor de la localizacion de la
+    * figura
+    * 
+    */
     public Point2D getLocation(){
         return forma.getP1();
     }
-    
+        
+    /**
+    *
+    *   Modificador de la forma
+    *   @param forma: la nueva forma
+    */
     public void setForma(Line2D forma){
         this.forma=forma;
     }
-    
+        
+    /**
+    *
+    *   Consultor de forma
+    */
     public Line2D getForma(){
         return forma;
     }
+    /**
+    *
+    * Devuelve true si es un punto
+    * 
+    * 
+    */
 
     public boolean EsPunto(){
         boolean resultado=false;
@@ -71,6 +112,12 @@ public class MiLinea extends MiFigura{
         }
         return resultado;
     }
+    /*
+    *
+    * Devuelve true si es una linea
+    * 
+    * 
+    */
     public boolean EsLinea(){
         boolean resultado=false;
         if(forma.getP1()!=forma.getP2()){
@@ -78,6 +125,12 @@ public class MiLinea extends MiFigura{
         }
         return resultado;
     }
+    /**
+    *
+    * Dibuja la figura
+    * @param g2d: graphics para dibujar la figura
+    * 
+    */
     @Override
     public void draw(Graphics2D g2d){
         actualizartransparencia();
@@ -88,7 +141,12 @@ public class MiLinea extends MiFigura{
         g2d.setColor(getBorde());
         g2d.draw((Shape)forma);
     }
-
+    /**
+    *
+    * dibuja el contorno de la figura
+    * @param g2d: graphics para dibujar la figura
+    * 
+    */
     @Override
     public void drawSelected(Graphics2D g2d) {
         g2d.setColor(new Color(0,0,0,80));

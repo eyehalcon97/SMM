@@ -15,6 +15,7 @@ package smm.moh.iu;
 /**
  *
  * @author eyehalcon97
+ * Lista de las formas disponibles
  */
 public enum Formas {
     PUNTO,
