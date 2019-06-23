@@ -33,6 +33,7 @@ public class MiLista extends AbstractListModel{
     * 
     * Consultor de elementos
     * @param index: devuelve el elemento seleccionado
+    * @return p: el elemento seleccionado
     */
     @Override
     public MiFigura getElementAt(int index) {
@@ -57,7 +58,14 @@ public class MiLista extends AbstractListModel{
         lista.remove(index);
         this.fireIntervalRemoved(index, getSize(), getSize()+1);
     }
-
+    /**
+    *
+    * Elimina de la lista un elemento todo el contenido de 
+    * la lista
+    */
+    public void clear(){
+        lista.clear();
+    }
     
   
 }

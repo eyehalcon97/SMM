@@ -1,3 +1,6 @@
+
+import uk.co.caprica.vlcj.discovery.NativeDiscovery;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -19,6 +22,7 @@ public class Paint {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        boolean ok=new NativeDiscovery().discover();
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -37,7 +41,11 @@ public class Paint {
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaPrincipal().setVisible(true);
+                VentanaPrincipal ventana = new VentanaPrincipal();
+                ventana.setVisible(true);
+                if(ok !=true){
+                    new AcercadeVideo(ventana,true).setVisible(true);
+                }
         
             }
         });

@@ -52,8 +52,8 @@ public class MiElipse extends MiRectangularShape{
     * @param rellenado: selecciona si esta rellenado
     * 
     */
-    public MiElipse(double x,double y,double h,double w,Color Borde,boolean alisar,int grosor,boolean rellenado,Color relleno,int numtrans,Color degradado,boolean deghorizontal,boolean degvertical){
-        super(Borde,alisar,grosor,rellenado,relleno,numtrans,degradado, deghorizontal, degvertical);
+    public MiElipse(double x,double y,double h,double w,Color Borde,boolean alisar,int grosor,boolean rellenado,Color relleno,int numtrans,Color degradado,boolean deghorizontal,boolean degvertical,boolean discontinua){
+        super(Borde,alisar,grosor,rellenado,relleno,numtrans,degradado, deghorizontal, degvertical,discontinua);
         this.forma = new Ellipse2D.Double(x, y, h, w);
 
     }
@@ -129,14 +129,20 @@ public class MiElipse extends MiRectangularShape{
             g2d.setRenderingHints(render);
         }
         g2d.setStroke(atributos);
+        
+         if(discontinua){
+             System.out.println("hooo");
+            float []dash={6f,2.0f,6.0f};
+            g2d.setStroke(new BasicStroke(grosor,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,5.0f, dash, 0.0f));
+        }
         if(rellenado){
             if(horizontal){
-                grad = new GradientPaint((float)forma.getX(),(float)forma.getY(), relleno, 200, (float)forma.getY(),
+                grad = new GradientPaint((float)forma.getX(),(float)forma.getY(), relleno, (float)(forma.getCenterX()), (float)forma.getY(),
                 degradado);
                 g2d.setPaint(grad);
             }else{
                 if(vertical){
-                    grad = new GradientPaint((float)forma.getX(),(float)forma.getY(), relleno,(float)forma.getX() ,200 ,
+                    grad = new GradientPaint((float)forma.getX(),(float)forma.getY(), relleno,(float)forma.getX() ,(float)forma.getCenterY() ,
                     degradado);
                     g2d.setPaint(grad);
                 }else{

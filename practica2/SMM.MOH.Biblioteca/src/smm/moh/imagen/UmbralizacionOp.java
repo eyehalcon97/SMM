@@ -8,7 +8,7 @@ package smm.moh.imagen;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 import sm.image.BufferedImageOpAdapter;
-import sm.image.BufferedImagePixelIterator;
+
 
 /**
  *
@@ -40,30 +40,32 @@ public class UmbralizacionOp extends BufferedImageOpAdapter{
         if (dest == null)
             dest = createCompatibleDestImage(src, null);
 
-        BufferedImagePixelIterator.PixelData pixel;
         WritableRaster destRaster = dest.getRaster();
-        BufferedImagePixelIterator it = new BufferedImagePixelIterator(src);
-        //Calculamos la media
-        for (int x = 0; x < src.getWidth(); x++) {        
+        float pixel[]=null;
+        for (int x = 0; x < src.getWidth(); x++) {       
             for (int y = 0; y < src.getHeight(); y++) {
-                pixel = it.next();
-                if (pixel.sample.length > 1){
+                pixel = src.getRaster().getPixel(x, y, pixel);
+                //Calculamos la media
+                float media = (pixel[0]+pixel[1]+pixel[2])/3;
+                //Establecemos el 255 como valor maximo
+                //Si es mayor que umbral ponemos el pixel a 255, en caso
+                //contrario lo pone a 0
+                if(media > umbral){ 
+                    pixel[0] =255;
+                    pixel[1] = 255;
+                    pixel[2] = 255;
+                }else{
+                    pixel[0] = 0;
+                    pixel[1] = 0;
+                    pixel[2] = 0;
+                }
 
-                    float numero = (pixel.sample[0] + pixel.sample[1] + pixel.sample[2])/3;
-                    //Si es mayor que el umbral lo establecemos en 255, si no en 0
-                    if(numero >umbral){
-                       pixel.sample[0] = 255;
-                        pixel.sample[1] = 255;
-                        pixel.sample[2] = 255;
-                    }else{
-                        pixel.sample[0] = 0;
-                        pixel.sample[1] = 0;
-                        pixel.sample[2] = 0;
-                    }
-                    destRaster.setPixel(pixel.col, pixel.row, pixel.sample);
-                }      
-            } 
-        }
+                //Aplicamos el cambio
+                destRaster.setPixel(x,y, pixel);
+                
+            }      
+        } 
+        
         return dest;
     }
  

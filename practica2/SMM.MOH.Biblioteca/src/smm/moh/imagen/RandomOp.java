@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,7 +9,7 @@ package smm.moh.imagen;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 import sm.image.BufferedImageOpAdapter;
-import sm.image.BufferedImagePixelIterator;
+
 
 /**
  *
@@ -23,6 +24,7 @@ public class RandomOp extends BufferedImageOpAdapter{
     * @param src: imagen de origen
     * @param dest: imagen de destino
     */
+    @Override
     public BufferedImage filter(BufferedImage src, BufferedImage dest)
     {
         if (src == null)
@@ -31,33 +33,26 @@ public class RandomOp extends BufferedImageOpAdapter{
         
         if (dest == null)
             dest = createCompatibleDestImage(src, null);
-
-        BufferedImagePixelIterator.PixelData pixel;
+        double random = Math.random();
         WritableRaster destRaster = dest.getRaster();
-        BufferedImagePixelIterator it = new BufferedImagePixelIterator(src);
-        double random= Math.random();
-        for (int x = 0; x < src.getWidth(); x++) {        
+        float pixel[]=null;
+        for (int x = 0; x < src.getWidth(); x++) {       
             for (int y = 0; y < src.getHeight(); y++) {
-                pixel = it.next();
-                if (pixel.sample.length > 1){
-                    //Calculamos la media del pixel y la mutiplicamos por un numero aleatorio
-                    float Red = pixel.sample[0];
-                    float Green = pixel.sample[1];
-                    float Blue = pixel.sample[2];
+                pixel = src.getRaster().getPixel(x, y, pixel);
+                //Calculamos la media del valor del pixel
+                float media = (pixel[0]+pixel[1]+pixel[2])/3;
+                //aplicamos el cambio del valor random
+                pixel[0] =(int)(pixel[0]+(media*random))%255;
+                pixel[1] =(int)(pixel[1]+(media*random))%255;
+                pixel[2] =(int)(pixel[2]+(media*random))%255;
+                   
+
+
+                //Aplicamos el cambio
+                destRaster.setPixel(x,y, pixel);
                 
-                    float media = (Red+Green+Blue)/3;
-                    Red = (int)((Red+(media*random))%255);
-                    Blue = (int)((Blue+(media*random))%255);
-                    Green = (int)((Green+(media*random))%255);
-                    
-                    pixel.sample[0] = (int) Red;
-                    pixel.sample[1] = (int) Green;
-                    pixel.sample[2] = (int) Blue;
-                
-                    destRaster.setPixel(pixel.col, pixel.row, pixel.sample);
-                }      
-            } 
-        }
+            }      
+        } 
         return dest;
     }
  

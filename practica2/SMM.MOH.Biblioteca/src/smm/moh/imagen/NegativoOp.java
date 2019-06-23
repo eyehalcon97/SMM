@@ -8,7 +8,7 @@ package smm.moh.imagen;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 import sm.image.BufferedImageOpAdapter;
-import sm.image.BufferedImagePixelIterator;
+
 
 /**
  *
@@ -33,26 +33,22 @@ public class NegativoOp extends BufferedImageOpAdapter
         if (dest == null)
             dest = createCompatibleDestImage(src, null);
 
-        BufferedImagePixelIterator.PixelData pixel;
         WritableRaster destRaster = dest.getRaster();
-        BufferedImagePixelIterator it = new BufferedImagePixelIterator(src);
-        
-        
-        //Leemos el rgb y restamos 255 a cada uno de los componentes
-        for (int x = 0; x < src.getWidth(); x++) {        
+        float pixel[]=null;
+        for (int x = 0; x < src.getWidth(); x++) {       
             for (int y = 0; y < src.getHeight(); y++) {
+                pixel = src.getRaster().getPixel(x, y, pixel);
+
+                    pixel[0] =255-pixel[0];
+                    pixel[1] = 255-pixel[1];
+                    pixel[2] = 255-pixel[2];
+
+
+                //Aplicamos el cambio
+                destRaster.setPixel(x,y, pixel);
                 
-                pixel = it.next();
-                if (pixel.sample.length > 1){
-                    
-                    pixel.sample[0] = 255-pixel.sample[0];
-                    pixel.sample[1] = 255-pixel.sample[1];
-                    pixel.sample[2] = 255-pixel.sample[2];
-                
-                    destRaster.setPixel(pixel.col, pixel.row, pixel.sample);
-                }      
-            } 
-        }
+            }      
+        } 
         return dest;
     }
 }

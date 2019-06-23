@@ -48,8 +48,8 @@ public class MiString extends MiFigura{
     * @param grosor: numero de grosor
     * @param numtrans: numero de transparencia
     */
-    public MiString(double x,double y,Color Borde,boolean alisar,int grosor,String string,int numtrans){
-        super(Borde,alisar,grosor,numtrans);
+    public MiString(double x,double y,Color Borde,boolean alisar,int grosor,String string,int numtrans,boolean discontinua){
+        super(Borde,alisar,grosor,numtrans,discontinua);
         this.forma = new Line2D.Double(x, y,x,y);
         this.string = string;
 
@@ -131,8 +131,13 @@ public class MiString extends MiFigura{
         if(alisar){
             g2d.setRenderingHints(render);
         }
-                
         g2d.setStroke(atributos);
+        
+         if(discontinua){
+             System.out.println("hooo");
+            float []dash={6f,2.0f,6.0f};
+            g2d.setStroke(new BasicStroke(grosor,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,5.0f, dash, 0.0f));
+        }
 
         g2d.setColor(borde);
 

@@ -57,8 +57,8 @@ public class MiRectangulo extends MiRectangularShape{
     * @param rellenado: selecciona si esta rellenado
     * 
     */
-    public MiRectangulo(double x,double y,double h,double w,Color Borde,boolean alisar,int grosor,boolean rellenado,Color relleno,int numtrans,Color degradado,boolean deghorizontal,boolean degvertical){
-        super(Borde,alisar,grosor,rellenado,relleno,numtrans,degradado,deghorizontal,degvertical);
+    public MiRectangulo(double x,double y,double h,double w,Color Borde,boolean alisar,int grosor,boolean rellenado,Color relleno,int numtrans,Color degradado,boolean deghorizontal,boolean degvertical,boolean discontinua){
+        super(Borde,alisar,grosor,rellenado,relleno,numtrans,degradado,deghorizontal,degvertical,discontinua);
         
         this.forma = new Rectangle2D.Double(x, y, h, w);
         
@@ -133,7 +133,15 @@ public class MiRectangulo extends MiRectangularShape{
         if(alisar){
             g2d.setRenderingHints(render);
         }
+        
         g2d.setStroke(atributos);
+        
+         if(discontinua){
+             System.out.println("hooo");
+            float []dash={6f,2.0f,6.0f};
+            g2d.setStroke(new BasicStroke(grosor,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,5.0f, dash, 0.0f));
+        }
+        
         if(rellenado){
             if(horizontal){
                 grad = new GradientPaint((float)forma.getX(),(float)forma.getY(), relleno, (float)(forma.getCenterX()), (float)forma.getY(),

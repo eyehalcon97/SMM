@@ -21,10 +21,11 @@ public abstract class MiFigura {
     private String name=null;
     protected Color borde;
     protected boolean alisar;
-    private int grosor;
+    protected int grosor;
     protected RenderingHints render;        
     protected Stroke atributos = new BasicStroke(grosor);
     protected int numtrans=255;
+    protected boolean discontinua=false;
     /**
     *
     * Contructor por defecto de la clase MiFigura
@@ -38,6 +39,7 @@ public abstract class MiFigura {
         this.grosor=1;
         this.atributos = new BasicStroke(grosor);
         this.numtrans=255;
+        this.discontinua=false;
         
         
     }
@@ -49,7 +51,7 @@ public abstract class MiFigura {
     *   @param grosor: grosor de la figura
     *   @param numtrans: numero de la transparencia
     */    
-    public MiFigura(Color borde,boolean alisar,int grosor,int numtrans){
+    public MiFigura(Color borde,boolean alisar,int grosor,int numtrans,boolean discontinua){
         render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         render.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         
@@ -59,7 +61,7 @@ public abstract class MiFigura {
         this.grosor=grosor;
         this.atributos = new BasicStroke(grosor);
         this.numtrans=numtrans;
-        
+        this.discontinua=discontinua;
     }
     /**
     *
@@ -107,6 +109,22 @@ public abstract class MiFigura {
     */
    public int getNumtrans(){
        return numtrans;
+   }
+    /**
+    *
+    * Colsultor de discontinua
+    * 
+    */
+   public boolean getDiscontinua(){
+       return discontinua;
+   }
+    /**
+    *
+    * Modificador de discontinua
+    * 
+    */
+   public void setDiscontinua(boolean discontinua){
+       this.discontinua=discontinua;
    }
    /**
     *

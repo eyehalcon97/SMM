@@ -52,12 +52,15 @@ public class Lienzo2D extends javax.swing.JPanel {
     protected int horizontal=0;
     private boolean deghorizontal=false;
     private boolean degvertical=false;
+    private boolean discontinua=false;
     private int numtrans=255;
     private Color degradado=Color.WHITE;
     private String string=null;
     List<MiFigura> Lista = new ArrayList();
     Graphics2D g2d;
+
     /**
+    * 
     * Constructor por defecto
     * 
     */
@@ -65,6 +68,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         initComponents();
     }
     /**
+    * 
     * Constructor
     * @param vertical: tamaño del lienzo vertical
     * @param horizontal:tamaño del lienzo horizontal
@@ -77,6 +81,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         
     }
     /**
+    * 
     * Consultor de vertical
     * 
     */
@@ -84,13 +89,31 @@ public class Lienzo2D extends javax.swing.JPanel {
         return vertical;
     }
     /**
+    * 
     * Consultor de horizontal
     * 
     */
     public int getHorizontal(){
         return horizontal;
     }
-     /**
+    /**
+    * 
+    * Consultor de discontinua de trazo
+    * 
+    */
+    public boolean getDiscontinua(){
+        return discontinua;
+    }
+    /**
+    * 
+    * Modificador de discontinua del trazo
+    * 
+    */
+    public void setDiscontinua(boolean discontinua){
+        this.discontinua=discontinua;
+    }
+    /**
+    * 
     * Metodo para pintar el componente
     * @param  g: graphics para pintarlo
     * Recorre el vector de las figuras y pinta
@@ -102,7 +125,8 @@ public class Lienzo2D extends javax.swing.JPanel {
         super.paint(g);
         g2d=(Graphics2D)g;
         g2d.clipRect(0,0,horizontal,vertical);
-
+        figura.draw(g2d);
+        
         
         for(MiFigura s:Lista){
             s.draw(g2d);
@@ -114,13 +138,16 @@ public class Lienzo2D extends javax.swing.JPanel {
         
     }
     /**
+    * 
     * Modificador de Borde
     * @param color: el nuevo color del borde
+    * 
     */
     public void setBorde(Color color){
         borde = color;
     }
     /**
+    * 
     * Consultor de Borde
     * 
     */
@@ -128,10 +155,12 @@ public class Lienzo2D extends javax.swing.JPanel {
         return borde;
     }
     /**
+    * 
     * Modificador de degradado vertical
     * @param degvertical: activa o desactiva el degradado
     * Solo puede haber un tipo de degradado por lo
     * que desactiva el otro degradado
+    * 
     */
     public void setdegvertical(boolean degvertical){
         this.degvertical = degvertical;
@@ -140,6 +169,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         }
     }
     /**
+    * 
     * Modificador de degradado horizontal
     * @param deghorizontal: activa o desactiva el degradado
     * Solo puede haber un tipo de degradado por lo
@@ -152,6 +182,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         }
     }
     /**
+    * 
     * Consultor de degradado vertical
     * 
     */
@@ -159,6 +190,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         return degvertical;
     }
     /**
+    * 
     * Consultor de degradado horizontal
     * 
     */
@@ -166,6 +198,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         return deghorizontal;
     }
     /**
+    * 
     * Modificador del Relleno
     * @param color: color del relleno
     * 
@@ -174,6 +207,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         relleno = color;
     }
     /**
+    * 
     * Consultor de Relleno
     * 
     */
@@ -181,6 +215,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         return relleno;
     }
     /**
+    * 
     * Consultor de la lista de figuras
     *
     */
@@ -188,6 +223,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         return Lista;
     }
     /**
+    * 
     * Modificador de la lista de figuras
     * @param lista: la nueva lista
     *
@@ -196,6 +232,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         this.Lista = lista;
     }
     /**
+    * 
     * Modificador de la lista de figuras
     * @param forma: la nueva forma
     *
@@ -205,6 +242,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         this.forma=forma;
     }
     /**
+    * 
     * Consultor de forma
     * 
     */
@@ -212,6 +250,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         return forma;
     }
     /**
+    * 
     * Consultor de forma
     * 
     */
@@ -219,6 +258,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         this.rellenado = rellenado;
     }
     /**
+    * 
     * Consultor de Rellenado
     * 
     */
@@ -226,6 +266,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         return rellenado;
     }
     /**
+    * 
     * Modificador del degradado
     * @param degradado: el nuevo color del degradado
     *
@@ -234,6 +275,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         this.degradado=degradado;
     }
     /**
+    * 
     * Consultor de degradado
     * 
     */
@@ -241,6 +283,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         return degradado;
     }
     /**
+    * 
     * Modificador de alisar
     * @param alisar: el nuevo alisar
     *
@@ -249,6 +292,7 @@ public class Lienzo2D extends javax.swing.JPanel {
        this.alisar=alisar;
     }
     /**
+    * 
     * Consultor de Alisar
     * 
     */
@@ -256,6 +300,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         return alisar;
     }
     /**
+    * 
     * Modificador de la variable string
     * @param string: string a modificar
     */
@@ -264,6 +309,7 @@ public class Lienzo2D extends javax.swing.JPanel {
        
     }
     /**
+    *
     * Consultor de la variable string
     * 
     */
@@ -271,6 +317,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         return string;
     }
     /**
+    * 
     * Modificador del numero de transparencia
     * @param numtrans: nuevo numero de transparencia
     *
@@ -279,6 +326,7 @@ public class Lienzo2D extends javax.swing.JPanel {
        this.numtrans = numtrans;
    }
     /**
+    * 
     * Consultor de numero transparencia
     * 
     */
@@ -286,6 +334,7 @@ public class Lienzo2D extends javax.swing.JPanel {
        return numtrans;
    }
     /**
+    * 
     * Modificador del grosor
     * @param grosor: numero de nuevo grosor
     *
@@ -295,6 +344,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         
     }
     /**
+    * 
     * Consultor del grosor
     * 
     */
@@ -302,7 +352,8 @@ public class Lienzo2D extends javax.swing.JPanel {
         return grosor;
     }
 
-     /**
+    /**
+    * 
     * Modificador de Editar
     * @param seleccionada: valor de la nueva Editar
     * pone Editar a true para que se vea la figura 
@@ -315,6 +366,7 @@ public class Lienzo2D extends javax.swing.JPanel {
         repaint();
     }
      /**
+    * 
     * Metodo que pinta una figura sobre el lienzo
     * 
     *
@@ -327,12 +379,12 @@ public class Lienzo2D extends javax.swing.JPanel {
         double w, h;
         if(null != forma)switch (forma) {
             case PUNTO:
-                figura = new MiLinea(pin,pin,borde,alisar,grosor,numtrans);
+                figura = new MiLinea(pin,pin,borde,alisar,grosor,numtrans,discontinua);
                 
                 figura.setName("punto: " + puntos);
                 break;
             case LINEA:
-                figura = new MiLinea(pin,pout,borde,alisar,grosor,numtrans);
+                figura = new MiLinea(pin,pout,borde,alisar,grosor,numtrans,discontinua);
                 figura.setName("linea: " + lineas);
                 break;
             case RECTANGULO:
@@ -352,7 +404,7 @@ public class Lienzo2D extends javax.swing.JPanel {
                     h = pout.getY() - pin.getY();
                 }
                     
-                    figura = new MiRectangulo(x,y, w, h,borde,alisar,grosor,rellenado,relleno,numtrans,degradado,deghorizontal,degvertical);
+                    figura = new MiRectangulo(x,y, w, h,borde,alisar,grosor,rellenado,relleno,numtrans,degradado,deghorizontal,degvertical,discontinua);
                     
                     figura.setName("Rectangulo: " + rectangulos);
                
@@ -360,7 +412,7 @@ public class Lienzo2D extends javax.swing.JPanel {
                 break;
             case STRING:
                 if(string !=null){
-                figura = new MiString(pin.getX(),pin.getY(),borde,alisar,grosor,string,numtrans);
+                figura = new MiString(pin.getX(),pin.getY(),borde,alisar,grosor,string,numtrans,discontinua);
                 figura.setName("String: " + strings);
                 }
 
@@ -382,12 +434,12 @@ public class Lienzo2D extends javax.swing.JPanel {
                         y = pin.getY();
                     h = pout.getY() - pin.getY();
                 }
-                figura = new MiElipse(x,y, w, h,borde,alisar,grosor,rellenado,relleno,numtrans,degradado,deghorizontal,degvertical);
+                figura = new MiElipse(x,y, w, h,borde,alisar,grosor,rellenado,relleno,numtrans,degradado,deghorizontal,degvertical,discontinua);
                 figura.setName("Elipse: " + elipses);
                 break;
             default:
                 break;
-                
+              
         }
         
         

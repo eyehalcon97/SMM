@@ -41,8 +41,8 @@ public abstract class MiRectangularShape extends MiFigura{
     * @param degvertical: Selecciona el tipo de degradado
     * 
     */
-    public MiRectangularShape(Color Borde,boolean alisar,int grosor,boolean rellenado,Color relleno,int numtrans,Color degradado,boolean deghorizontal,boolean degvertical){
-        super(Borde,alisar,grosor,numtrans);
+    public MiRectangularShape(Color Borde,boolean alisar,int grosor,boolean rellenado,Color relleno,int numtrans,Color degradado,boolean deghorizontal,boolean degvertical,boolean discontinua){
+        super(Borde,alisar,grosor,numtrans,discontinua);
         this.rellenado=rellenado;
         this.relleno=relleno;
         this.degradado=degradado;
