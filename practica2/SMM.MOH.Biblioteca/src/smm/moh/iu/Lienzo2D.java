@@ -368,6 +368,10 @@ public class Lienzo2D extends javax.swing.JPanel {
      /**
     * 
     * Metodo que pinta una figura sobre el lienzo
+    * Dicho metodo crea la figura, dicha figura se crea y
+    * se borra hasta que el usuario se decide en el tamaño y la
+    * posicion, una vez establecido, se incluye en la lista de
+    * figuras pintadas en nuestro lienzo
     * 
     *
     */
@@ -503,7 +507,10 @@ public class Lienzo2D extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+    * Evento de arrastre en el lienzo
+    * Si estamos en modo editar, mueve la figura seleccionada a dicha posicion
+    */
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         // TODO add your handling code here:
           pout=new Point2D.Float(evt.getX(),evt.getY());
@@ -518,7 +525,11 @@ public class Lienzo2D extends javax.swing.JPanel {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
             
     }//GEN-LAST:event_formMouseClicked
-
+    /**
+    * 
+    * Evento que gestiona cuando se deja pulsado el raton en el lienzo
+    *
+    */
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         // TODO add your handling code here:
                pin=new Point2D.Float(evt.getX(),evt.getY());
@@ -540,7 +551,13 @@ public class Lienzo2D extends javax.swing.JPanel {
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
 
     }//GEN-LAST:event_formMouseMoved
-
+    /**
+    * Evento que gestiona cuando se suelta el click del raton en el lienzo
+    * una vez dejado de pulsar, se añade el objeto figura en la lista de
+    * figuras del lienzo, tambien dependiendo de la figura, llevamos el 
+    * contador de que numero de figura que hemos creado
+    *
+    */
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         // TODO add your handling code here:
         pout=new Point2D.Float(evt.getX(),evt.getY());

@@ -19,10 +19,15 @@ import sm.image.BufferedImageOpAdapter;
 public class RandomOp extends BufferedImageOpAdapter{   
     
 
-     /**
-    * Applica el filtro de random
+    /**
+     * 
+    * Applica el filtro Randmo
+    * dicho filtro consiste en utilizar un numero aleatorio, dicho
+    * numero se multiplica por la media de los tres componentes del pixel y se 
+    * le suma al valor del comoponente en cuestion
     * @param src: imagen de origen
     * @param dest: imagen de destino
+    * 
     */
     @Override
     public BufferedImage filter(BufferedImage src, BufferedImage dest)

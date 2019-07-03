@@ -1,5 +1,5 @@
 
-import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import smm.moh.video.VideoListener;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
@@ -16,7 +16,7 @@ import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
  *
  * @author eyehalcon97
  */
-public class VentanaVideo extends VentanaInterna {
+public class VentanaVideo extends VentanaMultimedia {
 
     /**
      * Creates new form VentanaVideo
@@ -28,15 +28,30 @@ public class VentanaVideo extends VentanaInterna {
     private File fMedia;
     private javax.swing.JButton botonStop;
     private javax.swing.JButton botonPlay;
+     /**
+      * 
+     * Contructor por defecto
+     * 
+     */
     public VentanaVideo() {
         super();
-        initComponents();
     }
-
-    public VentanaVideo(File f,javax.swing.JButton botonStop,javax.swing.JButton botonPlay) {
-        super();
+    /**
+     * 
+     * Segundo constructor
+     * @param frame: VentanaPrincipal a la que pertenece
+     * @param f: Archivo que se reproduce
+     * @param botonStop: boton de parar
+     * @param botonPlay: boton de reproducir
+     * 
+     */
+    public VentanaVideo(VentanaPrincipal frame,File f,javax.swing.JButton botonStop,javax.swing.JButton botonPlay) {
+        super(frame);
+        
+        
         this.botonPlay=botonPlay;
         this.botonStop=botonStop;
+        botonPlay.setEnabled(true);
         initComponents();
         fMedia = f;   
         EmbeddedMediaPlayerComponent aVisual = new EmbeddedMediaPlayerComponent();    
@@ -47,7 +62,12 @@ public class VentanaVideo extends VentanaInterna {
         
         
     }
-
+    /**
+    * 
+    * Inicia la reproduccion por el principio o por donde se
+    * haya pausado
+    * 
+    */
     public void play() {   
         if (video != null) {     
             if(video.isPlayable()){       //Si se estaba reproduciendo       
@@ -58,7 +78,11 @@ public class VentanaVideo extends VentanaInterna {
             }   
         }         
     } 
- 
+    /**
+    * 
+    * Pausa la reproduccion
+    * 
+    */
     public void stop() {   
         if (video != null) {     
             if (video.isPlaying()) {       
@@ -67,14 +91,23 @@ public class VentanaVideo extends VentanaInterna {
                 video.stop();     
             }   
         }         
-    } 
+    }
+     /**
+     * 
+     * Establece el manejador de eventos de video
+     * @param ml:el manejador que se asigna al video
+     * 
+     */
     public void addMediaPlayerEventListener(MediaPlayerEventListener ml) {  
         if (video != null) {     
             video.addMediaPlayerEventListener(ml);   
         } 
     } 
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
+
+    @Override
+    public BufferedImage getImagen(){
+       
+        return video.getSnapshot();
         
     }
     /**
@@ -88,60 +121,39 @@ public class VentanaVideo extends VentanaInterna {
 
         jPanel1 = new javax.swing.JPanel();
 
-        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameActivated(evt);
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameClosing(evt);
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 390, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 268, Short.MAX_VALUE)
-        );
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        // TODO add your handling code here:
-        stop();
-    }//GEN-LAST:event_formInternalFrameClosing
-
-    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
-        // TODO add your handling code here:
-        repaint();
-    }//GEN-LAST:event_formInternalFrameActivated
-
+    /**
+    * 
+    * Consultor del boton Play
+    * @return botonPlay: boton de reproducir
+    * 
+    */
+    public javax.swing.JButton getBotonPlay(){
+        return botonPlay;
+    }
+    /**
+    * 
+    * Consultor del boton Stop
+    * @return botonStop: boton de parar
+    * 
+    */
+        public javax.swing.JButton getBotonStop(){
+        return botonStop;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;

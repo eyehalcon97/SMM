@@ -48,6 +48,7 @@ public class VentanaLienzo extends VentanaInterna {
     /**
     *
     * Consultor de vertical
+    * @return El valor del vertical
     * 
     */
     public int getVertical(){
@@ -56,6 +57,8 @@ public class VentanaLienzo extends VentanaInterna {
     /**
     *
     * Consultor de Horizontal
+    * @return El valor de la horizontal
+    * 
     */
     public int getHorizontal(){
         return horizontal;
@@ -63,6 +66,8 @@ public class VentanaLienzo extends VentanaInterna {
     /**
     *
     * Consultor del lienzo
+    * @return Lienzo
+    * 
     */
     public smm.moh.iu.LienzoImagen2D getLienzoImagen(){
         return lienzoImagen2D1;
@@ -211,7 +216,6 @@ public class VentanaLienzo extends VentanaInterna {
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        System.out.println(lienzoImagen2D1.getHeight());
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)

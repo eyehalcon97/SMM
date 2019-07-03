@@ -12,9 +12,13 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
-/*
+
+/**
+ *
  * @author eyehalcon97
+ * Mi clase Elipse
  */
+
 public class MiElipse extends MiRectangularShape{
     private Ellipse2D forma;
     /**
@@ -50,6 +54,7 @@ public class MiElipse extends MiRectangularShape{
     * @param deghorizontal: Selecciona el tipo de degradado
     * @param degvertical: Selecciona el tipo de degradado
     * @param rellenado: selecciona si esta rellenado
+    * @param discontinua: Selecciona el trazado
     * 
     */
     public MiElipse(double x,double y,double h,double w,Color Borde,boolean alisar,int grosor,boolean rellenado,Color relleno,int numtrans,Color degradado,boolean deghorizontal,boolean degvertical,boolean discontinua){
@@ -60,6 +65,7 @@ public class MiElipse extends MiRectangularShape{
     /**
     *
     * Constructor copia
+    * @param aux: Segundo objeto MiElipse
     * 
     */
     public MiElipse(MiElipse aux){
@@ -86,6 +92,7 @@ public class MiElipse extends MiRectangularShape{
     *
     * Consultor de la localizacion de la
     * figura
+    * @return Punto medio de la figura
     * 
     */
     @Override
@@ -107,6 +114,8 @@ public class MiElipse extends MiRectangularShape{
     /**
     *
     *   Consultor de forma
+    * @return la forma
+    * 
     */
     public Ellipse2D getForma(){
         return forma;

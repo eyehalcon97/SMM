@@ -12,19 +12,24 @@ import javax.sound.sampled.LineListener;
  *
  * @author eyehalcon97
  * Mi clase manejadora de eventos de audio
+ * 
  */
 public class ManejadorAudio implements LineListener {   
     
-    private javax.swing.JButton botonPlay;
-    private javax.swing.JButton botonStop;
+    private javax.swing.JButton botonPlay=null;
+    private javax.swing.JButton botonStop=null;
+    private javax.swing.JButton botonRecord=null;
     /**
     *
     *   Constructor
     *   @param botonPlay: boton de Play
     *   @param botonStop: boton de Stop
+    *   @param botonRecord: boton de grabacion
     */
-    public ManejadorAudio(javax.swing.JButton botonPlay,javax.swing.JButton botonStop){
+    public ManejadorAudio(javax.swing.JButton botonPlay,javax.swing.JButton botonStop,javax.swing.JButton botonRecord){
         this.botonPlay=botonPlay;
+        this.botonStop=botonStop;
+        this.botonRecord=botonRecord;
     }
     /**
     *
@@ -37,16 +42,19 @@ public class ManejadorAudio implements LineListener {
             
             botonPlay.setEnabled(false);
             botonStop.setEnabled(true);
+            botonRecord.setEnabled(false);
         }     
         if (event.getType() == LineEvent.Type.STOP) {  
             
             botonStop.setEnabled(false);
             botonPlay.setEnabled(true);
+            botonRecord.setEnabled(true);
         }          
         if (event.getType() == LineEvent.Type.CLOSE){ 
             
             botonStop.setEnabled(false);
             botonPlay.setEnabled(true);
+            botonRecord.setEnabled(true);
         }    
 
     } 

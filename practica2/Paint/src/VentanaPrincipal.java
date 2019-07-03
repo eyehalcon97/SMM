@@ -153,19 +153,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         numtrans = new javax.swing.JSlider();
         jPanel11 = new javax.swing.JPanel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        Trazado = new javax.swing.JComboBox<>();
         jPanel18 = new javax.swing.JPanel();
         jPanel26 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        botonRecord = new javax.swing.JButton();
         botonplay = new javax.swing.JButton();
         botonstop = new javax.swing.JButton();
         listaReproduccion = new javax.swing.JComboBox<>();
         jPanel21 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        PlayVideo = new javax.swing.JButton();
-        StopVideo = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        botonRecord = new javax.swing.JButton();
+        Camara = new javax.swing.JButton();
         Instantanea = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -181,8 +177,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         contrastenormal = new javax.swing.JButton();
         aclarar = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        MiFuncion = new javax.swing.JButton();
+        Seno = new javax.swing.JButton();
         Tintado = new javax.swing.JButton();
         Umbralizador = new javax.swing.JButton();
         Duplicar = new javax.swing.JButton();
@@ -192,7 +188,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Tinte = new javax.swing.JSlider();
         umbral = new javax.swing.JSlider();
         Random = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        FiltroBosque = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
@@ -471,16 +467,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel11.setPreferredSize(new java.awt.Dimension(20, 100));
         jPanel11.setLayout(new java.awt.GridLayout(1, 0));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "linea continua", "linea discontinua" }));
-        jComboBox2.setMaximumSize(new java.awt.Dimension(20, 100));
-        jComboBox2.setMinimumSize(new java.awt.Dimension(20, 100));
-        jComboBox2.setPreferredSize(new java.awt.Dimension(20, 100));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        Trazado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "linea continua", "linea discontinua" }));
+        Trazado.setMaximumSize(new java.awt.Dimension(20, 100));
+        Trazado.setMinimumSize(new java.awt.Dimension(20, 100));
+        Trazado.setPreferredSize(new java.awt.Dimension(20, 100));
+        Trazado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                TrazadoActionPerformed(evt);
             }
         });
-        jPanel11.add(jComboBox2);
+        jPanel11.add(Trazado);
 
         jPanel8.add(jPanel11);
 
@@ -490,18 +486,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel18.setLayout(new java.awt.GridLayout(0, 1));
 
         jPanel26.setLayout(new java.awt.GridLayout(1, 0));
-
-        jLabel13.setText("Audio");
-        jPanel26.add(jLabel13);
-
-        botonRecord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/record24x24.png"))); // NOI18N
-        botonRecord.setToolTipText("Grabar");
-        botonRecord.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonRecordActionPerformed(evt);
-            }
-        });
-        jPanel26.add(botonRecord);
 
         botonplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play24x24.png"))); // NOI18N
         botonplay.setToolTipText("Play");
@@ -522,6 +506,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel26.add(botonstop);
 
         listaReproduccion.setToolTipText("Lista de reproduccion");
+        listaReproduccion.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                listaReproduccionItemStateChanged(evt);
+            }
+        });
         listaReproduccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaReproduccionActionPerformed(evt);
@@ -533,34 +522,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanel21.setLayout(new java.awt.GridLayout(1, 0));
 
-        jLabel14.setText("Video");
-        jPanel21.add(jLabel14);
-
-        PlayVideo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/play24x24.png"))); // NOI18N
-        PlayVideo.setToolTipText("Play");
-        PlayVideo.addActionListener(new java.awt.event.ActionListener() {
+        botonRecord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/record24x24.png"))); // NOI18N
+        botonRecord.setToolTipText("Grabar");
+        botonRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PlayVideoActionPerformed(evt);
+                botonRecordActionPerformed(evt);
             }
         });
-        jPanel21.add(PlayVideo);
+        jPanel21.add(botonRecord);
 
-        StopVideo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/stop24x24.png"))); // NOI18N
-        StopVideo.setToolTipText("Parar");
-        StopVideo.addActionListener(new java.awt.event.ActionListener() {
+        Camara.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Camara.png"))); // NOI18N
+        Camara.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                StopVideoActionPerformed(evt);
+                CamaraActionPerformed(evt);
             }
         });
-        jPanel21.add(StopVideo);
-
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Camara.png"))); // NOI18N
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        jPanel21.add(jButton5);
+        jPanel21.add(Camara);
 
         Instantanea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Capturar.png"))); // NOI18N
         Instantanea.addActionListener(new java.awt.event.ActionListener() {
@@ -678,23 +655,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel10.setPreferredSize(new java.awt.Dimension(500, 90));
         jPanel10.setLayout(new java.awt.GridLayout(2, 3));
 
-        jButton9.setText("MiFuncion (sqrt(log10(x))");
-        jButton9.setToolTipText("Mi funcion");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        MiFuncion.setText("MiFuncion (sqrt(log10(x))");
+        MiFuncion.setToolTipText("Mi funcion");
+        MiFuncion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                MiFuncionActionPerformed(evt);
             }
         });
-        jPanel10.add(jButton9);
+        jPanel10.add(MiFuncion);
 
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sinusoidal.png"))); // NOI18N
-        jButton10.setToolTipText("Funcion seno");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        Seno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sinusoidal.png"))); // NOI18N
+        Seno.setToolTipText("Funcion seno");
+        Seno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                SenoActionPerformed(evt);
             }
         });
-        jPanel10.add(jButton10);
+        jPanel10.add(Seno);
 
         Tintado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/tintar.png"))); // NOI18N
         Tintado.setText("(Relleno)");
@@ -766,13 +743,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jPanel10.add(Random);
 
-        jButton6.setText("FiltroBosque");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        FiltroBosque.setText("FiltroBosque");
+        FiltroBosque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                FiltroBosqueActionPerformed(evt);
             }
         });
-        jPanel10.add(jButton6);
+        jPanel10.add(FiltroBosque);
 
         jPanel2.add(jPanel10);
 
@@ -1213,7 +1190,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 if(f.toString().contains(".png")||f.toString().contains("jpg")||f.toString().contains("jpeg")||f.toString().contains(".PNG")){
                     
                     BufferedImage img = ImageIO.read(f);  
-                    System.out.println(img.getHeight());
                 VentanaLienzo vi = new VentanaLienzo(this,img.getHeight(),img.getWidth()); 
                 vi.getLienzoImagen().setImagen(img);      
                 vi.setTitle(substring);
@@ -1231,10 +1207,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
                 }
                 if(f.toString().contains(".mp4")||f.toString().contains(".mpg")){
-                    VentanaVideo vi = new VentanaVideo(f,StopVideo,PlayVideo);
+                    VentanaVideo vi = new VentanaVideo(this,f,botonstop,botonplay);
                     vi.setTitle(substring);
-                    this.Escritorio.add(vi); 
+                    Escritorio.add(vi); 
                     vi.setVisible(true);
+                    vi.play();
                     
                 }
                 
@@ -1584,7 +1561,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBoxMenuItem2ActionPerformed
     /**
     *
-    * Selecciona un filtro para la immagen
+    * Selecciona un filtro para la imagen
+    * Dependiendo de que filtro seleccionado en el 
+    * desplegable le asignamos un Kernel y luego utilizamos
+    * Convolve Op con dicho kernel
     * 
     */
     private void FiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FiltroActionPerformed
@@ -1652,6 +1632,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     /**
     *
     * Selecciona el brillo de la imagen
+    * Para ello utilizamos el valor sacado del slider del brillo,
+    * Con la variable value sacamos la diferencia de valor entre el 
+    * brillo nuevo y el brillo establecido,una vez sacado el valor
+    * utilizamos RescaleOp teniendo en cuenta si la imagen tiene
+    * alpha o no
     * 
     */
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
@@ -1688,7 +1673,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jSlider1StateChanged
     /**
     *
-    * Selecciona un contraste
+    * Seleccionamos contraste oscuro,
+    * para ello utilizamos LookupTable para calcular el valor gamma con el
+    * que aplicar el filtro.
     * 
     */
     private void contrasteoscuroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contrasteoscuroActionPerformed
@@ -1700,7 +1687,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 if(imgSource!=null){             
                     try{              
                         LookupTable l = LookupTableProducer.gammaCorrection(LookupTableProducer.DEFAULT_A_GAMMA, LookupTableProducer.TYPE_GAMMA_CORRECTION);
-                        
                         LookupOp lop = new LookupOp(l, null);                 
                         lop.filter( imgSource , imgSource);         
                         vi.repaint();       
@@ -1713,7 +1699,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_contrasteoscuroActionPerformed
     /**
     *
-    * Selecciona un contraste
+    * Seleccionamos contraste normal,
+    * para ello utilizamos LookupTable con el tipo SFuncion para
+    * aplicar el filtro.
     * 
     */
     private void contrastenormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contrastenormalActionPerformed
@@ -1724,8 +1712,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 BufferedImage imgSource = vi.getLienzoImagen().getImagen(false);
                  if(imgSource!=null){             
                     try{              
-                    int type = LookupTableProducer.TYPE_SFUNCION;
-                    LookupTable l = LookupTableProducer.createLookupTable(type);
+                    LookupTable l = LookupTableProducer.createLookupTable(LookupTableProducer.TYPE_SFUNCION);
                     //l = LookupTableProducer.gammaCorrection(LookupTableProducer.TYPE_GAMMA_CORRECTION, LookupTableProducer.DEFAULT_GAMMA);
                     LookupOp lop = new LookupOp(l, null);                 
                     lop.filter( imgSource , imgSource);         
@@ -1739,7 +1726,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_contrastenormalActionPerformed
     /**
     *
-    * Selecciona un contraste
+    * Seleccionamos contraste aclarar,
+    * para ello utilizamos LookupTable con el tipo Logaritmico para
+    * aplicar el filtro.
     * 
     */
     private void aclararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aclararActionPerformed
@@ -1750,8 +1739,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 BufferedImage imgSource = vi.getLienzoImagen().getImagen(false);
                  if(imgSource!=null){             
                     try{              
-                        int type = LookupTableProducer.TYPE_LOGARITHM;
-                        LookupTable l = LookupTableProducer.createLookupTable(type);
+                        LookupTable l = LookupTableProducer.createLookupTable(LookupTableProducer.TYPE_LOGARITHM);
                         
                         LookupOp lop = new LookupOp(l, null);                 
                         lop.filter( imgSource , imgSource);         
@@ -1765,10 +1753,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_aclararActionPerformed
     /**
     *
-    * Selecciona un filtro
+    * Aplicamos el filtro Seno,
+    * para ello extraemos todos los datos de la imagen y le aplicamos la funcion seno
     * 
     */
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void SenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SenoActionPerformed
         // TODO add your handling code here:
         if(Escritorio.getSelectedFrame() instanceof VentanaLienzo){
             VentanaLienzo vi = (VentanaLienzo) Escritorio.getSelectedFrame();
@@ -1791,7 +1780,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_SenoActionPerformed
      /**
     *
     * Abre el cuadro de dialogo y selecciona el string 
@@ -1816,7 +1805,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jSlider2PropertyChange
     /**
     *
-    * Rota la imagen
+    * Rota la imagen, en nuestro caso hemos hecho que rote tambien las figuras dibujadas
+    * por el usuario, por lo que al rotar perdemos las propiedades de esas figuras y 
+    * pasaran a ser solo pixeles en el panel, por ello borramos la lista de figuras tras
+    * rotar la imagen, calculamos el centro de la imagen y rotamos tantos grados como el
+    * valor obtenido del slider de rotacion, rotamos en base a dicho centro.
     * 
     */
     private void jSlider2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider2StateChanged
@@ -1885,7 +1878,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_aumentarActionPerformed
     /**
     *
-    * Sacar espectro de color
+    * Sacar espectro de color,
+    * Creamos una nueva ventana interna con cada espectro de color a nivel de gris
+    * De esta forma creamos una ventana por cada componente del lienzo
+    * luego le aplicamos el filtro de niveles de gris
     * 
     */
     private void EspectroColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EspectroColorActionPerformed
@@ -1893,15 +1889,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if(Escritorio.getSelectedFrame() instanceof VentanaLienzo){
             VentanaLienzo vi = (VentanaLienzo) Escritorio.getSelectedFrame();
             if(vi != null){
-                imgSource = vi.getLienzoImagen().getImagen(true);
-                for(int i=0;i<imgSource.getColorModel().getNumColorComponents();i++){
+                BufferedImage imgSrc = vi.getLienzoImagen().getImagen(true);
+                int numerobandas=imgSrc.getColorModel().getNumColorComponents();
+
+                for(int i=0;i<numerobandas;i++){
                 //Creamos el modelo de color de la nueva imagen basado en un espcio de color GRAY );
                     ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY); 
                     ComponentColorModel cm = new ComponentColorModel(cs, false, false,Transparency.OPAQUE,DataBuffer.TYPE_BYTE);        
                     int bandList[] = {i};
-                    WritableRaster bandRaster = (WritableRaster)imgSource.getRaster().createWritableChild(0,0,imgSource.getWidth(), imgSource.getHeight(), 0, 0, bandList);
+                    System.out.println(i);
+                    WritableRaster bandRaster = (WritableRaster)imgSrc.getRaster().createWritableChild(0,0,imgSrc.getWidth(), imgSrc.getHeight(), 0, 0, bandList);
                     BufferedImage imgBanda = new BufferedImage(cm, bandRaster, false, null);
-                    VentanaLienzo vi2=new VentanaLienzo(this,imgSource.getHeight(),imgSource.getWidth());
+                    VentanaLienzo vi2=new VentanaLienzo(this,imgSrc.getHeight(),imgSrc.getWidth());
                     vi2.getLienzoImagen().setImagen(imgBanda);
                     Escritorio.add(vi2);
                     vi2.setTitle(vi2.getTitle()+ i);
@@ -1912,12 +1911,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
 
+    }//GEN-LAST:event_EspectroColorActionPerformed
     /**
     *
     * Consultor de la figura seleccionada
     * 
     */
-    }//GEN-LAST:event_EspectroColorActionPerformed
     public int figuraactual(){
         return li.getSelectedIndex();  
     }
@@ -1933,6 +1932,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     /**
     *
     * Convierte la imagen segun el espectro de color
+    * Para ello miramos el espectro que tenemos en el lienzo seleccionado
+    * y el espectro que queremos conseguir a partir del slider de seleccion
+    * de espectro,si este esta en la banda seleccionada
+    * no intenta convertirlo, en caso contrario se le aplica
+    * el filtro ConvolveOp para convertirlo al espectro deseado
     * 
     */
     private void espectroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_espectroActionPerformed
@@ -2091,22 +2095,73 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     */
     private void botonplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonplayActionPerformed
         // TODO add your handling code here:
-        player = null; 
-        File f = (File)listaReproduccion.getSelectedItem(); 
-        if(f!=null){   
-            player = new SMClipPlayer(f);
-            ((SMClipPlayer)player).addLineListener( new ManejadorAudio(botonplay,botonstop));
-            if (player != null) {     
-                player.play();
-                botonstop.setEnabled(true);
-                botonRecord.setEnabled(false);
+        
+        
+        if(Escritorio.getSelectedFrame() instanceof VentanaVideo){
+            VentanaVideo vi = (VentanaVideo) Escritorio.getSelectedFrame();
+            if(vi!=null){
+                vi.play();
+                 botonRecord.setEnabled(false);
+                 Instantanea.setEnabled(true);
+            }
+        }else{
+            player = null; 
+            File f = (File)listaReproduccion.getSelectedItem(); 
+            if(f!=null){   
+                player = new SMClipPlayer(f);
+                ((SMClipPlayer)player).addLineListener( new ManejadorAudio(botonplay,botonstop,botonRecord));
+                if (player != null) {     
+                    player.play();
                 
+                }
             }
         }
     }//GEN-LAST:event_botonplayActionPerformed
+    /**
+    *
+    * Establece en habilitado o deshabilitado los controles del video en
+    * caso de que hayamos seleccionado una ventana de video de nuevo
+    * 
+    */
+    public void actualizarControlador(){
+        if(Escritorio.getSelectedFrame() instanceof VentanaVideo){
+            VentanaVideo vi = (VentanaVideo) Escritorio.getSelectedFrame();
+            if(vi!=null){
+                Instantanea.setEnabled(true);
+                botonstop = vi.getBotonStop();
+                botonplay = vi.getBotonPlay();
+            }
+        }else{
+            if(Escritorio.getSelectedFrame() instanceof VentanaInternaCamara){
+                VentanaInternaCamara vi = (VentanaInternaCamara) Escritorio.getSelectedFrame();
+                Instantanea.setEnabled(true);
 
+            }
+        }
+    }
+    /**
+    *
+    * Cuando selecionamos un elemendo de la lista de reproduccion de audio,
+    * deseleccionamos la ventana interna activa para que los controles 
+    * multimedia se utiliceen para el audio
+    * 
+    */
     private void listaReproduccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaReproduccionActionPerformed
         // TODO add your handling code here:
+                VentanaInterna vi= (VentanaInterna)Escritorio.getSelectedFrame();
+        if(vi!= null){
+         try
+                {
+                    vi.setSelected(false);
+                } catch (Exception e)
+                {
+                    System.err.println("Error");
+                }
+        }
+        botonplay.setEnabled(true);
+        botonstop.setEnabled(false);
+        Instantanea.setEnabled(false);
+        botonRecord.setEnabled(true);
     }//GEN-LAST:event_listaReproduccionActionPerformed
     /**
     *
@@ -2117,22 +2172,35 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     */
     private void botonstopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonstopActionPerformed
         // TODO add your handling code here:
-        if (player != null) {     
-                player.stop();
+        if(Escritorio.getSelectedFrame() instanceof VentanaMultimedia){
+            VentanaMultimedia vi = (VentanaMultimedia) Escritorio.getSelectedFrame();
+            if(vi!=null){
+                vi.stop();
+                    botonRecord.setEnabled(true);
+                    Instantanea.setEnabled(true);
+                    botonplay.setEnabled(true);
+                    botonstop.setEnabled(false);
+
+            }
+        }else{
+            if (player != null) {     
+                    player.stop();
+                    Instantanea.setEnabled(false);
+
+                }
+            if (recorder != null){
+                recorder.stop();
+                recorder = null;
                 botonplay.setEnabled(true);
                 botonstop.setEnabled(false);
                 botonRecord.setEnabled(true);
+                new SelString(this,true).setVisible(true);
+                Instantanea.setEnabled(false);
+
+
             }
-        if (recorder != null){
-            recorder.stop();
-            recorder = null;
-            botonplay.setEnabled(true);
-            botonstop.setEnabled(false);
-            botonRecord.setEnabled(true);
-            new SelString(this,true).setVisible(true);
-            
-            
         }
+
     }//GEN-LAST:event_botonstopActionPerformed
     /**
     *
@@ -2142,6 +2210,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     */
     private void botonRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRecordActionPerformed
         // TODO add your handling code here:
+                VentanaInterna vi= (VentanaInterna)Escritorio.getSelectedFrame();
+        if(vi!= null){
+         try
+                {
+                    vi.setSelected(false);
+                } catch (Exception e)
+                {
+                    System.err.println("Error");
+                }
+        }
         botonplay.setEnabled(false);
         botonstop.setEnabled(true);
         botonRecord.setEnabled(false);
@@ -2328,25 +2406,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     /**
     *
     *  Funcion propia LookuOp: (sqrt(log10(xw))
+    * Extraemos los datos del lienzo y le aplicamos la
+    * funcion raiz cuadrada del logaritmo en base 10
     * 
     */
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void MiFuncionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MiFuncionActionPerformed
         // TODO add your handling code here:
         if(Escritorio.getSelectedFrame() instanceof VentanaLienzo){
             VentanaLienzo vi = (VentanaLienzo) Escritorio.getSelectedFrame();
-
-
             if (vi != null){
                 imgSource = vi.getLienzoImagen().getImagen(false);
                 try
                 {
                     byte[] lt = new byte[256];
-                    
                     //La funcion es raiz del log(wx)
                     for (int i = 0; i < 256; ++i){
                         lt[i] = (byte)Math.abs(255 * Math.sqrt(Math.log(90 * i )));
                     }
-                    
                     ByteLookupTable slt = new ByteLookupTable(0, lt);
                     LookupOp lop = new LookupOp(slt, null);
                     lop.filter(imgSource, imgSource);
@@ -2357,7 +2433,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_MiFuncionActionPerformed
 
     private void jSlider2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jSlider2FocusLost
         // TODO add your handling code here:
@@ -2404,6 +2480,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
    /**
     *
     * Duplicar una imagen
+    * Para ello creamos un nuevo BufferedImage desde 0 para que 
+    * este no este referenciado y por tanto cada uno tenga
+    * sus propias caracteristicas
     * 
     */
     private void DuplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DuplicarActionPerformed
@@ -2430,6 +2509,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     /**
     *
     * Tintar una imagen con el color de relleno
+    * sacamos el valor del porcentaje de tintado del slider de
+    * tintado, el color utilizado para el tinte es el del relleno,
+    * para ello aplicamos el filtro a la imagen con TintOp
     * 
     */
     private void TintadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TintadoActionPerformed
@@ -2449,6 +2531,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     /**
     *
     * Funcion ecualizacion
+    * Comprobamos si la ventana contiene un lienzo, una vez hecho esto
+    * usamos el filtro equalizationOp con la imagen
     * 
     */
     private void EcualizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EcualizacionActionPerformed
@@ -2467,7 +2551,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_EcualizacionActionPerformed
     /**
     *
-    * Filtro Sepia
+    * Funcion Sepia
+    * Comprobamos si la ventana contiene un lienzo, una vez hecho esto
+    * usamos el filtro SepiaOp con la imagen
     * 
     */
     private void SepiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SepiaActionPerformed
@@ -2486,7 +2572,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_SepiaActionPerformed
     /**
     *
-    * Filtro de Umbralizacion
+    * Funcion umbralizacion
+    * Comprobamos si la ventana contiene un lienzo, una vez hecho esto
+    * usamos el filtro UmbralizacionOp con la imagen
     * 
     */
     private void UmbralizadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UmbralizadorActionPerformed
@@ -2505,7 +2593,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_UmbralizadorActionPerformed
     /**
     *
-    * Filtro de la imagen negativo
+    * Funcion Negativo
+    * Comprobamos si la ventana contiene un lienzo, una vez hecho esto
+    * usamos el filtro negativoOp con la imagen
     * 
     */
     private void NegativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NegativoActionPerformed
@@ -2524,7 +2614,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_NegativoActionPerformed
     /**
     *
-    * Mi propio Filtro "Random"
+    * Funcion Random
+    * Comprobamos si la ventana contiene un lienzo, una vez hecho esto
+    * usamos el filtro randomOp con la imagen
     * 
     */
     private void RandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RandomActionPerformed
@@ -2626,13 +2718,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         barralista = !barralista;
         actualizarframe();
     }//GEN-LAST:event_jCheckBoxMenuItem5ActionPerformed
-
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    /**
+    *
+    * Establece el trazado del dibujo en el lienzo,
+    * este puede ser lineal o discontinuo
+    * 
+    */
+    private void TrazadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrazadoActionPerformed
         // TODO add your handling code here:
         if(Escritorio.getSelectedFrame() instanceof VentanaLienzo){
             VentanaLienzo vi = (VentanaLienzo) Escritorio.getSelectedFrame();
             if(vi!=null){
-                if(jComboBox2.getSelectedItem().toString() == "linea discontinua"){
+                if(Trazado.getSelectedItem().toString() == "linea discontinua"){
                     vi.getLienzoImagen().setDiscontinua(true);
                     if(li.getSelectedValue()!=null){
                         li.getSelectedValue().setDiscontinua(true);
@@ -2646,64 +2743,74 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 vi.getLienzoImagen().repaint();            
             }
         }
-    }//GEN-LAST:event_jComboBox2ActionPerformed
-
-    private void StopVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StopVideoActionPerformed
-        // TODO add your handling code here:
-        if(Escritorio.getSelectedFrame() instanceof VentanaVideo){
-            VentanaVideo vi = (VentanaVideo) Escritorio.getSelectedFrame();
-            if(vi!=null){
-                vi.stop();
-            }
-        }
-    }//GEN-LAST:event_StopVideoActionPerformed
-
-    private void PlayVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayVideoActionPerformed
-        // TODO add your handling code here:
-        if(Escritorio.getSelectedFrame() instanceof VentanaVideo){
-            VentanaVideo vi = (VentanaVideo) Escritorio.getSelectedFrame();
-            if(vi!=null){
-                vi.play();
-            }
-        }
-    }//GEN-LAST:event_PlayVideoActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_TrazadoActionPerformed
+    /**
+    *
+    * Abre una ventana interna con la imagen que capta
+    * de la camara, si es que el dispositivo tiene una
+    * tambien inicializa los botones
+    * 
+    */    
+    private void CamaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CamaraActionPerformed
         // TODO add your handling code here:
         VentanaInternaCamara vi = new VentanaInternaCamara(this); 
                 vi.setTitle("cam");
-                vi.setVisible(true);
-                this.Escritorio.add(vi);  
-                jButton5.setEnabled(false);
+                vi.setVisible(true);            
+                Escritorio.add(vi);  
+                Camara.setEnabled(false);
                 Instantanea.setEnabled(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
+                botonplay.setEnabled(false);
+                botonstop.setEnabled(true);
+    }//GEN-LAST:event_CamaraActionPerformed
+    /**
+    *
+    * Reestablece los botones de la camara y de la 
+    * captura de instantanea
+    * 
+    */
     public void nuevaCam(){
-        jButton5.setEnabled(true);
+        Camara.setEnabled(true);
         Instantanea.setEnabled(false);
     }
+    /**
+    *
+    * Comprueba que tenemos una ventana del tipo multimedia abierta,
+    * si es asi crea una ventana nueva lienzo con la imagen que se 
+    * mostraba en la ventana multimedia
+    * 
+    */
     private void InstantaneaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InstantaneaActionPerformed
         // TODO add your handling code here:
-        if(Escritorio.getSelectedFrame() instanceof VentanaInternaCamara){
-            VentanaInternaCamara cam = (VentanaInternaCamara) Escritorio.getSelectedFrame();
-            BufferedImage img = cam.getImagen();
-            VentanaLienzo vi = new VentanaLienzo(this,img.getHeight(),img.getWidth()); 
-            BufferedImage copia = new BufferedImage(vi.getLienzoImagen().getImagen(false).getWidth(),vi.getLienzoImagen().getImagen(false).getHeight(),vi.getLienzoImagen().getImagen(true).getType());
-            Graphics g = copia.getGraphics();
-            g.drawImage(vi.getLienzoImagen().getImagen(true), 0, 0, null);
-            VentanaLienzo vi2 = new VentanaLienzo(this,copia.getHeight(),copia.getWidth());
-            vi2.getLienzoImagen().setImagen(copia);
-            vi2.getLienzoImagen().setImagen(img);      
-            vi2.setTitle("captura"); 
-            this.Escritorio.add(vi2);        
-            vi2.setVisible(true);     
-            actualizarframe();
-            vi2.actualizardesplazable();
-            vi2.repaint();
+        if(Escritorio.getSelectedFrame() instanceof VentanaMultimedia){
+            VentanaMultimedia mul = (VentanaMultimedia) Escritorio.getSelectedFrame();
+            BufferedImage img = mul.getImagen();
+            if(img!=null){
+                VentanaLienzo vi = new VentanaLienzo(this,img.getHeight(),img.getWidth()); 
+                BufferedImage copia = new BufferedImage(vi.getLienzoImagen().getImagen(false).getWidth(),vi.getLienzoImagen().getImagen(false).getHeight(),vi.getLienzoImagen().getImagen(true).getType());
+                Graphics g = copia.getGraphics();
+                g.drawImage(vi.getLienzoImagen().getImagen(true), 0, 0, null);
+                VentanaLienzo vi2 = new VentanaLienzo(this,copia.getHeight(),copia.getWidth());
+                vi2.getLienzoImagen().setImagen(copia);
+                vi2.getLienzoImagen().setImagen(img);      
+                vi2.setTitle("captura"); 
+                this.Escritorio.add(vi2);        
+                vi2.setVisible(true);     
+                actualizarframe();
+                vi2.actualizardesplazable();
+                vi2.repaint();
+            }
             
         }
-    }//GEN-LAST:event_InstantaneaActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_InstantaneaActionPerformed
+    /**
+    *
+    * Funcion Bosque
+    * Comprobamos si la ventana contiene un lienzo, una vez hecho esto
+    * usamos el filtro BosqueOp con la imagen
+    * 
+    */
+    private void FiltroBosqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FiltroBosqueActionPerformed
         // TODO add your handling code here:
         VentanaLienzo vi = (VentanaLienzo) Escritorio.getSelectedFrame();
         if(vi!=null){
@@ -2714,12 +2821,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             vi.getLienzoImagen().repaint();
             vi.actualizardesplazable();
         }        
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_FiltroBosqueActionPerformed
+
+    private void listaReproduccionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaReproduccionItemStateChanged
+
+    }//GEN-LAST:event_listaReproduccionItemStateChanged
     /**
     *
     * Escalar la imagen seleccionada
     * @param indice: valor de la escala
-    * 
+    * Aumenta o disminuye la imagen del lienzo seleccionada en base al indice que pasamos
+    * por parametro
     */
     private void escalar(double indice){
         if(Escritorio.getSelectedFrame() instanceof VentanaLienzo){
@@ -2774,6 +2886,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JToggleButton Alisar;
     private javax.swing.JButton Bajar;
     private javax.swing.JButton Borde;
+    private javax.swing.JButton Camara;
     private javax.swing.JButton Degradado;
     private javax.swing.JButton Duplicar;
     private javax.swing.JButton Ecualizacion;
@@ -2787,17 +2900,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem FileGuardar;
     private javax.swing.JMenuItem FileNuevo;
     private javax.swing.JComboBox<String> Filtro;
+    private javax.swing.JButton FiltroBosque;
     private javax.swing.JButton Instantanea;
+    private javax.swing.JButton MiFuncion;
     private javax.swing.JButton Negativo;
-    private javax.swing.JButton PlayVideo;
     private javax.swing.JButton Random;
     private javax.swing.JButton Relleno;
+    private javax.swing.JButton Seno;
     private javax.swing.JButton Sepia;
-    private javax.swing.JButton StopVideo;
     private javax.swing.JToggleButton String;
     private javax.swing.JButton Subir;
     private javax.swing.JButton Tintado;
     private javax.swing.JSlider Tinte;
+    private javax.swing.JComboBox<String> Trazado;
     private javax.swing.JButton Umbralizador;
     private javax.swing.JSpinner X;
     private javax.swing.JSpinner Y;
@@ -2815,26 +2930,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel estado;
     private javax.swing.JPanel head;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton9;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem4;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem5;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

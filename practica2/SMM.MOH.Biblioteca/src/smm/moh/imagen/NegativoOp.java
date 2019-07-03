@@ -20,6 +20,8 @@ public class NegativoOp extends BufferedImageOpAdapter
 
     /**
     * Applica el filtro de negativo
+    * dicho filtro consiste en restar 255(maximo) al valor de cada componente
+    * para ello sacamos el pixel y lo descomponemos
     * @param src: imagen de origen
     * @param dest: imagen de destino
     */

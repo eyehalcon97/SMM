@@ -11,10 +11,18 @@ import uk.co.caprica.vlcj.player.MediaPlayerEventAdapter;
 /**
  *
  * @author eyehalcon97
+ * Mi clase manejadora de eventos de video
  */
 public class VideoListener extends MediaPlayerEventAdapter {
     javax.swing.JButton botonStop;
     javax.swing.JButton botonPlay;
+    /**
+    *
+    *   Constructor
+    *   @param botonPlay: boton de Play
+    *   @param botonStop: boton de Stop
+    *
+    */
     public VideoListener(javax.swing.JButton botonStop,javax.swing.JButton botonPlay){
         this.botonPlay=botonPlay;
         this.botonStop=botonStop;

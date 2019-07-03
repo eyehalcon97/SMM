@@ -23,6 +23,9 @@ public class SepiaOp extends BufferedImageOpAdapter
 {
     /**
     * Applica el filtro de Sepia
+    * dicho filtro consisteen multiplicar cada componente del pixel por
+    * un valor en concreto y su suma, guardarla en cada una de los componentes
+    * correspondientes
     * @param src: imagen de origen
     * @param dest: imagen de destino
     */

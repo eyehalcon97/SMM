@@ -15,14 +15,20 @@ import sm.image.BufferedImageOpAdapter;
  *
  * @author eyehalcon97
  * Mi clase FiltroBosqueOp
+ * 
  */
 public class FiltroBosqueOp extends BufferedImageOpAdapter{   
     
 
-     /**
-    * Applica el filtro de random
+    /**
+    * Applica el filtro de Bosque
+    * dicho filtro consiste en coger el componente con el numero mas alto, y si ese
+    * componente es distintio de Green, se intercambian entre ellos, de esta manera 
+    * hacemos que la imagen se vea un poco mas verdosa, excepto tanto los tonos 
+    * oscuros como claros que apenas notaremos la diferencia.
     * @param src: imagen de origen
     * @param dest: imagen de destino
+    * 
     */
     @Override
     public BufferedImage filter(BufferedImage src, BufferedImage dest)
@@ -51,12 +57,6 @@ public class FiltroBosqueOp extends BufferedImageOpAdapter{
                         pixel[1] = maximo2;
                     }
                 }
-
-                   //De esta manera hacemos que la imagen se vea un poco mas verdosa,
-                   //excepto tanto  los tonos oscuros como claros que 
-                   // apenas notaremos la diferencia o 
-                  
-
 
                 //Aplicamos el cambio
                 destRaster.setPixel(x,y, pixel);

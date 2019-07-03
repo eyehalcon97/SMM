@@ -17,7 +17,7 @@ import sm.image.BufferedImageOpAdapter;
  */
 
 public class UmbralizacionOp extends BufferedImageOpAdapter{   
-    private int umbral;
+    private int umbral = 0;
      /**
     * Constructor por defecto
     * @param umbral: numero del umbral
@@ -27,7 +27,12 @@ public class UmbralizacionOp extends BufferedImageOpAdapter{
         this.umbral = umbral;
     } 
     /**
-    * Applica el filtro de umbralizacion
+    * Applica el filtro de Umbral
+    * dicho filtro consiste en calcular la media de cada componente de
+    * un pixel, luego utilizamos el umbral para decidir el valor del nuevo
+    * pixel, si la media es superior al umbral, establecemos ese pixel a
+    * negro, si por el contrario es inferior o igual a la media del umbral,
+    * dicho pixel toma el valor del blanco
     * @param src: imagen de origen
     * @param dest: imagen de destino
     */
