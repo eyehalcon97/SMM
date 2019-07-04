@@ -22,7 +22,11 @@ public abstract class MiRectangularShape extends MiFigura{
         protected Color degradado;
         protected boolean vertical;
         protected boolean horizontal;
-        public MiRectangularShape(){
+        
+    /**
+     *Contructor por defecto
+     */
+    public MiRectangularShape(){
         super();
         rellenado = false;
         relleno = Color.BLACK;
@@ -39,6 +43,8 @@ public abstract class MiRectangularShape extends MiFigura{
     * @param degradado: Selecciona el degradado
     * @param deghorizontal: Selecciona el tipo de degradado
     * @param degvertical: Selecciona el tipo de degradado
+    * @param discontinua: Selecciona el trazado
+    * @param rellenado: Selecciona el rellenado
     * 
     */
     public MiRectangularShape(Color Borde,boolean alisar,int grosor,boolean rellenado,Color relleno,int numtrans,Color degradado,boolean deghorizontal,boolean degvertical,boolean discontinua){
@@ -52,7 +58,9 @@ public abstract class MiRectangularShape extends MiFigura{
     }
     /**
     *
-    * Constructor por defecto
+    * Constructor copia
+    * @param aux: Segundo objeto del constructor
+    * 
     */
     public MiRectangularShape(MiRectangularShape aux){
         super((MiFigura)aux);
@@ -65,6 +73,8 @@ public abstract class MiRectangularShape extends MiFigura{
     /**
     *
     *   Consultor de rellenado
+    * Devuelve true si esta relleando
+    * @return booleano de rellenado
     */
      public boolean getRellenado(){
         return rellenado;
@@ -88,6 +98,7 @@ public abstract class MiRectangularShape extends MiFigura{
     /**
     *
     *   Consultor de relleno
+    * @return color de relleno
     */
     public Color getRelleno(){
         return relleno;
@@ -96,6 +107,8 @@ public abstract class MiRectangularShape extends MiFigura{
     /**
     *
     *   Consultor de horizontal
+    * @return bool degradado horizontal
+    * 
     */
     public boolean getHorizontal(){
         return horizontal;
@@ -103,6 +116,8 @@ public abstract class MiRectangularShape extends MiFigura{
     /**
     *
     *   Consultor de vertical
+    * @return bool degradado vertical
+    * 
     */
     public boolean getVertical(){
         return vertical;
@@ -111,6 +126,7 @@ public abstract class MiRectangularShape extends MiFigura{
     *
     *   Modificador de horizontal
     *   @param horizontal: bool a introducir
+    * 
     */
     public void setHorizontal(boolean horizontal){
         this.horizontal=horizontal;
@@ -122,6 +138,7 @@ public abstract class MiRectangularShape extends MiFigura{
     *
     *   Modificador de vertical
     *   @param vertical: bool a introducir
+    * 
     */
     public void setVertical(boolean vertical){
         this.vertical=vertical;
@@ -132,6 +149,8 @@ public abstract class MiRectangularShape extends MiFigura{
     /**
     *
     *   Consultor de degradado
+    * @return color de degradado
+    * 
     */
     public Color getDegradado(){
         return degradado;
@@ -140,6 +159,7 @@ public abstract class MiRectangularShape extends MiFigura{
     *
     *   Modificador de degradado
     *   @param color: color de degradado
+    * 
     */
     public void setDegradado(Color color){
         degradado= color;

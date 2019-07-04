@@ -27,6 +27,7 @@ public class UmbralizacionOp extends BufferedImageOpAdapter{
         this.umbral = umbral;
     } 
     /**
+    *
     * Applica el filtro de Umbral
     * dicho filtro consiste en calcular la media de cada componente de
     * un pixel, luego utilizamos el umbral para decidir el valor del nuevo
@@ -35,7 +36,10 @@ public class UmbralizacionOp extends BufferedImageOpAdapter{
     * dicho pixel toma el valor del blanco
     * @param src: imagen de origen
     * @param dest: imagen de destino
+    * @return Nueva imagen con el filtro aplicado
+    * 
     */
+    @Override
     public BufferedImage filter(BufferedImage src, BufferedImage dest)
     {
         if (src == null)

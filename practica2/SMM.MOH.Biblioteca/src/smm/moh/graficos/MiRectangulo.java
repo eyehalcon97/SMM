@@ -55,6 +55,7 @@ public class MiRectangulo extends MiRectangularShape{
     * @param deghorizontal: Selecciona el tipo de degradado
     * @param degvertical: Selecciona el tipo de degradado
     * @param rellenado: selecciona si esta rellenado
+    * @param discontinua: Selecciona el trazado
     * 
     */
     public MiRectangulo(double x,double y,double h,double w,Color Borde,boolean alisar,int grosor,boolean rellenado,Color relleno,int numtrans,Color degradado,boolean deghorizontal,boolean degvertical,boolean discontinua){
@@ -68,6 +69,7 @@ public class MiRectangulo extends MiRectangularShape{
     /**
     *
     * Constructor copia
+    * @param aux: Segundo objeto del constructor
     * 
     */
     public MiRectangulo(MiRectangulo aux){
@@ -92,8 +94,10 @@ public class MiRectangulo extends MiRectangularShape{
     *
     * Consultor de la localizacion de la
     * figura
+    * @return Punto medio de la figura
     * 
     */
+    @Override
     public Point2D getLocation(){
         double dx=forma.getX()+(forma.getWidth()/2);
         double dy=forma.getY()+(forma.getHeight()/2);
@@ -111,6 +115,7 @@ public class MiRectangulo extends MiRectangularShape{
     /**
     *
     *   Consultor de forma
+    * @return forma
     */  
     public Rectangle2D getForma(){
         return forma;

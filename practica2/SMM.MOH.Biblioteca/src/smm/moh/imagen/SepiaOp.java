@@ -28,6 +28,8 @@ public class SepiaOp extends BufferedImageOpAdapter
     * correspondientes
     * @param src: imagen de origen
     * @param dest: imagen de destino
+    * @return Nueva imagen con el filtro aplicado
+    * 
     */
     @Override
      public BufferedImage filter(BufferedImage src, BufferedImage dest){       

@@ -65,7 +65,7 @@ public class MiElipse extends MiRectangularShape{
     /**
     *
     * Constructor copia
-    * @param aux: Segundo objeto MiElipse
+    * @param aux: Segundo objeto del constructor
     * 
     */
     public MiElipse(MiElipse aux){
@@ -75,7 +75,7 @@ public class MiElipse extends MiRectangularShape{
         relleno=aux.getRelleno();
 
     }
-        /**
+    /**
     *
     * Posiciona la figura en la posicion 
     * seleccionada

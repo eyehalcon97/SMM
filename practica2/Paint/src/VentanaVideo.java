@@ -83,6 +83,7 @@ public class VentanaVideo extends VentanaMultimedia {
     * Pausa la reproduccion
     * 
     */
+    @Override
     public void stop() {   
         if (video != null) {     
             if (video.isPlaying()) {       
@@ -121,6 +122,24 @@ public class VentanaVideo extends VentanaMultimedia {
 
         jPanel1 = new javax.swing.JPanel();
 
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
+
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -136,6 +155,11 @@ public class VentanaVideo extends VentanaMultimedia {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        // TODO add your handling code here:
+                cuadro.actualizarControlador();
+    }//GEN-LAST:event_formInternalFrameActivated
     /**
     * 
     * Consultor del boton Play
@@ -143,6 +167,9 @@ public class VentanaVideo extends VentanaMultimedia {
     * 
     */
     public javax.swing.JButton getBotonPlay(){
+         if (video.isPlaying()) {
+             botonPlay.setEnabled(false);
+         }
         return botonPlay;
     }
     /**
@@ -152,6 +179,9 @@ public class VentanaVideo extends VentanaMultimedia {
     * 
     */
         public javax.swing.JButton getBotonStop(){
+         if (video.isPlaying()) {
+             botonStop.setEnabled(true);
+         }
         return botonStop;
     }
 

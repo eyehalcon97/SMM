@@ -50,6 +50,8 @@ public abstract class MiFigura {
     *   @param alisar: booleano de alisar
     *   @param grosor: grosor de la figura
     *   @param numtrans: numero de la transparencia
+    *   @param discontinua: Selecciona el trazado
+    * 
     */    
     public MiFigura(Color borde,boolean alisar,int grosor,int numtrans,boolean discontinua){
         render = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
@@ -65,7 +67,8 @@ public abstract class MiFigura {
     }
     /**
     *
-    * Contructor por referencia
+    * Constructor copia
+    * @param aux: Segundo objeto del constructor
     * 
     */
     public MiFigura(MiFigura aux){
@@ -105,6 +108,7 @@ public abstract class MiFigura {
     /**
     *
     * Colsultor de transparencia
+    * @return numero de transparencia
     * 
     */
    public int getNumtrans(){
@@ -113,6 +117,7 @@ public abstract class MiFigura {
     /**
     *
     * Colsultor de discontinua
+    * @return booleano discontinua
     * 
     */
    public boolean getDiscontinua(){
@@ -121,6 +126,7 @@ public abstract class MiFigura {
     /**
     *
     * Modificador de discontinua
+    * @param discontinua: nuevo valor
     * 
     */
    public void setDiscontinua(boolean discontinua){
@@ -147,6 +153,7 @@ public abstract class MiFigura {
     /**
     *
     * Colsultor de Borde
+    * @return Color del borde
     * 
     */
    public Color getBorde(){
@@ -155,6 +162,7 @@ public abstract class MiFigura {
     /**
     *
     * Colsultor de Alisar
+    * @return boleano de alisar
     * 
     */
    public boolean getAlisar(){
@@ -163,6 +171,7 @@ public abstract class MiFigura {
     /**
     *
     * Colsultor de grosor
+    * @return numero de grosor
     * 
     */
    public int getGrosor(){
@@ -197,6 +206,7 @@ public abstract class MiFigura {
     *
     * Consultor de la localizacion de la
     * figura
+    * @return Punto medio de la figura
     * 
     */
     public abstract Point2D getLocation();

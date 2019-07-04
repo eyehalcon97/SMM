@@ -16,6 +16,7 @@ import java.awt.geom.Point2D;
 /**
  *
  * @author eyehalcon97
+ * 
  */
 public class MiString extends MiFigura{
     private Line2D forma;
@@ -47,6 +48,8 @@ public class MiString extends MiFigura{
     * @param alisar: bool de alisar
     * @param grosor: numero de grosor
     * @param numtrans: numero de transparencia
+    * @param discontinua: Selecciona el trazado
+    * 
     */
     public MiString(double x,double y,Color Borde,boolean alisar,int grosor,String string,int numtrans,boolean discontinua){
         super(Borde,alisar,grosor,numtrans,discontinua);
@@ -57,6 +60,7 @@ public class MiString extends MiFigura{
     /**
     *
     * Constructor copia
+    * @param aux: Segundo objeto del constructor
     * 
     */
     public MiString(MiString aux){
@@ -73,6 +77,7 @@ public class MiString extends MiFigura{
     * @param pos: punto donde se posiciona
     * 
     */
+    @Override
     public void setLocation(Point2D pos){
         double dx=pos.getX()-forma.getX1();
         double dy=pos.getY()-forma.getY1();
@@ -83,8 +88,10 @@ public class MiString extends MiFigura{
     *
     * Consultor de la localizacion de la
     * figura
+    * @return Punto medio de la figura
     * 
     */
+    @Override
       public Point2D getLocation(){
         return forma.getP1();
     }
@@ -99,6 +106,7 @@ public class MiString extends MiFigura{
     /**
     *
     *   Consultor de forma
+    * @return forma
     */   
     public Line2D getForma(){
         return forma;
@@ -114,6 +122,7 @@ public class MiString extends MiFigura{
     /**
     *
     *   Consultor de string
+    * @return contenido
     */   
     public String getString(){
         return string;

@@ -21,12 +21,12 @@ public class RandomOp extends BufferedImageOpAdapter{
 
     /**
      * 
-    * Applica el filtro Randmo
+    * Applica el filtro Random (Componente a componente)
     * dicho filtro consiste en utilizar un numero aleatorio, dicho
-    * numero se multiplica por la media de los tres componentes del pixel y se 
-    * le suma al valor del comoponente en cuestion
+    * numero se multiplica por 3.5 se le suma al valor del pixel,
     * @param src: imagen de origen
     * @param dest: imagen de destino
+    * @return Nueva imagen con el filtro aplicado
     * 
     */
     @Override
@@ -44,13 +44,12 @@ public class RandomOp extends BufferedImageOpAdapter{
         for (int x = 0; x < src.getWidth(); x++) {       
             for (int y = 0; y < src.getHeight(); y++) {
                 pixel = src.getRaster().getPixel(x, y, pixel);
-                //Calculamos la media del valor del pixel
-                float media = (pixel[0]+pixel[1]+pixel[2])/3;
-                //aplicamos el cambio del valor random
-                pixel[0] =(int)(pixel[0]+(media*random))%255;
-                pixel[1] =(int)(pixel[1]+(media*random))%255;
-                pixel[2] =(int)(pixel[2]+(media*random))%255;
-                   
+                   //aplicamos el cambio del valor random
+                for(int i=0;i<3;i++){
+                     pixel[i] =(int)((pixel[i]+(random))*3.5)%255;
+                }
+                
+
 
 
                 //Aplicamos el cambio

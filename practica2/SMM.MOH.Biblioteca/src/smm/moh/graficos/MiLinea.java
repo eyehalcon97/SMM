@@ -40,6 +40,8 @@ public class MiLinea extends MiFigura{
     * @param alisar: bool de alisar
     * @param grosor: numero de grosor
     * @param numtrans: numero de transparencia
+    * @param discontinua: Selecciona el trazado
+    * 
     */
     public MiLinea(Point2D pd, Point2D pd1,Color Borde,boolean alisar,int grosor,int numtrans,boolean discontinua){
         super(Borde,alisar,grosor,numtrans,discontinua);
@@ -48,7 +50,9 @@ public class MiLinea extends MiFigura{
     }
     /**
     *
-    *   Contructor copia
+    * Constructor copia
+    * @param aux: Segundo objeto del constructor
+    * 
     */
     public MiLinea(MiLinea aux){
         super((MiFigura)aux);
@@ -76,8 +80,10 @@ public class MiLinea extends MiFigura{
     *
     * Consultor de la localizacion de la
     * figura
+    * @return Punto medio de la figura
     * 
     */
+    @Override
     public Point2D getLocation(){
         return forma.getP1();
     }
@@ -94,6 +100,7 @@ public class MiLinea extends MiFigura{
     /**
     *
     *   Consultor de forma
+    * @return devuelve forma
     */
     public Line2D getForma(){
         return forma;
@@ -101,7 +108,7 @@ public class MiLinea extends MiFigura{
     /**
     *
     * Devuelve true si es un punto
-    * 
+    * @return valor booleano
     * 
     */
 
@@ -112,12 +119,14 @@ public class MiLinea extends MiFigura{
         }
         return resultado;
     }
-    /*
+
+
+    /**
     *
     * Devuelve true si es una linea
-    * 
-    * 
+    * @return valor booleano
     */
+
     public boolean EsLinea(){
         boolean resultado=false;
         if(forma.getP1()!=forma.getP2()){

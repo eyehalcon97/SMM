@@ -53,6 +53,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     private boolean deghorizontal=false;
     private boolean degvertical=false;
     private boolean discontinua=false;
+    private int numerofiguras=0;
     private int numtrans=255;
     private Color degradado=Color.WHITE;
     private String string=null;
@@ -83,6 +84,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     /**
     * 
     * Consultor de vertical
+    * @return tamaño de la vertical
     * 
     */
     public int getVertical(){
@@ -91,6 +93,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     /**
     * 
     * Consultor de horizontal
+    * @return tamaño horizontal
     * 
     */
     public int getHorizontal(){
@@ -99,6 +102,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     /**
     * 
     * Consultor de discontinua de trazo
+    * @return discontinua
     * 
     */
     public boolean getDiscontinua(){
@@ -107,6 +111,8 @@ public class Lienzo2D extends javax.swing.JPanel {
     /**
     * 
     * Modificador de discontinua del trazo
+    * @param discontinua: nuevo valor
+    * 
     * 
     */
     public void setDiscontinua(boolean discontinua){
@@ -121,18 +127,18 @@ public class Lienzo2D extends javax.swing.JPanel {
     * editar, dibuja su contorno
     * 
     */
+    @Override
     public void paint(Graphics g){
         super.paint(g);
         g2d=(Graphics2D)g;
         g2d.clipRect(0,0,horizontal,vertical);
-        figura.draw(g2d);
-        
+        if(EDITAR){
+                figmod.drawSelected(g2d);
+        }
         
         for(MiFigura s:Lista){
             s.draw(g2d);
-            if(EDITAR){
-                figmod.drawSelected(g2d);
-            }
+            
         }
         
         
@@ -149,6 +155,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     /**
     * 
     * Consultor de Borde
+    * @return color del borde
     * 
     */
     public Color getBorde(){
@@ -174,6 +181,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     * @param deghorizontal: activa o desactiva el degradado
     * Solo puede haber un tipo de degradado por lo
     * que desactiva el otro degradado
+    * 
     */
     public void setdeghorizontal(boolean deghorizontal){
         this.deghorizontal = deghorizontal;
@@ -184,6 +192,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     /**
     * 
     * Consultor de degradado vertical
+    * @return booleano degradado vertical
     * 
     */
     public boolean getdegvertical(){
@@ -192,6 +201,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     /**
     * 
     * Consultor de degradado horizontal
+    * @return booleano degradado horizontal
     * 
     */
     public boolean getdeghorizontal(){
@@ -209,6 +219,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     /**
     * 
     * Consultor de Relleno
+    * @return color del relleno
     * 
     */
     public Color getRelleno(){
@@ -217,6 +228,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     /**
     * 
     * Consultor de la lista de figuras
+    * @return lista de figuras
     *
     */
     public List<MiFigura> GetLista(){
@@ -229,7 +241,10 @@ public class Lienzo2D extends javax.swing.JPanel {
     *
     */
     public void setLista(List<MiFigura> lista){
+        numerofiguras = lista.size();
         this.Lista = lista;
+        repaint();
+        EDITAR =false;
     }
     /**
     * 
@@ -244,6 +259,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     /**
     * 
     * Consultor de forma
+    * @return forma
     * 
     */
     public Formas getForma(){
@@ -252,6 +268,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     /**
     * 
     * Consultor de forma
+    * @param rellenado: valor de rellenado
     * 
     */
     public void setRellenado(boolean rellenado){
@@ -260,6 +277,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     /**
     * 
     * Consultor de Rellenado
+    * @return valor de rellenado
     * 
     */
     public boolean getRellenado(){
@@ -277,6 +295,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     /**
     * 
     * Consultor de degradado
+    * @return color de degradado
     * 
     */
     public Color getDegradado(){
@@ -294,6 +313,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     /**
     * 
     * Consultor de Alisar
+    * @return boolean de alisar
     * 
     */
     public boolean getAlisar(){
@@ -311,6 +331,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     /**
     *
     * Consultor de la variable string
+    * @return Valor del String
     * 
     */
     public String getString(){
@@ -328,6 +349,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     /**
     * 
     * Consultor de numero transparencia
+    * @return numero de transparencia
     * 
     */
    public int getNumtrans(){
@@ -346,6 +368,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     /**
     * 
     * Consultor del grosor
+    * @return numero grosor
     * 
     */
     public int getGrosor(){
@@ -446,8 +469,8 @@ public class Lienzo2D extends javax.swing.JPanel {
               
         }
         
-        
            repaint();
+          
     }
     
   
@@ -517,9 +540,12 @@ public class Lienzo2D extends javax.swing.JPanel {
           
             if(EDITAR){
                 actualizar(figmod,evt);
+            }else{
+                Lista.set(numerofiguras, figura);
             }
+             
             pintar();
-
+            
     }//GEN-LAST:event_formMouseDragged
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
@@ -532,19 +558,29 @@ public class Lienzo2D extends javax.swing.JPanel {
     */
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         // TODO add your handling code here:
+        
+                
                pin=new Point2D.Float(evt.getX(),evt.getY());
                if(EDITAR){
             actualizar(figmod,evt);
-            pin = new Point2D.Double(-10, -10);
+                    pin = new Point2D.Double(-10, -10);
                     pout = new Point2D.Double(-10, -10);
                     figura = new MiLinea(pin, pout);
             
             
                 }else{
                    
+                     if(Lista.size() < (numerofiguras)+1){
+                    
+                    figura = new MiLinea(pin, pin);
+                    Lista.add(figura);
+                    }
                }
+               
        pintar();
        
+
+                    
        
     }//GEN-LAST:event_formMousePressed
 
@@ -569,7 +605,9 @@ public class Lienzo2D extends javax.swing.JPanel {
                 }
            
         }else{
-        Lista.add(figura);
+
+        
+        numerofiguras++;
         if(figura instanceof MiLinea){
             if(((MiLinea)figura).EsPunto()==true){
                 puntos++;

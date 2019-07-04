@@ -73,6 +73,7 @@ public class LienzoImagen2D extends Lienzo2D{
     }
     /**
     * Consultor de brillo
+    * @return valor del brillo
     * 
     */
     public float getBrillo(){
@@ -80,6 +81,7 @@ public class LienzoImagen2D extends Lienzo2D{
     }
     /**
     * Consultor de Filtro
+    * @return valor del filtro
     * 
     */
     public String getFiltro(){
@@ -87,6 +89,7 @@ public class LienzoImagen2D extends Lienzo2D{
     }
     /**
     * Consultor de Espectro
+    * @return Valor del espectro
     * 
     */
     public String getEspectro(){
@@ -98,6 +101,7 @@ public class LienzoImagen2D extends Lienzo2D{
     * que nos devulvan los objetos dibujados dentro del lienzo
     * dichos objetos pasan a ser parte de la imagen y se borran de 
     * la lista
+    * @return Imagen que contiene el lienzo
     */
     public BufferedImage getImagen(boolean imagen){
             Graphics g = img.getGraphics();
@@ -126,7 +130,9 @@ public class LienzoImagen2D extends Lienzo2D{
     /**
     * Metodo para repintar el componente
     * @param g: el graphics necesario para pintar
+    * 
     */
+    @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         if(img !=null){
@@ -134,7 +140,9 @@ public class LienzoImagen2D extends Lienzo2D{
         }
     }
     /**
+    * 
     * Consultor del Punto centro de la imagen
+    * @return punto dentro de la imagen
     * 
     */
     public Point getPoint(){

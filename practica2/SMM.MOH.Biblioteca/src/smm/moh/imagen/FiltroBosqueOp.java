@@ -28,6 +28,7 @@ public class FiltroBosqueOp extends BufferedImageOpAdapter{
     * oscuros como claros que apenas notaremos la diferencia.
     * @param src: imagen de origen
     * @param dest: imagen de destino
+    * @return Nueva imagen con el filtro aplicado
     * 
     */
     @Override

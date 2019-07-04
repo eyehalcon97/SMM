@@ -2128,14 +2128,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             VentanaVideo vi = (VentanaVideo) Escritorio.getSelectedFrame();
             if(vi!=null){
                 Instantanea.setEnabled(true);
+                
                 botonstop = vi.getBotonStop();
                 botonplay = vi.getBotonPlay();
+                
+                
             }
         }else{
             if(Escritorio.getSelectedFrame() instanceof VentanaInternaCamara){
-                VentanaInternaCamara vi = (VentanaInternaCamara) Escritorio.getSelectedFrame();
-                Instantanea.setEnabled(true);
 
+                Instantanea.setEnabled(true);
+                botonplay.setEnabled(false);
+                botonstop.setEnabled(true);
+                 
+                 
             }
         }
     }
@@ -2163,6 +2169,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Instantanea.setEnabled(false);
         botonRecord.setEnabled(true);
     }//GEN-LAST:event_listaReproduccionActionPerformed
+   
+    
     /**
     *
     * Para el audio seleccionado en la lista,
@@ -2319,6 +2327,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
              lista = vi.getLienzoImagen().GetLista();
                  lista.remove(numero);
              vi.getLienzoImagen().setLista(lista);
+             
              actualizarlista();
             }
         }
