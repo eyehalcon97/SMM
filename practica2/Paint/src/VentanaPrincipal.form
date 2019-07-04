@@ -43,6 +43,7 @@
         <Menu class="javax.swing.JMenu" name="File">
           <Properties>
             <Property name="text" type="java.lang.String" value="Archivo"/>
+            <Property name="toolTipText" type="java.lang.String" value="Archivo"/>
           </Properties>
           <Events>
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="FileMouseEntered"/>
@@ -55,12 +56,13 @@
                   <Image iconType="3" name="/images/NuevoBoceto.GIF"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nuevo"/>
+                <Property name="toolTipText" type="java.lang.String" value="Nuevo"/>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="menu"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FileNuevoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="FileAbrir">
@@ -69,6 +71,7 @@
                   <Image iconType="3" name="/images/abrir.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Abrir"/>
+                <Property name="toolTipText" type="java.lang.String" value="Abrir"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FileAbrirActionPerformed"/>
@@ -80,6 +83,7 @@
                   <Image iconType="3" name="/images/Guardar.gif"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
+                <Property name="toolTipText" type="java.lang.String" value="Guardar"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FileGuardarActionPerformed"/>
@@ -90,6 +94,7 @@
         <Menu class="javax.swing.JMenu" name="Edicion">
           <Properties>
             <Property name="text" type="java.lang.String" value="Edici&#xf3;n"/>
+            <Property name="toolTipText" type="java.lang.String" value="Edicion"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JCheckBoxMenuItem" name="EdicionVerbarra">
@@ -690,6 +695,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/images/Camara.png"/>
                         </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="Iniciar Camara"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CamaraActionPerformed"/>
@@ -700,6 +706,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/images/Capturar.png"/>
                         </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="Tomar Captura"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="InstantaneaActionPerformed"/>
@@ -1002,6 +1009,7 @@
                 <Component class="javax.swing.JButton" name="FiltroBosque">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="FiltroBosque"/>
+                    <Property name="toolTipText" type="java.lang.String" value="FiltroBosque"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FiltroBosqueActionPerformed"/>

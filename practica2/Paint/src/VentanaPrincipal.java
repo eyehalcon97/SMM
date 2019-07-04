@@ -532,6 +532,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel21.add(botonRecord);
 
         Camara.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Camara.png"))); // NOI18N
+        Camara.setToolTipText("Iniciar Camara");
         Camara.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CamaraActionPerformed(evt);
@@ -540,6 +541,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel21.add(Camara);
 
         Instantanea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Capturar.png"))); // NOI18N
+        Instantanea.setToolTipText("Tomar Captura");
         Instantanea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 InstantaneaActionPerformed(evt);
@@ -744,6 +746,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel10.add(Random);
 
         FiltroBosque.setText("FiltroBosque");
+        FiltroBosque.setToolTipText("FiltroBosque");
         FiltroBosque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FiltroBosqueActionPerformed(evt);
@@ -982,6 +985,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(Escritorio, java.awt.BorderLayout.CENTER);
 
         File.setText("Archivo");
+        File.setToolTipText("Archivo");
         File.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 FileMouseEntered(evt);
@@ -995,16 +999,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         FileNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/NuevoBoceto.GIF"))); // NOI18N
         FileNuevo.setText("Nuevo");
+        FileNuevo.setToolTipText("Nuevo");
         menu.add(FileNuevo);
         FileNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FileNuevoActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
         File.add(FileNuevo);
 
         FileAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/abrir.png"))); // NOI18N
         FileAbrir.setText("Abrir");
+        FileAbrir.setToolTipText("Abrir");
         FileAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FileAbrirActionPerformed(evt);
@@ -1014,6 +1020,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         FileGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Guardar.gif"))); // NOI18N
         FileGuardar.setText("Guardar");
+        FileGuardar.setToolTipText("Guardar");
         FileGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FileGuardarActionPerformed(evt);
@@ -1024,6 +1031,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(File);
 
         Edicion.setText("Edición");
+        Edicion.setToolTipText("Edicion");
 
         EdicionVerbarra.setSelected(true);
         EdicionVerbarra.setText("Ver barra de estado");
@@ -1219,21 +1227,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 System.err.println("Error al leer el archivo");     }   }
         
     }//GEN-LAST:event_FileAbrirActionPerformed
-    /**
-    *
-    * Constructor de nuevo lienzo
-    * Establece en el label Paint,
-    * actualiza el color a 0 y limpia la lista del menu
-    * 
-    */
-    private void FileNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FileNuevoActionPerformed
-        // TODO add your handling code here:
-         estado.setText("Paint");
-        forma = null;
-        color = new Color(0,0,0);
-        menu.clearSelection();
-    }//GEN-LAST:event_FileNuevoActionPerformed
-    /**
+
+   /**
     *
     * Activar o desactivar la barra de estado
     *

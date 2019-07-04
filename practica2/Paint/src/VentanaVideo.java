@@ -129,6 +129,7 @@ public class VentanaVideo extends VentanaMultimedia {
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
             }
             public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -160,6 +161,11 @@ public class VentanaVideo extends VentanaMultimedia {
         // TODO add your handling code here:
                 cuadro.actualizarControlador();
     }//GEN-LAST:event_formInternalFrameActivated
+
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
+        // TODO add your handling code here:
+        video.stop();
+    }//GEN-LAST:event_formInternalFrameClosing
     /**
     * 
     * Consultor del boton Play

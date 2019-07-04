@@ -92,7 +92,7 @@ public abstract class VentanaMultimedia extends VentanaInterna {
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         // TODO add your handling code here:
-        System.out.println("fffff");
+
 
     }//GEN-LAST:event_formInternalFrameActivated
 
